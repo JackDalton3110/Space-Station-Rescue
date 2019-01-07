@@ -6,6 +6,7 @@
 Game::Game() :
 	m_window(sf::VideoMode(1920, 1080), "AI LabCA1", sf::Style::Default)
 {
+	m_Grid = new Grid();
 	/*m_player = new Player();
 	Enemy* m_pursue = new Pursue(*this);
 	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
@@ -69,6 +70,7 @@ void Game::run()
 void Game::update(double dt)
 {
 	//m_player->update(dt);
+	m_Grid->update();
 
 	/*for (int i = 0; i < enemies.size(); i++)
 	{
@@ -89,6 +91,7 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
+	m_Grid->render();
 	//m_player->render(m_window);
 
 	/*for (int i = 0; i < enemies.size(); i++)

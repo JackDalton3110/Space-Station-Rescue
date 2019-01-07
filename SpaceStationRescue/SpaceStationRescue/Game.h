@@ -13,6 +13,7 @@
 //#include "Flee.h"
 //#include "Seek.h"
 //#include "Wander.h"
+#include "Grid.h"
 
 
 class Game
@@ -32,6 +33,7 @@ protected:
 	//Enemy* m_pursue;
 
 	//std::vector<Enemy*> enemies;
+	Grid *m_Grid;
 
 };
 #endif // !GAME
