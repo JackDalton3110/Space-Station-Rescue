@@ -156,6 +156,9 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\OCRAEXT.TTF" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

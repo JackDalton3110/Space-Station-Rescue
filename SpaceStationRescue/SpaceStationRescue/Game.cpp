@@ -4,7 +4,7 @@
 /// 
 /// </summary>
 Game::Game() :
-	m_window(sf::VideoMode(1920, 1080), "AI LabCA1", sf::Style::Default)
+	m_window(sf::VideoMode(1900, 1900), "AI LabCA1", sf::Style::Default)
 {
 	m_Grid = new Grid();
 	/*m_player = new Player();
@@ -44,6 +44,7 @@ void Game::run()
 
 	while (m_window.isOpen())
 	{
+		ProcessEvents();
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
@@ -63,6 +64,107 @@ void Game::run()
 		render();
 	}
 }
+
+void Game::ProcessEvents()
+{
+	sf::Event e;
+	while (m_window.pollEvent(e))
+	{
+		if (e.type == sf::Event::Closed)
+		{
+			m_window.close();
+		}
+		processGameEvents(e);
+	}
+}
+
+void Game::processGameEvents(sf::Event& event)
+{
+	//mouse.getPosition();
+	m_mousePos = sf::Mouse::getPosition(m_window);
+
+	//std::cout << "Current State :" << m_tileGrid[m_tilePosX][m_tilePosY]->getCurrentState() << std::endl;
+	if (m_mousePos.x > 0 && m_mousePos.x < m_window.getSize().x
+		&& m_mousePos.y > 0 && m_mousePos.y < m_window.getSize().y)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_leftPress == false)
+		{
+			m_tilePosX = static_cast<int>(m_mousePos.x / (m_tileSize * m_tileScale));
+			m_tilePosY = static_cast<int>(m_mousePos.y / (m_tileSize * m_tileScale));
+
+
+			if (m_startTile != NULL)
+			{
+				m_startTile->setCurrentState(NONE);
+			}
+
+			if (m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->getCurrentState() != OBSTACLE)
+			{
+				m_startTile = m_Grid->m_tileGrid[m_tilePosX][m_tilePosY];
+
+				m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->setCurrentState(START);
+
+				//getPath(m_tilePosX, m_tilePosY);
+				m_leftPress = true;
+			}
+
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			m_leftPress = false;
+		}
+
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && m_rightPress == false && m_startTile != NULL)
+		{
+			m_tilePosX = static_cast<int>(m_mousePos.x / (m_tileSize * m_tileScale));
+			m_tilePosY = static_cast<int>(m_mousePos.y / (m_tileSize * m_tileScale));
+
+
+			if (m_goalTile != NULL)
+			{
+				m_goalTile->setCurrentState(NONE);
+			}
+
+			if (m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->getCurrentState() != OBSTACLE)
+			{
+				m_goalTile = m_Grid->m_tileGrid[m_tilePosX][m_tilePosY];
+
+				m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->setCurrentState(GOAL);
+
+				m_rightPress = true;
+
+				m_Grid->initGrid(m_tilePosX, m_tilePosY);
+			}
+
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			m_rightPress = false;
+		}
+
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+		{
+			m_tilePosX = static_cast<int>(m_mousePos.x / (m_tileSize * m_tileScale));
+			m_tilePosY = static_cast<int>(m_mousePos.y / (m_tileSize * m_tileScale));
+
+
+			if (m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->getCurrentState() == NONE)
+			{
+				m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->setCurrentState(OBSTACLE);
+			}
+
+
+
+		}
+
+
+	}
+
+
+}
+
 
 /// <summary>
 /// 
@@ -91,7 +193,7 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_Grid->render();
+	m_Grid->render(m_window);
 	//m_player->render(m_window);
 
 	/*for (int i = 0; i < enemies.size(); i++)
