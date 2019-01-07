@@ -7,16 +7,9 @@
 /// <summary>
 /// 
 /// </summary>
-Grid::Grid() :
-	m_window(sf::VideoMode(3000, 2000), "AI Lab6", sf::Style::Default)
+Grid::Grid() 
 {
-
-	if (!m_font.loadFromFile("ARLRDBD.ttf"))
-	{
-		// error...
-	}
-
-
+	
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)
@@ -37,6 +30,16 @@ Grid::Grid() :
 		m_tileGrid[m_gridSize - 1][i]->setCurrentState(OBSTACLE);
 		m_tileGrid[i][m_gridSize - 1]->setCurrentState(OBSTACLE);
 	}
+	
+	//Set up second view for minimap, scale and positioned to the top right hand corner
+	miniMapView.setViewport(sf::FloatRect(0.73f, 0.02f, 0.25f, 0.25f));
+	miniMapView.setSize(1920, 1080);
+	miniMapView.setCenter(960, 540);
+
+	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
+	//gameView.setSize(1920, 1080);
+	//gameView.setCenter(960, 540);
+
 }
 
 /// <summary>
@@ -330,18 +333,32 @@ void Grid::getPath(Tile m_startTile)
 /// <summary>
 /// 
 /// </summary>
-void Grid::render()
+void Grid::render(sf::RenderWindow &window)
 {
-	m_window.clear(sf::Color::White);
+	window.clear(sf::Color::White);
+	//m_window.setView(gameView);
+	//m_window.setView(follow);
 
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)
 		{
-			m_tileGrid[i][j]->render(m_window);
+			m_tileGrid[i][j]->render(window);
 		}
 
 	}
 
-	m_window.display();
+
+	//m_window.setView(miniMapView);
+	////m_window.setView(follow);
+
+	//for (int i = 0; i < m_gridSize; i++)
+	//{
+	//	for (int j = 0; j < m_gridSize; j++)
+	//	{
+	//		m_tileGrid[i][j]->render(window);
+	//	}
+
+	//}
+
 }

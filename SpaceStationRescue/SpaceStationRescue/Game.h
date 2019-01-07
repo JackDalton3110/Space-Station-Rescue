@@ -34,6 +34,9 @@ protected:
 
 	//std::vector<Enemy*> enemies;
 	Grid *m_Grid;
+	sf::View gameView;
+	sf::View miniMapView;
+	sf::View follow;
 
 };
 #endif // !GAME

@@ -13,7 +13,7 @@ public:
 	Grid();
 	void run();
 	void update();
-	void render();
+	void render(sf::RenderWindow &window);
 
 private:
 	
@@ -25,7 +25,6 @@ private:
 	void getPath(Tile m_startTile);
 
 protected:
-	sf::RenderWindow m_window;
 
 	static const int m_gridSize = 30;
 	static const int m_tileSize = 60;
@@ -47,4 +46,6 @@ protected:
 
 	bool m_leftPress = false;
 	bool m_rightPress = false;
+	sf::View gameView;
+	sf::View miniMapView;
 };

@@ -28,6 +28,8 @@ Game::Game() :
 	//enemies.push_back(m_seek);
 	////enemies.push_back(m_flee);
 	//enemies.push_back(m_wander);
+
+
 }
 
 /// <summary>
@@ -90,8 +92,11 @@ void Game::update(double dt)
 /// </summary>
 void Game::render()
 {
-	m_window.clear(sf::Color::White);
-	m_Grid->render();
+	//m_window.setView(follow);
+	//m_window.setView(miniMapView);
+	m_window.clear(sf::Color::Black);
+	m_Grid->render(m_window);
+
 	//m_player->render(m_window);
 
 	/*for (int i = 0; i < enemies.size(); i++)
