@@ -30,10 +30,6 @@ private:
 
 protected:
 
-
-	static const int m_gridSize = 32;
-	static const int m_tileSize = 60;
-
 	float m_tileScale = 1;
 
 	
