@@ -43,7 +43,7 @@ protected:
 	static const int m_tileSize = 60;
 	float m_tileScale = 1;
 
-	//Tile *m_tileGrid[m_gridSize][m_gridSize];
+	
 
 	//Enemy* m_pursue;
 
