@@ -25,6 +25,7 @@ Tile::Tile(float x, float y, int tileSize, float tileScale, int xPos, int yPos, 
 	vector.setPosition(m_position.x + ((m_tileSize * m_tileScale) / 2), m_position.y + ((m_tileSize * m_tileScale) / 2));
 	vector.setRotation(m_rotation);
 
+	
 
 }
 
@@ -43,42 +44,6 @@ void Tile::setRotation(float rot)
 void Tile::setCurrentState(State s)
 {
 	m_currentState = s;
-}
-
-
-State Tile::getCurrentState()
-{
-	return m_currentState;
-}
-
-void Tile::setDrawState(Draw ds) {
-
-	m_drawState = ds;
-}
-Draw Tile::getDrawState() {
-	return m_drawState;
-}
-
-//void Tile::setCurrentDrawState(DrawState s)
-//{
-//	m_currentDrawState = s;
-//}
-//
-//
-//DrawState Tile::getCurrentDrawState()
-//{
-//	return m_currentDrawState;
-//}
-//
-
-void Tile::update()
-{
-	if (m_cost == 0) {
-		vector.setSize(sf::Vector2f(1, 1));
-	}
-	else {
-		vector.setSize(sf::Vector2f(25, 1));
-	}
 
 	switch (m_currentState)
 	{
@@ -109,6 +74,33 @@ void Tile::update()
 		break;
 	}
 }
+
+
+State Tile::getCurrentState()
+{
+	return m_currentState;
+}
+
+void Tile::setDrawState(Draw ds) {
+
+	m_drawState = ds;
+}
+Draw Tile::getDrawState() {
+	return m_drawState;
+}
+
+//void Tile::setCurrentDrawState(DrawState s)
+//{
+//	m_currentDrawState = s;
+//}
+//
+//
+//DrawState Tile::getCurrentDrawState()
+//{
+//	return m_currentDrawState;
+//}
+//
+
 void Tile::mouseDetection(sf::Vector2i mousePos, int val)
 {
 

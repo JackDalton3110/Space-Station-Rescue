@@ -7,7 +7,9 @@
 /// <summary>
 /// 
 /// </summary>
-Grid::Grid()
+Grid::Grid(sf::View &gameView):
+	m_gameView(m_gameView)
+
 {
 
 	for (int i = 0; i < m_gridSize; i++)
@@ -76,13 +78,17 @@ void Grid::reset()
 /// <summary>
 /// 
 /// </summary>
-void Grid::update()
+void Grid::update(sf::View &m_gameView)
 {
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)
 		{
-			m_tileGrid[i][j]->update();
+			if (inView(m_tileGrid[i][j]->m_position, m_gameView))
+			{
+				m_tileGrid[i][j]->update();
+			}
+			
 		}
 
 	}
@@ -221,18 +227,38 @@ void Grid::getPath(Tile m_startTile)
 
 
 }
+bool Grid::inView(sf::Vector2f position, sf::View &m_gameView)
+{
+	sf::Vector2f center = m_gameView.getCenter();
+	float width = m_gameView.getSize().x / 2;
+	float height = m_gameView.getSize().y / 2;
 
+	if (position.x < center.x + width && position.x > center.x - width) {
+		if (position.y < center.y + height && position.y > center.y - height) {
+
+			return true;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
 /// <summary>
 /// 
 /// </summary>
-void Grid::render(sf::RenderWindow &window)
+void Grid::render(sf::RenderWindow &window, sf::View &m_gameView)
 {
 
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)
 		{
-			m_tileGrid[i][j]->render(window);
+			if (inView(m_tileGrid[i][j]->m_position, m_gameView))
+			{ 
+				m_tileGrid[i][j]->render(window);
+			}
+			
 		}
 
 	}

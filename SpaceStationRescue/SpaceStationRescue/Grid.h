@@ -10,14 +10,15 @@
 class Grid
 {
 public:
-	Grid();
+	Grid(sf::View &m_gameView);
 	void run();
-	void update();
-	void render(sf::RenderWindow &window);
+	void update(sf::View &m_gameView);
+	void render(sf::RenderWindow &window, sf::View &m_gameView);
+	bool inView(sf::Vector2f position, sf::View &m_gameView);
 
 	void processGameEvents(sf::Event& event);
 	void initGrid(int posX, int posY);
-	static const int m_gridSize = 30;
+	static const int m_gridSize = 100;
 	static const int m_tileSize = 60;
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
 
@@ -48,6 +49,6 @@ protected:
 
 	bool m_leftPress = false;
 	bool m_rightPress = false;
-	sf::View gameView;
+	sf::View m_gameView;
 	sf::View miniMapView;
 };
