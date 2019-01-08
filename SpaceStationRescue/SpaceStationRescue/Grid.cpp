@@ -75,24 +75,6 @@ void Grid::reset()
 	}
 }
 
-/// <summary>
-/// 
-/// </summary>
-void Grid::update(sf::View &m_gameView)
-{
-	for (int i = 0; i < m_gridSize; i++)
-	{
-		for (int j = 0; j < m_gridSize; j++)
-		{
-			if (inView(m_tileGrid[i][j]->m_position, m_gameView))
-			{
-				m_tileGrid[i][j]->update();
-			}
-			
-		}
-
-	}
-}
 
 void Grid::initGrid(int posX, int posY)
 {
