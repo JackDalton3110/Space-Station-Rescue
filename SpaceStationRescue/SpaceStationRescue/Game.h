@@ -39,8 +39,8 @@ protected:
 
 	int m_tilePosX = 0;
 	int m_tilePosY = 0;
-	static const int m_gridSize = 100;
-	static const int m_tileSize = 60;
+	static const int m_gridSize = 55;
+	static const int m_tileSize = 68.2;
 	float m_tileScale = 1;
 
 	

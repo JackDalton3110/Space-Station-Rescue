@@ -105,20 +105,20 @@ void Player::respawn(float x, float y)
 {
 	if (y >= 1000 + 100)
 	{
-		m_sprite.setPosition(m_sprite.getPosition().x, -200);
+		//m_sprite.setPosition(m_sprite.getPosition().x, -200);
 	}
 
 	else if (y < -200)
 	{
-		m_sprite.setPosition(m_sprite.getPosition().x,1100);
+		//m_sprite.setPosition(m_sprite.getPosition().x,1100);
 	}
 	else if (x < -200)
 	{
-		m_sprite.setPosition(2100, m_sprite.getPosition().y);
+		//m_sprite.setPosition(2100, m_sprite.getPosition().y);
 	}
 	else if (x >= 2100)
 	{
-		m_sprite.setPosition(200, m_sprite.getPosition().y);
+		//m_sprite.setPosition(200, m_sprite.getPosition().y);
 	}
 }
 
