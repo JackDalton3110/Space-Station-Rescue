@@ -15,22 +15,28 @@ public:
 	void update();
 	void render(sf::RenderWindow &window);
 
+	void processGameEvents(sf::Event& event);
+	void initGrid(int posX, int posY);
+	static const int m_gridSize = 30;
+	static const int m_tileSize = 60;
+	Tile *m_tileGrid[m_gridSize][m_gridSize];
+
+
 private:
 	
 	void processEvents();
-	void processGameEvents(sf::Event& event);
-	
 	void reset();
-	void initGrid(int posX, int posY);
 	void getPath(Tile m_startTile);
 
 protected:
 
+
 	static const int m_gridSize = 32;
 	static const int m_tileSize = 60;
+
 	float m_tileScale = 1;
 
-	Tile *m_tileGrid[m_gridSize][m_gridSize];
+	
 
 	int x = 0;
 	int y = 0;
