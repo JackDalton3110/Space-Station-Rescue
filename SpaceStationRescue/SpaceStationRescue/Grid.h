@@ -14,11 +14,13 @@ public:
 	void run();
 	void update();
 	void render(sf::RenderWindow &window);
+
 	void processGameEvents(sf::Event& event);
 	void initGrid(int posX, int posY);
 	static const int m_gridSize = 30;
 	static const int m_tileSize = 60;
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
+
 
 private:
 	
@@ -28,6 +30,9 @@ private:
 
 protected:
 
+
+	static const int m_gridSize = 32;
+	static const int m_tileSize = 60;
 
 	float m_tileScale = 1;
 
@@ -47,4 +52,6 @@ protected:
 
 	bool m_leftPress = false;
 	bool m_rightPress = false;
+	sf::View gameView;
+	sf::View miniMapView;
 };

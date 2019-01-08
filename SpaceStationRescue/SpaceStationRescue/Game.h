@@ -6,7 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
-//#include "Player.h"
+#include "Player.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -30,7 +30,7 @@ private:
 
 protected:
 	sf::RenderWindow m_window;
-	/*Player* m_player;*/
+	Player* m_player;
 
 	sf::Vector2i m_mousePos;
 
@@ -49,8 +49,14 @@ protected:
 
 	//std::vector<Enemy*> enemies;
 	Grid *m_Grid;
+
+	sf::View gameView;
+	sf::View miniMapView;
+	sf::View follow;
+
 	bool m_leftPress = false;
 	bool m_rightPress = false;
+
 
 };
 #endif // !GAME
