@@ -4,7 +4,7 @@
 /// 
 /// </summary>
 Game::Game() :
-	m_window(sf::VideoMode(1920, 1080), "AI LabCA1", sf::Style::Default)
+	m_window(sf::VideoMode(3000, 2000), "AI LabCA1", sf::Style::Default)
 {
 	m_Grid = new Grid();
 	/*m_player = new Player();
@@ -28,7 +28,13 @@ Game::Game() :
 	//enemies.push_back(m_seek);
 	////enemies.push_back(m_flee);
 	//enemies.push_back(m_wander);
+	miniMapView.setViewport(sf::FloatRect(0.73f, 0.02f, 0.25f, 0.25f));
+	miniMapView.setSize(3000, 2000);
+	miniMapView.setCenter(1500, 1000);
 
+	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
+	gameView.setSize(3000, 2000);
+	gameView.setCenter(1500, 1000);
 
 }
 
@@ -93,8 +99,12 @@ void Game::update(double dt)
 void Game::render()
 {
 	//m_window.setView(follow);
-	//m_window.setView(miniMapView);
-	m_window.clear(sf::Color::Black);
+	
+	m_window.clear(sf::Color::White);
+	m_window.setView(gameView);
+	m_Grid->render(m_window);
+
+	m_window.setView(miniMapView);
 	m_Grid->render(m_window);
 
 	//m_player->render(m_window);
