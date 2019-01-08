@@ -13,7 +13,7 @@ public:
 	Grid(sf::View &m_gameView);
 	void run();
 	void update(sf::View &m_gameView);
-	void render(sf::RenderWindow &window, sf::View &m_gameView);
+	void render(sf::RenderWindow &window, sf::View &m_gameView, bool draw);
 	bool inView(sf::Vector2f position, sf::View &m_gameView);
 
 	void processGameEvents(sf::Event& event);

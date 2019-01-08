@@ -209,11 +209,11 @@ void Game::render()
 	
 	m_window.clear(sf::Color::White);
 	m_window.setView(gameView);
-	m_Grid->render(m_window, gameView);
+	m_Grid->render(m_window, gameView, false);
 	m_player->render(m_window);
 
 	m_window.setView(miniMapView);
-	m_Grid->render(m_window, gameView);
+	m_Grid->render(m_window, gameView, true);
 	m_player->render(m_window);
 
 	//m_player->render(m_window);
