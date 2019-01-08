@@ -2,10 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "Tile.h"
 
-
+using namespace std;
 
 class Grid
 {
@@ -23,6 +24,8 @@ public:
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
 
 
+	std::ofstream myMap;
+
 private:
 	
 	void processEvents();
@@ -32,8 +35,6 @@ private:
 protected:
 
 	float m_tileScale = 1;
-
-	
 
 	int x = 0;
 	int y = 0;
