@@ -6,7 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
-//#include "Player.h"
+#include "Player.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -28,7 +28,7 @@ private:
 
 protected:
 	sf::RenderWindow m_window;
-	/*Player* m_player;*/
+	Player* m_player;
 
 	//Enemy* m_pursue;
 

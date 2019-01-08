@@ -7,8 +7,8 @@ Game::Game() :
 	m_window(sf::VideoMode(3000, 2000), "AI LabCA1", sf::Style::Default)
 {
 	m_Grid = new Grid();
-	/*m_player = new Player();
-	Enemy* m_pursue = new Pursue(*this);
+	m_player = new Player();
+	/*Enemy* m_pursue = new Pursue(*this);
 	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
 	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
 	Enemy* m_seek = new Seek();
@@ -35,6 +35,8 @@ Game::Game() :
 	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
 	gameView.setSize(3000, 2000);
 	gameView.setCenter(1500, 1000);
+	gameView.zoom(0.5f);
+
 
 }
 
@@ -77,7 +79,8 @@ void Game::run()
 /// </summary>
 void Game::update(double dt)
 {
-	//m_player->update(dt);
+	m_player->update(dt);
+	gameView.setCenter(m_player->getPosition());
 	m_Grid->update();
 
 	/*for (int i = 0; i < enemies.size(); i++)
@@ -103,9 +106,11 @@ void Game::render()
 	m_window.clear(sf::Color::White);
 	m_window.setView(gameView);
 	m_Grid->render(m_window);
+	m_player->render(m_window);
 
 	m_window.setView(miniMapView);
 	m_Grid->render(m_window);
+	m_player->render(m_window);
 
 	//m_player->render(m_window);
 
