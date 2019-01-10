@@ -322,9 +322,9 @@ void Grid::render(sf::RenderWindow &window, sf::View &m_gameView, bool draw)
 	{
 		for (int j = 0; j < m_gridSize; j++)
 		{
-			/*if (draw == true) {
+			if (draw == true) {
 				m_tileGrid[i][j]->render(window);
-			}*/
+			}
 			if (inView(m_tileGrid[i][j]->m_position, m_gameView))
 			{ 
 				m_tileGrid[i][j]->render(window);
