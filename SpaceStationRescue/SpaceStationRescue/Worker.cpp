@@ -1,12 +1,18 @@
 #include "Worker.h"
 
 Worker::Worker():
-	m_position(500,500),
 	velocity(0,0),
 	maxSpeed(2.0f),
 	maxRotation(360),
-	rotation(0)
+	rotation(90)
 {
+
+	int x, y;
+	x = rand() % 500 + 100;
+	y = rand() % 500 + 100;
+	m_position.x = x;
+	m_position.y = y;
+
 	if (!workerTxt.loadFromFile("./resources/worker.png"))
 	{
 		std::cout << "Cannot load worker image" << std::endl;
@@ -97,42 +103,80 @@ float Worker::getRandom(int x, int y)
 
 int Worker::rotateWorker(sf::Vector2f vel, int angle)
 {
-	if (vel.x > 0 && angle<90)
+	if (vel.x > 0 && angle < 80)
 	{
 		rotation += 10;
 	}
-	else if (vel.x > 0 && angle > 90)
+	else if (vel.x > 0 && angle > 100)
 	{
 		rotation -= 10;
 	}
 
-	if (vel.x < 0 && angle <270)
+	if (vel.x > 0 && vel.y > 0 && angle<130)
 	{
 		rotation += 10;
 	}
-	else if (vel.x < 0 && angle > 270)
+	else if (vel.x > 0 && vel.y>0 && angle > 140)
 	{
 		rotation -= 10;
 	}
 
-	if (vel.y > 0 && angle < 180)
+	if (vel.y > 0 && angle < 170)
 	{
 		rotation += 10;
 	}
-	else if (vel.y > 0 && angle > 180)
+	else if (vel.y > 0 && angle > 190)
 	{
 		rotation -= 10;
 	}
 
-	if (vel.y < 0 && angle < 360)
+	if (vel.x < 0 && vel.y > 0 && angle <215)
 	{
 		rotation += 10;
 	}
-	else if (vel.y < 0 && angle > 360)
+	else if (vel.x < 0 && vel.y>0 && angle > 235)
 	{
 		rotation -= 10;
 	}
+
+	if (vel.x < 0 && angle <260)
+	{
+		rotation += 10;
+	}
+	else if (vel.x < 0 && angle > 280)
+	{
+		rotation -= 10;
+	}
+
+	if (vel.x < 0 && vel.y < 0 && angle <305)
+	{
+		rotation += 10;
+	}
+	else if (vel.x < 0 && vel.y < 0 && angle > 325)
+	{
+		rotation -= 10;
+	}
+
+	if (vel.y < 0 && angle < 350)
+	{
+		rotation += 10;
+	}
+	else if (vel.y < 0 && angle > 10)
+	{
+		rotation -= 10;
+	}
+
+	if (vel.x > 0 && vel.y < 0  && angle < 35)
+	{
+			rotation += 10;
+	}
+	else if (vel.x > 0 && vel.y < 0  && angle > 55)
+	{
+		rotation -= 10;
+	}
+	std::cout << rotation << std::endl;
 	return rotation;
+	
 }
 
 void Worker::respawn(float x, float y)

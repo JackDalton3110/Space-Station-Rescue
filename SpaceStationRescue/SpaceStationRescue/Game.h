@@ -17,6 +17,7 @@
 #include "Grid.h"
 
 
+
 class Game
 {
 public:
@@ -32,8 +33,8 @@ private:
 protected:
 	sf::RenderWindow m_window;
 	Player* m_player;
-	Worker* m_worker;
-
+	//Worker* m_worker;
+	std::vector<Worker*> workers;
 	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
