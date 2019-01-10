@@ -151,15 +151,23 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Worker.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\OCRAEXT.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\Player.png" />
+    <Image Include="resources\Predator.png" />
+    <Image Include="resources\sweeper.png" />
+    <Image Include="resources\worker.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

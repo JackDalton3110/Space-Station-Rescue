@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "Worker.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -31,6 +32,7 @@ private:
 protected:
 	sf::RenderWindow m_window;
 	Player* m_player;
+	Worker* m_worker;
 
 	sf::Vector2i m_mousePos;
 
