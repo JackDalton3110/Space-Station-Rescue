@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <math.h>
+#include "Grid.h"
 
 class Player
 {
@@ -18,6 +19,7 @@ public:
 	void respawn(float x, float y);
 	void update(double dt);
 	void render(sf::RenderWindow &window);
+	int collision();
 
 private:
 	sf::CircleShape shape;
@@ -33,5 +35,9 @@ private:
 	float m_rotation;
 	sf::Vector2f m_heading;
 	float m_speed;
+
+	Grid *m_grid;
+	int pGridX;
+	int pGridY;
 
 };

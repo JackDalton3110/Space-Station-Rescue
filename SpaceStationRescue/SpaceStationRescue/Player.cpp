@@ -5,7 +5,7 @@ Player::Player() :
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(600.0),
+	m_maxSpeed(20.0),
 	m_speed(0),
 	m_heading(0,0)
 
@@ -16,10 +16,15 @@ Player::Player() :
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
-	m_sprite.setScale(0.3, 0.3);
+	m_sprite.setScale(0.1, 0.1);
 	m_sprite.setRotation(90);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
+
+	m_grid = new Grid();
+
+	pGridX = m_position.x / m_grid->m_tileSize;
+	pGridY= m_position.y / m_grid->m_tileSize;
 	
 }
 Player::~Player()
@@ -40,27 +45,27 @@ void Player::speedUp()
 {
 	if (m_speed < m_maxSpeed)
 	{
-		m_speed += 4;
+		m_speed += 2;
 	}
 }
 void Player::speedDown()
 {
 	if (m_speed > 0)
 	{
-		m_speed -= 4;
+		m_speed -= 2;
 	}
 }
 void Player::increaseRotation()
 {
 
-	m_rotation += 2.0f;
+	m_rotation += 4.0f;
 }
 void Player::decreaseRotation()
 {
 	
 	if (m_rotation != 0.00f)
 	{
-		m_rotation -= 2.0f;
+		m_rotation -= 4.0f;
 	}
 	else
 	{
@@ -72,6 +77,16 @@ void Player::decreaseRotation()
 
 void Player::update(double dt)
 {
+
+	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
+	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
+
+	
+	//std::cout << pGrid.x << std::endl;
+	//std::cout << pGrid.y << std::endl;
+	
+	collision();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		increaseRotation();
@@ -120,6 +135,48 @@ void Player::respawn(float x, float y)
 	{
 		//m_sprite.setPosition(200, m_sprite.getPosition().y);
 	}
+}
+
+ int Player::collision()
+{
+
+
+
+
+
+	if (m_grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
+	{
+		if ((m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize) >= m_sprite.getPosition().y - (m_grid->m_tileSize / 2))
+		{
+			m_sprite.setPosition(m_sprite.getPosition().x, m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize + (m_grid->m_tileSize / 2));
+		}
+		return 1;
+	}
+	  if (m_grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
+	{
+		 if ((m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x) <= m_sprite.getPosition().x + (m_grid->m_tileSize / 2))
+		 {
+			 m_sprite.setPosition(m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x - (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		 }
+		return 2;
+	}
+	if (m_grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
+	{
+		if ((m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y) <= m_sprite.getPosition().y + (m_grid->m_tileSize / 2))
+		{
+			m_sprite.setPosition(m_sprite.getPosition().x, m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y  - (m_grid->m_tileSize / 2));
+		}
+		return 3;
+	}
+	  if (m_grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
+	{
+		 if ((m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize) >= m_sprite.getPosition().x - (m_grid->m_tileSize / 2))
+		 {
+			 m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		 }
+		return 3;
+	}
+
 }
 
 void Player::render(sf::RenderWindow &window)

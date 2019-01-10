@@ -11,7 +11,7 @@ using namespace std;
 class Grid
 {
 public:
-	Grid(sf::View &m_gameView);
+	Grid();
 	void run();
 	void update(sf::View &m_gameView);
 	void render(sf::RenderWindow &window, sf::View &m_gameView, bool draw);
