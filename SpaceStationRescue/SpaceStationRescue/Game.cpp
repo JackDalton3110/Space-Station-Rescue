@@ -7,11 +7,11 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 960), "AI LabCA1", sf::Style::Default)
 {
 	srand(time(NULL));
-	
 	for (int i = 0; i < 30; i++)
 	{
 		workers.push_back(new Worker());
 	}
+	
 
 	m_player = new Player();
 	//m_worker = new Worker();
@@ -45,7 +45,7 @@ Game::Game() :
 	gameView.setCenter(640, 480);
 	//gameView.zoom(0.3f);
 
-	m_Grid = new Grid(gameView);
+	m_Grid = new Grid();
 	
 
 }

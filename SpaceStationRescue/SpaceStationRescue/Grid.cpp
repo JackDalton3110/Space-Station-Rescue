@@ -7,8 +7,7 @@
 /// <summary>
 /// 
 /// </summary>
-Grid::Grid(sf::View &gameView):
-	m_gameView(m_gameView)
+Grid::Grid()
 {
 	int mySampleMap[55][55] = { 
 	{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
@@ -108,7 +107,6 @@ Grid::Grid(sf::View &gameView):
 	miniMapView.setSize(1920, 1080);
 	miniMapView.setCenter(960, 540);
 
-	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
 	//gameView.setSize(1920, 1080);
 	//gameView.setCenter(960, 540);
 

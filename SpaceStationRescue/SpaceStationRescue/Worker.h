@@ -15,8 +15,9 @@ public:
 	void update();
 	void render(sf::RenderWindow &window);
 	float getRandom(int x, int y);
-	void respawn(float x, float y);
 	int count = 0;
+	int spawnCount = 0;
+	int spawn =0;
 
 protected:
 
@@ -32,4 +33,6 @@ private:
 	sf::Texture workerTxt;
 	sf::Sprite workerSprite;
 	int rotateWorker(sf::Vector2f vel, int rotate);
+	void spawnWorkers();
+	Grid *m_Grid;
 };
