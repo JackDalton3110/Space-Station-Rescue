@@ -17,7 +17,8 @@ enum State
 	GOAL,
 	OBSTACLE,
 	PATH,
-	SPAWN
+	SPAWN,
+	NEST
 };
 
 

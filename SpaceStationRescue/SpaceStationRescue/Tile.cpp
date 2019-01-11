@@ -73,6 +73,9 @@ void Tile::setCurrentState(State s)
 	case SPAWN:
 		rectangle.setFillColor(sf::Color::Red);
 		break;
+	case NEST:
+		rectangle.setFillColor(sf::Color::Blue);
+		break;
 	default:
 		break;
 	}

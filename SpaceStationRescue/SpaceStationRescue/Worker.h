@@ -16,7 +16,6 @@ public:
 	void render(sf::RenderWindow &window);
 	float getRandom(int x, int y);
 	int count = 0;
-	int spawnCount = 0;
 	int spawn =0;
 
 protected:
@@ -24,8 +23,6 @@ protected:
 private:
 	sf::Vector2f velocity;
 	sf::Vector2f m_position;
-	float radius;
-	float speed;
 	float maxSpeed;
 	float rotation;
 	float maxRotation;
