@@ -6,12 +6,11 @@ Worker::Worker():
 	maxRotation(360),
 	rotation(90)
 {
-
-	int x, y;
-	x = rand() % 500 + 100;
-	y = rand() % 500 + 100;
+	float x = rand() % 800 + 300;
+	float y = rand() % 800 + 300;
 	m_position.x = x;
 	m_position.y = y;
+	
 
 	if (!workerTxt.loadFromFile("./resources/worker.png"))
 	{
@@ -34,7 +33,6 @@ Worker::~Worker()
 
 void Worker::update()
 {
-	srand(time(NULL));
 
 	/*if (enemy.getPosition().x < -100)
 	{
@@ -96,7 +94,7 @@ void Worker::update()
 
 float Worker::getRandom(int x, int y)
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	float randVal = rand() % x + y;
 	return randVal;
 }

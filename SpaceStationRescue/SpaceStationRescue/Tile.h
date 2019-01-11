@@ -16,7 +16,8 @@ enum State
 	START,
 	GOAL,
 	OBSTACLE,
-	PATH
+	PATH,
+	SPAWN
 };
 
 

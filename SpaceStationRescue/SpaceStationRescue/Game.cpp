@@ -6,6 +6,7 @@
 Game::Game() :
 	m_window(sf::VideoMode(1280, 960), "AI LabCA1", sf::Style::Default)
 {
+	srand(time(NULL));
 	
 	for (int i = 0; i < 30; i++)
 	{
