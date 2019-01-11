@@ -19,7 +19,7 @@ public:
 	void respawn(float x, float y);
 	void update(double dt);
 	void render(sf::RenderWindow &window);
-	int collision();
+	void collision();
 
 private:
 	sf::CircleShape shape;

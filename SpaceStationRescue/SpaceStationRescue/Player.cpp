@@ -137,44 +137,41 @@ void Player::respawn(float x, float y)
 	}
 }
 
- int Player::collision()
+ void Player::collision()
 {
-
-
-
-
 
 	if (m_grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
-		if ((m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize) >= m_sprite.getPosition().y - (m_grid->m_tileSize / 2))
+		if (m_sprite.getPosition().y - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize))
 		{
 			m_sprite.setPosition(m_sprite.getPosition().x, m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize + (m_grid->m_tileSize / 2));
 		}
-		return 1;
-	}
-	  if (m_grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
-	{
-		 if ((m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x) <= m_sprite.getPosition().x + (m_grid->m_tileSize / 2))
-		 {
-			 m_sprite.setPosition(m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x - (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
-		 }
-		return 2;
+		
 	}
 	if (m_grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{
-		if ((m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y) <= m_sprite.getPosition().y + (m_grid->m_tileSize / 2))
+		if (m_sprite.getPosition().y + (m_grid->m_tileSize / 2) >= (m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y))
 		{
-			m_sprite.setPosition(m_sprite.getPosition().x, m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y  - (m_grid->m_tileSize / 2));
+			m_sprite.setPosition(m_sprite.getPosition().x, m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y - (m_grid->m_tileSize / 2));
 		}
-		return 3;
+	
 	}
+	  if (m_grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
+	{
+		 if (m_sprite.getPosition().x + (m_grid->m_tileSize / 2) >= (m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x))
+		 {
+			 m_sprite.setPosition(m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x - (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		 }
+		
+	}
+	
 	  if (m_grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
-		 if ((m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize) >= m_sprite.getPosition().x - (m_grid->m_tileSize / 2))
+		 if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
 		 {
 			 m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
 		 }
-		return 3;
+	
 	}
 
 }
