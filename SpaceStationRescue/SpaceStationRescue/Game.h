@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "Worker.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -14,6 +15,9 @@
 //#include "Seek.h"
 //#include "Wander.h"
 #include "Grid.h"
+#include <ctime>
+#include <cstdlib>
+
 
 
 class Game
@@ -31,7 +35,8 @@ private:
 protected:
 	sf::RenderWindow m_window;
 	Player* m_player;
-
+	//Worker* m_worker;
+	std::vector<Worker*> workers;
 	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;

@@ -10,7 +10,7 @@ Player::Player() :
 	m_heading(0,0)
 
 {
-	if (!m_texture.loadFromFile("Player.png")) {
+	if (!m_texture.loadFromFile("./resources/Player.png")) {
 		//do something
 	}
 

@@ -70,6 +70,9 @@ void Tile::setCurrentState(State s)
 	case PATH:
 		rectangle.setFillColor(sf::Color(50, 255, 255));
 		break;
+	case SPAWN:
+		rectangle.setFillColor(sf::Color::Red);
+		break;
 	default:
 		break;
 	}

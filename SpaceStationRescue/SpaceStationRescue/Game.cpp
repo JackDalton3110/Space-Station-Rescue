@@ -6,8 +6,16 @@
 Game::Game() :
 	m_window(sf::VideoMode(1280, 960), "AI LabCA1", sf::Style::Default)
 {
+	srand(time(NULL));
+	for (int i = 0; i < 30; i++)
+	{
+		workers.push_back(new Worker());
+	}
 	
+
 	m_player = new Player();
+	//m_worker = new Worker();
+
 	/*Enemy* m_pursue = new Pursue(*this);
 	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
 	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
@@ -185,6 +193,13 @@ void Game::update(double dt)
 {
 	m_player->update(dt);
 	gameView.setCenter(m_player->getPosition());
+	for (int i = 0; i < workers.size(); i++)
+	{
+		workers[i]->update();
+	}
+
+	//m_worker->update();
+
 	//m_Grid->update(gameView);
 
 	/*for (int i = 0; i < enemies.size(); i++)
@@ -211,11 +226,20 @@ void Game::render()
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
 	m_player->render(m_window);
+	for (int i = 0; i < workers.size(); i++)
+	{
+		workers[i]->render(m_window);
+	}
+	/*m_worker->render(m_window);*/
 
 	m_window.setView(miniMapView);
 	m_Grid->render(m_window, gameView, true);
 	m_player->render(m_window);
-
+	for (int i = 0; i < workers.size(); i++)
+	{
+		workers[i]->render(m_window);
+	}
+	/*m_worker->render(m_window);*/
 	//m_player->render(m_window);
 
 	/*for (int i = 0; i < enemies.size(); i++)

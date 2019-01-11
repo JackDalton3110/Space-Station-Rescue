@@ -22,6 +22,7 @@ public:
 	static const int m_gridSize = 55;
 	static const int m_tileSize = 68.2;
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
+	std::vector <Tile*> m_spawnPoints;
 
 
 	std::ofstream myMap;
