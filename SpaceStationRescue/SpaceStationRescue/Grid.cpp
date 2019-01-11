@@ -7,7 +7,7 @@
 /// <summary>
 /// 
 /// </summary>
-Grid::Grid(sf::View &gameView):
+Grid::Grid():
 	m_gameView(m_gameView)
 {
 	int mySampleMap[55][55] = { 
@@ -103,7 +103,6 @@ Grid::Grid(sf::View &gameView):
 	miniMapView.setSize(1920, 1080);
 	miniMapView.setCenter(960, 540);
 
-	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
 	//gameView.setSize(1920, 1080);
 	//gameView.setCenter(960, 540);
 
@@ -199,7 +198,7 @@ void Grid::initGrid(int posX, int posY)
 	//for (; iter != endIter; iter++) {
 	while (tileQueue.size() != 0) {
 		i++;
-		std::cout << i << std::endl;
+	
 
 		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCost() == 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() != GOAL)
 		{
@@ -317,7 +316,7 @@ bool Grid::inView(sf::Vector2f position, sf::View &m_gameView)
 /// </summary>
 void Grid::render(sf::RenderWindow &window, sf::View &m_gameView, bool draw)
 {
-	std::cout << window.getPosition().x << std::endl;
+
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)

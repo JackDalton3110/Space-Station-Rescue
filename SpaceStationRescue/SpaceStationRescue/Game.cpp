@@ -37,7 +37,7 @@ Game::Game() :
 	gameView.setCenter(640, 480);
 	//gameView.zoom(0.3f);
 
-	m_Grid = new Grid(gameView);
+	m_Grid = new Grid();
 	
 
 }
