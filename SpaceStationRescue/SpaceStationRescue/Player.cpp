@@ -26,7 +26,8 @@ Player::Player() :
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 	m_bullet = new Bullet();
-	
+	m_healthSystem = new HealthSystem();
+	m_healthSystem->m_healthValue = 2;
 }
 Player::~Player()
 {
@@ -40,6 +41,11 @@ sf::Vector2f Player::getPosition()
 sf::Vector2f Player::getVelocity()
 {
 	return m_velocity;
+}
+
+float Player::getRotation()
+{
+	return m_sprite.getRotation();
 }
 
 void Player::speedUp()
@@ -122,6 +128,9 @@ void Player::update(double dt)
 		m_bullet->update(dt);
 	}
 
+	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+	m_healthSystem->update();
+
 
 }
 
@@ -188,6 +197,7 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+	m_healthSystem->render(window);
 
 	if (m_bullet->getState() == true) {
 

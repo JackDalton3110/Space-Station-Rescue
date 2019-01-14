@@ -4,6 +4,7 @@
 #include <math.h>
 #include "Grid.h"
 #include "Bullet.h"
+#include "HealthSystem.h"
 
 class Player
 {
@@ -21,6 +22,7 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow &window);
 	void collision();
+	float getRotation();
 
 private:
 	sf::CircleShape shape;
@@ -39,6 +41,7 @@ private:
 
 	Grid *m_grid;
 	Bullet *m_bullet;
+	HealthSystem *m_healthSystem;
 	int pGridX;
 	int pGridY;
 
