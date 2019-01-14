@@ -26,7 +26,8 @@ Player::Player() :
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 
-	m_healthSystem = new HealthSystem();
+	m_healthSystem = new HealthSystem(0,0);
+	m_healthSystem->setState(PLAYER);
 
 	for (int i = 0; i < 3; i++)
 	{

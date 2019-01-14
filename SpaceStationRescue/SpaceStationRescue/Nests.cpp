@@ -1,4 +1,5 @@
 #include "Nests.h"
+#include <cstdlib>
 
 Nests::Nests():
 	defendRad(400)
@@ -6,7 +7,7 @@ Nests::Nests():
 	m_Grid = new Grid();
 	m_player = new Player();
 	m_bullet = new Bullet();
-	m_healthSystem = new HealthSystem();
+	
 	defendRad.setFillColor(sf::Color(0,100,0,70));
 	spawnNests();
 	
@@ -24,6 +25,8 @@ void Nests::spawnNests()
 	spawnSpot = rand() % 5;
 	defendRad.setPosition(m_Grid->m_nestPoints[spawnSpot]->m_position.x + (m_Grid->m_tileSize / 2), m_Grid->m_nestPoints[spawnSpot]->m_position.y + (m_Grid->m_tileSize / 2));
 	defendRad.setOrigin(400, 400);
+	m_healthSystem = new HealthSystem(defendRad.getPosition().x + 30, defendRad.getPosition().y + 30);
+	m_healthSystem->setState(ENEMY);
 }
 
 void Nests::Attack(sf::Vector2f pos)
@@ -87,6 +90,7 @@ void Nests::update(sf::Vector2f pos, double dt)
 void Nests::render(sf::RenderWindow &m_window)
 {
 	m_window.draw(defendRad);
+	m_healthSystem->render(m_window);
 	if (m_bullet->nestShot)
 	{
 		m_window.draw(line, 2, sf::Lines);
