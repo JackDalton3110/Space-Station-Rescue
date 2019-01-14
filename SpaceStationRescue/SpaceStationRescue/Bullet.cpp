@@ -24,7 +24,7 @@ Bullet::Bullet() :
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY = m_position.y / m_grid->m_tileSize;
-
+	
 }
 Bullet::~Bullet()
 {
@@ -68,11 +68,6 @@ void Bullet::update(double dt)
 	//std::cout << pGrid.y << std::endl;
 
 	collision();
-	
-
-
-	
-
 }
 
 bool Bullet::getState() {
@@ -144,6 +139,4 @@ void Bullet::render(sf::RenderWindow &window)
 {
 
 	window.draw(m_sprite);
-	
-	
 }
