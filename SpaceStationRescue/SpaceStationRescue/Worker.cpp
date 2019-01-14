@@ -180,7 +180,7 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 	{
 		rotation -= 10;
 	}
-	std::cout << rotation << std::endl;
+
 	return rotation;
 	
 }

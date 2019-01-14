@@ -14,6 +14,7 @@ Tile::Tile(float x, float y, int tileSize, float tileScale, int xPos, int yPos, 
 	m_costText.setFillColor(sf::Color::Black);
 	m_costText.setPosition(m_position);
 	rectangle.setSize(sf::Vector2f(m_tileSize * m_tileScale, m_tileSize * m_tileScale));
+
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(200, 200, 200));
 	rectangle.setPosition(x, y);
@@ -66,6 +67,7 @@ void Tile::setCurrentState(State s)
 		break;
 	case OBSTACLE:
 		rectangle.setFillColor(sf::Color(45, 45, 45));
+		rectangle.setOutlineThickness(0);
 		break;
 	case PATH:
 		rectangle.setFillColor(sf::Color(50, 255, 255));

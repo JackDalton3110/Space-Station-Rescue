@@ -68,6 +68,7 @@ void Bullet::update(double dt)
 	//std::cout << pGrid.y << std::endl;
 
 	collision();
+	
 
 
 	
