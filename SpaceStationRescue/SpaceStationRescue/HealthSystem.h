@@ -27,4 +27,7 @@ private:
 	sf::Texture health1_0Txt;
 	sf::Texture health0_5Txt;
 	sf::Texture health0_0Txt;
+
+	sf::RectangleShape outerRect;
+	sf::RectangleShape innerRect;
 };

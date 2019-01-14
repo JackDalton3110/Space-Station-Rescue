@@ -6,6 +6,14 @@
 #include <string>
 #include "Bullet.h"
 #include "Player.h"
+#include "HealthSystem.h"
+
+//enum State
+//{
+//	PLAYER,
+//	ENEMY
+//
+//};
 
 class Nests
 {
@@ -17,6 +25,7 @@ public:
 	void render(sf::RenderWindow &m_window);
 	int spawnSpot;
 	sf::Vertex line[2];
+	//State m_currentState = PLAYER;
 protected:
 
 private:
@@ -24,7 +33,7 @@ private:
 	sf::CircleShape defendRad;
 	bool shot,attack;
 	Grid *m_Grid;
-	Player *m_player;
+	HealthSystem *m_healthSystem;
 	void spawnNests();
 	void Attack(sf::Vector2f pos);
 	float dist, dx, dy;
