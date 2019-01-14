@@ -33,7 +33,11 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Nests.cpp">
+=======
+    <ClCompile Include="Bullet.cpp">
+>>>>>>> f039697595e37a4875284a2c47782fbd07f37fda
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +57,11 @@
     <ClInclude Include="Worker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Nests.h">
+=======
+    <ClInclude Include="Bullet.h">
+>>>>>>> f039697595e37a4875284a2c47782fbd07f37fda
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

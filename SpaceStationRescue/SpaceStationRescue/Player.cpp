@@ -25,6 +25,10 @@ Player::Player() :
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
+	for (int i = 0; i < 3; i++)
+	{
+		m_bullet.push_back(new Bullet());
+	}
 	
 }
 Player::~Player()
@@ -81,10 +85,6 @@ void Player::update(double dt)
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 
-	
-	//std::cout << pGrid.x << std::endl;
-	//std::cout << pGrid.y << std::endl;
-	
 	collision();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -103,6 +103,7 @@ void Player::update(double dt)
 	{
 		speedDown();
 	}
+	
 
 	m_heading.x = cos(m_rotation * (3.14 / 180));
 	m_heading.y = sin(m_rotation * (3.14 / 180));
@@ -113,6 +114,32 @@ void Player::update(double dt)
 	m_sprite.setRotation(m_rotation);
 
 	respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
+	if (bulletindex <= 2)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false )
+		{
+			
+				m_bullet[bulletindex]->shoot(m_heading, m_sprite.getPosition(), m_rotation);
+				bulletindex++;
+				fired = true;
+		}
+	}
+	else
+		bulletindex = 0;
+	
+
+	for (int i = 0; i < m_bullet.size(); i++)
+	{
+		if (m_bullet[i]->getState() == true){
+
+			m_bullet[i]->update(dt);
+		}
+	}
+
+	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Space)==false && fired == true)
+	{
+		fired = false;
+	}
 
 }
 
@@ -179,4 +206,12 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+	for (int i = 0; i < m_bullet.size(); i++)
+	{
+		if (m_bullet[i]->getState() == true) {
+
+			m_bullet[i]->render(window);
+		}
+	}
+	
 }

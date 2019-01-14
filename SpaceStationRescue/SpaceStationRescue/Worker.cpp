@@ -21,6 +21,8 @@ Worker::Worker():
 	workerSprite.setOrigin(workerSprite.getTextureRect().width / 2, workerSprite.getTextureRect().height / 2);
 	velocity.x = getRandom(10, -5);
 	velocity.y = getRandom(10, -5);
+	pGridX = m_position.x / m_Grid->m_tileSize;
+	pGridY = m_position.y / m_Grid->m_tileSize;
 	
 }
 
@@ -29,53 +31,47 @@ Worker::~Worker()
 
 }
 
+void Worker::collision()
+{
+	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
+	{
+			velocity.x *= -1;
+			velocity.y *= -1;
+
+	}
+	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
+	{
+			velocity.x *= -1;
+			velocity.y *= -1;
+	}
+	if (m_Grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
+	{
+
+			velocity.x *= -1;
+			velocity.y *= -1;
+	}
+
+	if (m_Grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
+	{
+			velocity.x *= -1;
+			velocity.y *= -1;
+	}
+}
+
+sf::Vector2f Worker::getPosition()
+{
+	return workerSprite.getPosition();
+}
+
 void Worker::update()
 {
 
-	/*if (enemy.getPosition().x < -100)
-	{
-		enemy.setPosition(1550, enemy.getPosition().y);
-		velocity.x = rand() % 20 - 10;
-		velocity.x = velocity.x / 100;
-		velocity.y = rand() % 20 - 10;
-		velocity.y = velocity.y / 100;
-
-	}
-
-	if (enemy.getPosition().x > 1600)
-	{
-		enemy.setPosition(-90, enemy.getPosition().y);
-		velocity.x = rand() % 20 - 10;
-		velocity.x = velocity.x / 100;
-		velocity.y = rand() % 20 - 10;
-		velocity.y = velocity.y / 100;
-
-	}
-
-	if (enemy.getPosition().y < -100)
-	{
-		enemy.setPosition(enemy.getPosition().x, 1550);
-
-		velocity.x = rand() % 20 - 10;
-		velocity.x = velocity.x / 100;
-		velocity.y = rand() % 20 - 10;
-		velocity.y = velocity.y / 100;
-	}
-
-	if (enemy.getPosition().y > 1600)
-	{
-		enemy.setPosition(enemy.getPosition().x, -90);
-
-		velocity.x = rand() % 20 - 10;
-		velocity.x = velocity.x / 100;
-		velocity.y = rand() % 20 - 10;
-		velocity.y = velocity.y / 100;
-	}*/
-	
-	workerSprite.setPosition(enemy.getPosition().x, enemy.getPosition().y);
+	pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
+	pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
+	collision();
 	m_position.x += velocity.x * 30 / 100;
 	m_position.y += velocity.y * 30 / 100;
-	enemy.setPosition(m_position.x, m_position.y);
+	workerSprite.setPosition(m_position.x, m_position.y);
 	rotateWorker(velocity, rotation);
 
 	workerSprite.setRotation(rotation);
@@ -88,7 +84,7 @@ void Worker::update()
 	}
 
 	count++;
-
+	
 }
 
 void Worker::spawnWorkers()
@@ -180,7 +176,6 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 	{
 		rotation -= 10;
 	}
-	std::cout << rotation << std::endl;
 	return rotation;
 	
 }

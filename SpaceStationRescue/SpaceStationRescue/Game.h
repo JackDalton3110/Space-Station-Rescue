@@ -8,6 +8,7 @@
 #include <vector>
 #include "Player.h"
 #include "Worker.h"
+#include "Nests.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -37,7 +38,8 @@ protected:
 	Player* m_player;
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
-	sf::Vector2i m_mousePos;
+	std::vector<Nests*> nests;
+ 	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
 	Tile * m_goalTile;

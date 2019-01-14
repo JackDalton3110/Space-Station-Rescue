@@ -174,25 +174,9 @@ void Grid::initGrid(int posX, int posY)
 				m_tileGrid[i][j]->setCost(0);
 				
 			}
-			else
-			{
-				
-			}
 		}
 
 		
-	}
-
-	for (int i = 0; i < m_gridSize; i++)
-	{
-		for (int j = 0; j < m_gridSize; j++)
-		{
-			if (m_tileGrid[i][j]->getCurrentState() == NONE)
-			{
-				m_tileGrid[i][j]->setCost(0);
-			}
-		}
-
 	}
 
 	std::list<Tile> tileQueue;
