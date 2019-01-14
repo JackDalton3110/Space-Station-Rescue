@@ -6,6 +6,7 @@ Nests::Nests():
 	m_Grid = new Grid();
 	m_player = new Player();
 	m_bullet = new Bullet();
+	m_healthSystem = new HealthSystem();
 	defendRad.setFillColor(sf::Color(0,100,0,70));
 	spawnNests();
 	

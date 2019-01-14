@@ -43,6 +43,18 @@ HealthSystem::HealthSystem() :
 	healthSprite.setTexture(health3_0Txt);
 	healthSprite.setPosition(m_position);
 
+	outerRect.setSize(sf::Vector2f(200, 30));
+	outerRect.setOutlineColor(sf::Color::Red);
+	outerRect.setOutlineThickness(5);
+	outerRect.setFillColor(sf::Color::White);
+	outerRect.setPosition(m_position);
+
+	innerRect.setSize(sf::Vector2f(200, 30));
+	innerRect.setOutlineColor(sf::Color::Red);
+	outerRect.setFillColor(sf::Color::Red);
+	innerRect.setOutlineThickness(5);
+	innerRect.setPosition(m_position);
+
 
 }
 
