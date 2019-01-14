@@ -237,7 +237,7 @@ void Game::render()
 {
 	//m_window.setView(follow);
 	
-	m_window.clear(sf::Color::White);
+	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
 	m_player->render(m_window);
