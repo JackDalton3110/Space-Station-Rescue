@@ -1,26 +1,21 @@
 #pragma once
-#include <SFML\Graphics.hpp>
-#include <string>
 #include <math.h>
 #include "Grid.h"
-#include "Bullet.h"
 
-class Player
+class Bullet
 {
 public:
-	Player();
-	~Player();
+	Bullet();
+	~Bullet();
 
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
-	void speedUp();
-	void speedDown();
-	void increaseRotation();
-	void decreaseRotation();
 	void respawn(float x, float y);
 	void update(double dt);
 	void render(sf::RenderWindow &window);
+	void shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rotation);
 	void collision();
+	bool getState();
 
 private:
 	sf::CircleShape shape;
@@ -38,8 +33,9 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
-	Bullet *m_bullet;
 	int pGridX;
 	int pGridY;
+
+	bool active = false;
 
 };
