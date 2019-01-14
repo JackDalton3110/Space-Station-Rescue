@@ -40,6 +40,9 @@
 >>>>>>> f039697595e37a4875284a2c47782fbd07f37fda
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HealthSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -62,6 +65,9 @@
 =======
     <ClInclude Include="Bullet.h">
 >>>>>>> f039697595e37a4875284a2c47782fbd07f37fda
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

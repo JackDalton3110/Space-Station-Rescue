@@ -64,6 +64,12 @@ protected:
 	bool m_leftPress = false;
 	bool m_rightPress = false;
 
+	sf::Sprite m_playerMM;
+	sf::Texture m_playerMMT;
+
+	sf::Sprite m_MM;
+	sf::Texture m_MMT;
+
 
 };
 #endif // !GAME

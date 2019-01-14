@@ -4,6 +4,7 @@
 #include <math.h>
 #include "Grid.h"
 #include "Bullet.h"
+#include "HealthSystem.h"
 
 class Player
 {
@@ -21,6 +22,10 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow &window);
 	void collision();
+
+	float getRotation();
+
+
 	int bulletindex = 0;
 	bool fired=false;
 
@@ -40,7 +45,11 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
+
+	HealthSystem *m_healthSystem;
+
 	std::vector<Bullet *> m_bullet;
+
 	int pGridX;
 	int pGridY;
 

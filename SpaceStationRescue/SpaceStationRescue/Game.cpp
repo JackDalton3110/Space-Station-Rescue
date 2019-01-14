@@ -47,10 +47,22 @@ Game::Game() :
 	gameView.setViewport(sf::FloatRect(0, 0, 1, 1));
 	gameView.setSize(1280, 960);
 	gameView.setCenter(640, 480);
-	//gameView.zoom(0.3f);
+
 
 	m_Grid = new Grid();
+
+	if (!m_playerMMT.loadFromFile("./resources/PlayerMiniMap.png")) {
+		//do something
+	}
+
+	if (!m_MMT.loadFromFile("./resources/MiniMap.png")) {
+		//do something
+	}
+
+	m_playerMM.setTexture(m_playerMMT);
+	m_playerMM.setOrigin(m_playerMM.getTextureRect().width / 2, m_playerMM.getTextureRect().height / 2);
 	
+	m_MM.setTexture(m_MMT);
 
 }
 
@@ -195,6 +207,8 @@ void Game::processGameEvents(sf::Event& event)
 /// </summary>
 void Game::update(double dt)
 {
+	m_playerMM.setPosition(m_player->getPosition());
+	m_playerMM.setRotation(m_player->getRotation());
 	m_player->update(dt);
 	gameView.setCenter(m_player->getPosition());
 	for (int i = 0; i < workers.size(); i++)
@@ -230,7 +244,7 @@ void Game::render()
 {
 	//m_window.setView(follow);
 	
-	m_window.clear(sf::Color::White);
+	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
 	for (int i = 0; i < nests.size(); i++)
@@ -242,16 +256,21 @@ void Game::render()
 	{
 		workers[i]->render(m_window);
 	}
-	
-	/*m_worker->render(m_window);*/
+
+
 
 	m_window.setView(miniMapView);
-	m_Grid->render(m_window, gameView, true);
-	m_player->render(m_window);
-	/*for (int i = 0; i < workers.size(); i++)
-	{
-		workers[i]->render(m_window);
-	}*/
+
+	m_window.draw(m_MM);
+	for (int i = 0; i < m_Grid->m_spawnPoints.size(); i++) {
+		m_Grid->m_spawnPoints[i]->render(m_window);
+	}
+	
+	m_window.draw(m_playerMM);
+	//for (int i = 0; i < workers.size(); i++)
+	//{
+		//workers[i]->render(m_window);
+	//}
 	/*m_worker->render(m_window);*/
 	//m_player->render(m_window);
 

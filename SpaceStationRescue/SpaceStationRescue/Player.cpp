@@ -25,11 +25,15 @@ Player::Player() :
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
+
+	m_healthSystem = new HealthSystem();
+
 	for (int i = 0; i < 3; i++)
 	{
 		m_bullet.push_back(new Bullet());
 	}
 	
+
 }
 Player::~Player()
 {
@@ -43,6 +47,11 @@ sf::Vector2f Player::getPosition()
 sf::Vector2f Player::getVelocity()
 {
 	return m_velocity;
+}
+
+float Player::getRotation()
+{
+	return m_sprite.getRotation();
 }
 
 void Player::speedUp()
@@ -136,10 +145,15 @@ void Player::update(double dt)
 		}
 	}
 
+
+	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+	m_healthSystem->update();
+
 	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Space)==false && fired == true)
 	{
 		fired = false;
 	}
+
 
 }
 
@@ -206,10 +220,12 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+
+	m_healthSystem->render(window);
+
 	for (int i = 0; i < m_bullet.size(); i++)
 	{
 		if (m_bullet[i]->getState() == true) {
-
 			m_bullet[i]->render(window);
 		}
 	}
