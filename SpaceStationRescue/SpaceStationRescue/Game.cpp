@@ -10,9 +10,12 @@ Game::Game() :
 	for (int i = 0; i < 30; i++)
 	{
 		workers.push_back(new Worker());
-
+		
 	}
-	
+	for (int i = 0; i < 3; i++)
+	{
+		nests.push_back(new Nests());
+	}
 
 	m_player = new Player();
 	//m_worker = new Worker();
@@ -212,6 +215,10 @@ void Game::update(double dt)
 	{
 		workers[i]->update();
 	}
+	for (int i = 0; i < nests.size(); i++)
+	{
+		nests[i]->update(m_player->getPosition());
+	}
 
 	//m_worker->update();
 
@@ -240,11 +247,16 @@ void Game::render()
 	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
+	for (int i = 0; i < nests.size(); i++)
+	{
+		nests[i]->render(m_window);
+	}
 	m_player->render(m_window);
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->render(m_window);
 	}
+
 
 
 	m_window.setView(miniMapView);
