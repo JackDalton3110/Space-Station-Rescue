@@ -21,7 +21,8 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow &window);
 	void collision();
-
+	int bulletindex = 0;
+	bool fired=false;
 private:
 	sf::CircleShape shape;
 	sf::RectangleShape m_rect;
@@ -38,7 +39,7 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
-	Bullet *m_bullet;
+	std::vector<Bullet *> m_bullet;
 	int pGridX;
 	int pGridY;
 
