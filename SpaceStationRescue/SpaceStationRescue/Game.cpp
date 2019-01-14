@@ -217,7 +217,7 @@ void Game::update(double dt)
 	}
 	for (int i = 0; i < nests.size(); i++)
 	{
-		nests[i]->update(m_player->getPosition());
+		nests[i]->update(m_player->getPosition(), dt);
 	}
 
 	//m_worker->update();
