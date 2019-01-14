@@ -25,9 +25,15 @@ Player::Player() :
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
-	m_bullet = new Bullet();
+
 	m_healthSystem = new HealthSystem();
-	m_healthSystem->m_healthValue = 2;
+
+	for (int i = 0; i < 3; i++)
+	{
+		m_bullet.push_back(new Bullet());
+	}
+	
+
 }
 Player::~Player()
 {
@@ -117,19 +123,36 @@ void Player::update(double dt)
 	m_sprite.setRotation(m_rotation);
 
 	respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet->getState() == false)
+	if (bulletindex <= 2)
 	{
-		m_bullet->shoot(m_heading, m_sprite.getPosition(), m_rotation);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false )
+		{
+			
+				m_bullet[bulletindex]->shoot(m_heading, m_sprite.getPosition(), m_rotation);
+				bulletindex++;
+				fired = true;
+		}
+	}
+	else
+		bulletindex = 0;
+	
+
+	for (int i = 0; i < m_bullet.size(); i++)
+	{
+		if (m_bullet[i]->getState() == true){
+
+			m_bullet[i]->update(dt);
+		}
 	}
 
-	if (m_bullet->getState() == true){
-
-		m_bullet->update(dt);
-	}
 
 	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
 	m_healthSystem->update();
+
+	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Space)==false && fired == true)
+	{
+		fired = false;
+	}
 
 
 }
@@ -197,12 +220,14 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+
 	m_healthSystem->render(window);
 
-	if (m_bullet->getState() == true) {
-
-		m_bullet->render(window);
+	for (int i = 0; i < m_bullet.size(); i++)
+	{
+		if (m_bullet[i]->getState() == true) {
+			m_bullet[i]->render(window);
+		}
 	}
-
 	
 }

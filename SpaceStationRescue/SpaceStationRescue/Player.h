@@ -22,7 +22,12 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow &window);
 	void collision();
+
 	float getRotation();
+
+
+	int bulletindex = 0;
+	bool fired=false;
 
 private:
 	sf::CircleShape shape;
@@ -40,8 +45,11 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
-	Bullet *m_bullet;
+
 	HealthSystem *m_healthSystem;
+
+	std::vector<Bullet *> m_bullet;
+
 	int pGridX;
 	int pGridY;
 
