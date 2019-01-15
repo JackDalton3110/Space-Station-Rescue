@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 Player::Player() :
-	m_position(900, 500),
+	m_position(3000, 3000),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
@@ -217,6 +217,15 @@ void Player::respawn(float x, float y)
 		 }
 	
 	}
+
+	  if (m_grid->m_tileGrid[pGridX - 1][pGridY - 1]->getCurrentState() == OBSTACLE)
+	  {
+		  if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
+		  {
+			  m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		  }
+
+	  }
 
 
 }
