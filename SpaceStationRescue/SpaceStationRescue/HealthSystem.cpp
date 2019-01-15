@@ -116,7 +116,7 @@ void HealthSystem::update()
 			
 			break;
 		case 5:
-			innerRect.setSize(sf::Vector2f(m_hbWidth * 83, m_hbHeight));
+			innerRect.setSize(sf::Vector2f(m_hbWidth * 0.83, m_hbHeight));
 			
 			break;
 		case 4:
@@ -157,13 +157,16 @@ void HealthSystem::render(sf::RenderWindow &window)
 	if (getState() == PLAYER)
 	{
 		healthSprite.setPosition(m_position);
+		window.draw(healthSprite);
 	}
 	else
 	{
+		innerRect.setPosition(m_position);
+		outerRect.setPosition(m_position);
 		window.draw(outerRect);
 		window.draw(innerRect);
 	}
 	
-	window.draw(healthSprite);
+	
 
 }

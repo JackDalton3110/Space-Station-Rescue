@@ -3,8 +3,8 @@
 #include <string>
 #include <math.h>
 #include "Grid.h"
-#include "Bullet.h"
 #include "HealthSystem.h"
+#include "Bullet.h"
 
 class Player
 {
@@ -28,6 +28,8 @@ public:
 
 	int bulletindex = 0;
 	bool fired=false;
+	HealthSystem *m_healthSystem;
+	std::vector<Bullet *> m_bullet;
 
 private:
 	sf::CircleShape shape;
@@ -46,9 +48,9 @@ private:
 
 	Grid *m_grid;
 
-	HealthSystem *m_healthSystem;
+	
 
-	std::vector<Bullet *> m_bullet;
+
 
 	int pGridX;
 	int pGridY;
