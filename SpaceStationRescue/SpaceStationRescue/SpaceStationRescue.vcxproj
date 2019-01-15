@@ -163,6 +163,7 @@
     <ClInclude Include="Nests.h" />
     <ClInclude Include="HealthSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Predator.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Worker.h" />
   </ItemGroup>

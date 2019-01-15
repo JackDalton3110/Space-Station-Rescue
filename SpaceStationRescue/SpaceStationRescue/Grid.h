@@ -19,6 +19,7 @@ public:
 
 	void processGameEvents(sf::Event& event);
 	void initGrid(int posX, int posY);
+	void updateCost(int posX, int posY);
 	static const int m_gridSize = 55;
 	static const int m_tileSize = 68.2;
 	Tile *m_tileGrid[m_gridSize][m_gridSize];

@@ -54,6 +54,9 @@
     <ClInclude Include="Worker.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Predator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Player.png">

@@ -179,6 +179,12 @@ void Grid::initGrid(int posX, int posY)
 		
 	}
 
+}
+
+
+
+void Grid::updateCost(int posX, int posY)
+{
 	std::list<Tile> tileQueue;
 
 
@@ -256,7 +262,7 @@ void Grid::initGrid(int posX, int posY)
 		//tileQueue.remove(*iter);
 		iter++;
 		tileQueue.pop_front();
-		
+
 	}
 
 	if (m_startTile != NULL)
