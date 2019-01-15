@@ -26,7 +26,9 @@ Player::Player() :
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 
-	m_healthSystem = new HealthSystem();
+	m_healthSystem = new HealthSystem(0,0);
+	m_healthSystem->setState(PLAYER);
+	m_healthSystem->m_healthValue = 6;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -142,6 +144,7 @@ void Player::update(double dt)
 		if (m_bullet[i]->getState() == true){
 
 			m_bullet[i]->update(dt);
+			
 		}
 	}
 
@@ -215,7 +218,9 @@ void Player::respawn(float x, float y)
 	
 	}
 
+
 }
+
 
 void Player::render(sf::RenderWindow &window)
 {

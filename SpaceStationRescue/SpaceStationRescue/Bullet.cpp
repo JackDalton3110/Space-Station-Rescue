@@ -6,7 +6,7 @@ Bullet::Bullet() :
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(20.0),
-	m_speed(75),
+	m_speed(100),
 	m_heading(0, 0)
 
 {
@@ -114,7 +114,7 @@ void Bullet::update(double dt)
 	//std::cout << pGrid.x << std::endl;
 	//std::cout << pGrid.y << std::endl;
 
-	collision();
+	collisionWall();
 }
 
 bool Bullet::getState() {
@@ -143,7 +143,7 @@ void Bullet::respawn(float x, float y)
 	}
 }
 
-void Bullet::collision()
+void Bullet::collisionWall()
 {
 
 	if (m_grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
@@ -184,6 +184,13 @@ void Bullet::collision()
 
 	}
 
+}
+
+void Bullet::collisionNest(int xPos, int yPos)
+{
+	
+
+	
 }
 
 void Bullet::render(sf::RenderWindow &window)
