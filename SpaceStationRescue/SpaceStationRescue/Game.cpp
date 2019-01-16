@@ -24,6 +24,7 @@ Game::Game() :
 			nests.push_back(new Nests(spawnSpot));
 			
 			usedSpawns.push_back(spawnSpot);
+			m_sweeper.push_back(new Sweeper(workers));
 	}
 	
 

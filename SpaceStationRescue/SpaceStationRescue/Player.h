@@ -29,7 +29,6 @@ public:
 	int bulletindex = 0;
 	bool fired=false;
 	HealthSystem *m_healthSystem;
-	std::vector<Bullet *> m_bullet;
 
 	std::vector<Bullet *> m_bullet;
 

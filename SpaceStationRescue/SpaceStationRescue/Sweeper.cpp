@@ -39,7 +39,6 @@ Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	sweeperSprite.setPosition(m_position);
 	pGridX = m_position.x / m_Grid->m_tileSize;
 	pGridY = m_position.y / m_Grid->m_tileSize;
-	m_healthSystem = new HealthSystem;
 }
 
 Sweeper::~Sweeper()
