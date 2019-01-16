@@ -4,7 +4,8 @@ Worker::Worker():
 	velocity(0,0),
 	maxSpeed(2.0f),
 	maxRotation(360),
-	rotation(90)
+	rotation(90),
+	alive(true)
 {
 	m_Grid = new Grid();
 	spawnWorkers();
@@ -23,7 +24,6 @@ Worker::Worker():
 	velocity.y = getRandom(10, -5);
 	pGridX = m_position.x / m_Grid->m_tileSize;
 	pGridY = m_position.y / m_Grid->m_tileSize;
-	
 }
 
 Worker::~Worker()
@@ -66,25 +66,27 @@ sf::Vector2f Worker::getPosition()
 
 void Worker::update()
 {
-
-	pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
-	pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
-	collision();
-	m_position.x += velocity.x * 30 / 100;
-	m_position.y += velocity.y * 30 / 100;
-	workerSprite.setPosition(m_position.x, m_position.y);
-	rotateWorker(velocity, rotation);
-
-	workerSprite.setRotation(rotation);
-	if (count >= 50)
+	if (alive)
 	{
-		velocity.x = getRandom(10, -5);
-		velocity.y = getRandom(10, -5);
-		
-		count = 0;
-	}
+		pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
+		pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
+		collision();
+		m_position.x += velocity.x * 30 / 100;
+		m_position.y += velocity.y * 30 / 100;
+		workerSprite.setPosition(m_position.x, m_position.y);
+		rotateWorker(velocity, rotation);
 
-	count++;
+		workerSprite.setRotation(rotation);
+		if (count >= 50)
+		{
+			velocity.x = getRandom(10, -5);
+			velocity.y = getRandom(10, -5);
+		
+			count = 0;
+		}
+
+		count++;
+	}
 	
 }
 
@@ -181,8 +183,8 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 
 void Worker::render(sf::RenderWindow &window)
 {
-	
-		window.draw(workerSprite);
+	if(alive)
+	window.draw(workerSprite);
 
 }
 

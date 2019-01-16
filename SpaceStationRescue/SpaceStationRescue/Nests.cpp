@@ -27,7 +27,7 @@ void Nests::spawnNests()
 
 void Nests::Attack(sf::Vector2f pos)
 {
-	//std::cout << dist << std::endl;
+	
 	if (dist<defendRad.getRadius()+m_Grid->m_tileSize/2)
 	{
 		defendRad.setFillColor(sf::Color(100,0,0,70));
@@ -66,8 +66,6 @@ void Nests::update(sf::Vector2f pos, double dt)
 	{
 		cumulativeTime += dt/1000;
 	}
-
-	std::cout << cumulativeTime << std::endl;
 
 	if (cumulativeTime >= 5)
 	{

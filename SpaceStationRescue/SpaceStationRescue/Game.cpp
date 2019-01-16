@@ -18,7 +18,7 @@ Game::Game() :
 	}
 
 	m_player = new Player();
-	m_sweeper = new Sweeper();
+	m_sweeper = new Sweeper(workers);
 	//m_worker = new Worker();
 
 	/*Enemy* m_pursue = new Pursue(*this);
@@ -222,7 +222,7 @@ void Game::update(double dt)
 	{
 		nests[i]->update(m_player->getPosition(), dt);
 	}
-	m_sweeper->update(dt);
+	m_sweeper->update(m_player->getPosition(), dt);
 	//m_worker->update();
 
 	//m_Grid->update(gameView);

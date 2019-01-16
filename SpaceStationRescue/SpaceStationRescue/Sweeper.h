@@ -5,6 +5,7 @@
 #include <string>
 #include "Worker.h"
 #include "Grid.h"
+#include "Player.h"
 
 enum behaveState {
 	WANDER,
@@ -15,14 +16,18 @@ enum behaveState {
 class Sweeper 
 {
 public:
-	Sweeper();
+	Sweeper(std::vector<Worker*> &m_worker);
 	~Sweeper();
 
-	void update(double dt);
+	void kinematicSeek(sf::Vector2f workerPos);
+	float getNewOrientation(float currentOrientation, float velocity);
+	void kinematicFlee(sf::Vector2f playerPos);
+	void coneVision(std::vector<Worker*> workers);
+	void update(sf::Vector2f pos, double dt);
 	void render(sf::RenderWindow &window);
 	sf::Vector2f getPosition();
 	void collision();
-	void setBehaveState(behaveState S);
+	void setBehaveState(sf::Vector2f pos, behaveState S);
 	behaveState getCurrentState();
 	behaveState currentState = WANDER;
 
@@ -38,14 +43,19 @@ private:
 	float rotation;
 	float maxRotation;
 	float speed;
+	float m_velocityF;
+	float m_orientation;
+	float dist, dx, dy;
 
 	double cumulativeTime;
 
 	sf::Texture sweeperTxt;
 	sf::Sprite sweeperSprite;
+	sf::CircleShape radius;
 
 	float rotateSweeper(sf::Vector2f vel, float rot);
 
+	std::vector<Worker *>workers;
 	Grid *m_Grid;
 	int pGridX, pGridY;
 };
