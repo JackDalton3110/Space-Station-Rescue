@@ -6,6 +6,7 @@
 #include "Worker.h"
 #include "Grid.h"
 #include "Player.h"
+#include "HealthSystem.h"
 
 enum behaveState {
 	WANDER,
@@ -23,10 +24,10 @@ public:
 	float getNewOrientation(float currentOrientation, float velocity);
 	void kinematicFlee(sf::Vector2f playerPos);
 	void coneVision(std::vector<Worker*> workers);
-	void update(sf::Vector2f pos, double dt);
+	void update(sf::Vector2f pos, double dt , Player &m_player);
 	void render(sf::RenderWindow &window);
 	sf::Vector2f getPosition();
-	void collision();
+	void collision(Player &m_player);
 	void setBehaveState(sf::Vector2f pos, behaveState S);
 	behaveState getCurrentState();
 	behaveState currentState = WANDER;
@@ -46,7 +47,7 @@ private:
 	float m_velocityF;
 	float m_orientation;
 	float dist, dx, dy;
-
+	int scoreCount;
 	double cumulativeTime;
 
 	sf::Texture sweeperTxt;
@@ -56,6 +57,8 @@ private:
 	float rotateSweeper(sf::Vector2f vel, float rot);
 
 	std::vector<Worker *>workers;
+	HealthSystem *m_healthSystem;
 	Grid *m_Grid;
 	int pGridX, pGridY;
+	bool alive;
 };

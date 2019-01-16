@@ -15,10 +15,11 @@ Game::Game() :
 	for (int i = 0; i < 3; i++)
 	{
 		nests.push_back(new Nests());
+		m_sweeper.push_back(new Sweeper(workers));
 	}
+	
 
 	m_player = new Player();
-	m_sweeper = new Sweeper(workers);
 	//m_worker = new Worker();
 
 	/*Enemy* m_pursue = new Pursue(*this);
@@ -222,7 +223,10 @@ void Game::update(double dt)
 	{
 		nests[i]->update(m_player->getPosition(), dt);
 	}
-	m_sweeper->update(m_player->getPosition(), dt);
+	for (int i = 0; i < m_sweeper.size(); i++)
+	{
+		m_sweeper[i]->update(m_player->getPosition(), dt, *m_player);
+	}
 	//m_worker->update();
 
 	//m_Grid->update(gameView);
@@ -262,8 +266,10 @@ void Game::render()
 		workers[i]->render(m_window);
 	}
 
-
-	m_sweeper->render(m_window);
+	for (int i = 0; i < m_sweeper.size(); i++)
+	{
+		m_sweeper[i]->render(m_window);
+	}
 	m_window.setView(miniMapView);
 
 	m_window.draw(m_MM);

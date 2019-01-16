@@ -40,7 +40,7 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
-	Sweeper * m_sweeper;
+	std::vector<Sweeper*> m_sweeper;
  	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;

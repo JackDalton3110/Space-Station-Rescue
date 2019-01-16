@@ -29,6 +29,12 @@ public:
 	int bulletindex = 0;
 	bool fired=false;
 
+	std::vector<Bullet *> m_bullet;
+
+	int pGridX;
+	int pGridY;
+	int score;
+
 private:
 	sf::CircleShape shape;
 	sf::RectangleShape m_rect;
@@ -43,14 +49,12 @@ private:
 	float m_rotation;
 	sf::Vector2f m_heading;
 	float m_speed;
-
+	
 	Grid *m_grid;
 
 	HealthSystem *m_healthSystem;
 
-	std::vector<Bullet *> m_bullet;
+	
 
-	int pGridX;
-	int pGridY;
-
+	
 };

@@ -2,12 +2,12 @@
 
 Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	m_velocity(0,0),
-	maxSpeed(5.0f),
+	maxSpeed(3.0f),
 	maxRotation(360),
 	rotation(0),
-	m_heading(1,0),
 	speed(2.0f),
-	radius(250)
+	radius(250),
+	alive(true)
 {
 	m_Grid = new Grid();
 	workers = m_worker;
@@ -23,12 +23,23 @@ Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	radius.setPosition(m_position);
 	radius.setFillColor(sf::Color(0, 100, 0, 70));
 	radius.setOrigin(250,250);
+	rotation = rand() % 360;
+	m_heading.x = cos(rotation*(3.14 / 180));
+	m_heading.y = sin(rotation*(3.14 / 180));
+	if (m_heading.x >= 0 && m_heading.y >= 0)
+	{
+		m_velocity = m_heading * speed;
+	}
+	else
+		m_velocity = m_heading * -speed;
 	m_velocity = m_heading * speed;
 	m_position.x = m_Grid->m_sweeperSpawn->m_position.x;
 	m_position.y = m_Grid->m_sweeperSpawn->m_position.y;
+	
 	sweeperSprite.setPosition(m_position);
 	pGridX = m_position.x / m_Grid->m_tileSize;
 	pGridY = m_position.y / m_Grid->m_tileSize;
+	m_healthSystem = new HealthSystem;
 }
 
 Sweeper::~Sweeper()
@@ -69,7 +80,7 @@ sf::Vector2f Sweeper::getPosition()
 	return sweeperSprite.getPosition();
 }
 
-void Sweeper::collision()
+void Sweeper::collision(Player &m_player)
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
@@ -103,10 +114,29 @@ void Sweeper::collision()
 			sweeperSprite.getPosition().y - m_Grid->m_tileSize / 2 < workers[i]->getPosition().y + m_Grid->m_tileSize / 2 &&
 			sweeperSprite.getPosition().y + m_Grid->m_tileSize / 2 > workers[i]->getPosition().y - m_Grid->m_tileSize / 2)
 		{
-			if (workers[i]->alive)
+			if (workers[i]->alive && getCurrentState()!=FLEE)
 			{
 				workers[i]->alive = false;
+				scoreCount += 10;
 			}
+		}
+	}
+
+	for (int i = 0; i < m_player.m_bullet.size(); i++) {
+
+		if (sweeperSprite.getPosition().x - m_Grid->m_tileSize / 2 < m_player.m_bullet[i]->getPosition().x + m_Grid->m_tileSize / 2 &&
+			sweeperSprite.getPosition().x + m_Grid->m_tileSize / 2 > m_player.m_bullet[i]->getPosition().x - m_Grid->m_tileSize / 2 &&
+			sweeperSprite.getPosition().y - m_Grid->m_tileSize / 2 < m_player.m_bullet[i]->getPosition().y + m_Grid->m_tileSize / 2 &&
+			sweeperSprite.getPosition().y + m_Grid->m_tileSize / 2 > m_player.m_bullet[i]->getPosition().y - m_Grid->m_tileSize / 2) {
+
+			if (m_player.m_bullet[i]->active == true && alive)
+			{
+				m_player.m_bullet[i]->active = false;
+				std::cout << "HIT" << std::endl;
+				alive = false;
+				m_player.score += scoreCount;
+			}
+
 		}
 	}
 }
@@ -135,7 +165,7 @@ void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 	{
 		currentState = FLEE;
 		kinematicFlee(pos);
-		std::cout << "FLEE" << std::endl;
+		//std::cout << "FLEE" << std::endl;
 		radius.setFillColor(sf::Color(100, 0, 0, 70));
 	}
 	else if (currentState != FLEE)
@@ -152,13 +182,13 @@ void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 					currentState = FIND;
 
 					kinematicSeek(workers[i]->getPosition());
-					std::cout << "SEEK" << std::endl;
+					//std::cout << "SEEK" << std::endl;
 					radius.setFillColor(sf::Color(0, 0, 100, 70));
 				}
 				else
 				{
 					currentState = WANDER;
-					std::cout << "WANDER" << std::endl;
+					//std::cout << "WANDER" << std::endl;
 					radius.setFillColor(sf::Color(0, 100, 0, 70));
 				}
 			}
@@ -168,14 +198,14 @@ void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 	else
 	{
 		currentState = WANDER;
-		std::cout << "WANDER" << std::endl;
+		//std::cout << "WANDER" << std::endl;
 		radius.setFillColor(sf::Color(0, 100, 0, 70));
 	}
 }
 
 behaveState Sweeper::getCurrentState()
 {
-	return behaveState();
+	return currentState;
 }
 
 float Sweeper::rotateSweeper(sf::Vector2f vel, float rot)
@@ -248,38 +278,45 @@ float Sweeper::rotateSweeper(sf::Vector2f vel, float rot)
 	return rotation;
 }
 
-void Sweeper::update(sf::Vector2f pos, double dt)
+void Sweeper::update(sf::Vector2f pos, double dt, Player &m_player)
 {
-	pGridX = floor(sweeperSprite.getPosition().x / m_Grid->m_tileSize);
-	pGridY = floor(sweeperSprite.getPosition().y / m_Grid->m_tileSize);
-	collision();
-	radius.setPosition(m_position);
-	m_position.x += m_velocity.x ;
-	m_position.y += m_velocity.y ;
-	sweeperSprite.setPosition(m_position.x, m_position.y);
-	rotateSweeper(m_velocity, rotation);
-	cumulativeTime += dt / 1000;
-	setBehaveState(pos, currentState);
-	sweeperSprite.setRotation(rotation);
-	if (cumulativeTime >= 5)
+	if (alive)
 	{
-		rotation = rand() % 360;
-		m_heading.x = cos(rotation*(3.14 / 180));
-		m_heading.y = sin(rotation*(3.14 / 180));
-		if (m_heading.x >= 0 && m_heading.y >= 0)
+		pGridX = floor(sweeperSprite.getPosition().x / m_Grid->m_tileSize);
+		pGridY = floor(sweeperSprite.getPosition().y / m_Grid->m_tileSize);
+		collision(m_player);
+		radius.setPosition(m_position);
+		m_position.x += m_velocity.x;
+		m_position.y += m_velocity.y;
+		sweeperSprite.setPosition(m_position.x, m_position.y);
+		rotateSweeper(m_velocity, rotation);
+		cumulativeTime += dt / 1000;
+		setBehaveState(pos, currentState);
+		sweeperSprite.setRotation(rotation);
+		if (cumulativeTime >= 5)
 		{
-			m_velocity = m_heading * speed;
+			rotation = rand() % 360;
+			m_heading.x = cos(rotation*(3.14 / 180));
+			m_heading.y = sin(rotation*(3.14 / 180));
+			if (m_heading.x >= 0 && m_heading.y >= 0)
+			{
+				m_velocity = m_heading * speed;
+			}
+			else
+				m_velocity = m_heading * -speed;
+			cumulativeTime = 0;
 		}
-		else
-			m_velocity = m_heading * -speed;
-		cumulativeTime = 0;
 	}
+	
 	
 }
 
 void Sweeper::render(sf::RenderWindow &window)
 {
-	window.draw(radius);
-	window.draw(sweeperSprite);
+	if (alive)
+	{
+		window.draw(radius);
+		window.draw(sweeperSprite);
+	}
 
 }

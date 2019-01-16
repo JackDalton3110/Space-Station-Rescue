@@ -26,6 +26,10 @@ public:
 	void seekShoot(sf::Vector2f playerPosition);
 	bool nestShot = false;
 	sf::Vector2f m_position;
+	int pGridX;
+	int pGridY;
+
+	bool active = false;
 
 private:
 	float getNewOrientation(float currentOrientation, float velocity);
@@ -45,10 +49,7 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
-	int pGridX;
-	int pGridY;
-
-	bool active = false;
+	
 
 
 	
