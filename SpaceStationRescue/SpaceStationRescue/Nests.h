@@ -1,34 +1,45 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "Grid.h"
 #include <SFML\Config.hpp>
 #include <string>
-#include "Bullet.h"
 #include "Player.h"
+
+//enum State
+//{
+//	PLAYER,
+//	ENEMY
+//
+//};
 
 class Nests
 {
 public:
-	Nests();
+	Nests(int m_spawnSpot);
 	~Nests();
 
-	void update(sf::Vector2f pos, double dt);
+	void update(Player & m_player, double dt);
 	void render(sf::RenderWindow &m_window);
+	void collision(Player & m_player);
+	void spawnNests();
 	int spawnSpot;
 	sf::Vertex line[2];
-protected:
+	//State m_currentState = PLAYER;
+	HealthSystem *m_healthSystem;
+	int m_gridX;
+	int m_gridY;
+	Bullet *m_bullet;
 
 private:
 	sf::Vector2f m_position;
+	std::vector<int> usedSpawns;
 	sf::CircleShape defendRad;
 	bool shot,attack,time;
 	bool inView(sf::Vector2f position);
 	
 	Grid *m_Grid;
-	Player *m_player;
-	Bullet *m_bullet;
-	void spawnNests();
+
+	
 	void Attack(sf::Vector2f pos);
 	float dist, dx, dy;
 	sf::Clock bulletTime;

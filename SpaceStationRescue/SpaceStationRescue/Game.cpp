@@ -13,9 +13,17 @@ Game::Game() :
 		
 	}
 	for (int i = 0; i < 3; i++)
-	{
-		nests.push_back(new Nests());
-		m_sweeper.push_back(new Sweeper(workers));
+	{	
+		spawnSpot = rand() % 5;
+
+		
+			while ((std::find(usedSpawns.begin(), usedSpawns.end(), spawnSpot) != usedSpawns.end()))
+			{
+				spawnSpot = rand() % 5;
+			}
+			nests.push_back(new Nests(spawnSpot));
+			
+			usedSpawns.push_back(spawnSpot);
 	}
 	
 
@@ -221,7 +229,7 @@ void Game::update(double dt)
 	}
 	for (int i = 0; i < nests.size(); i++)
 	{
-		nests[i]->update(m_player->getPosition(), dt);
+		nests[i]->update(*m_player, dt);
 	}
 	for (int i = 0; i < m_sweeper.size(); i++)
 	{
@@ -275,6 +283,15 @@ void Game::render()
 	m_window.draw(m_MM);
 	for (int i = 0; i < m_Grid->m_spawnPoints.size(); i++) {
 		m_Grid->m_spawnPoints[i]->render(m_window);
+	}
+
+	//for (int i = 0; i < m_Grid->m_nestPoints.size(); i++) {
+	//	m_Grid->m_nestPoints[i]->render(m_window);
+	//}
+
+	for (int i = 0; i < nests.size(); i++)
+	{
+		nests[i]->render(m_window);
 	}
 	
 	m_window.draw(m_playerMM);

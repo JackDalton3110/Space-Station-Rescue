@@ -1,16 +1,16 @@
 #include "Nests.h"
+#include <cstdlib>
 
-Nests::Nests():
-	defendRad(400)
+Nests::Nests(int m_spawnSpot):
+	defendRad(400),
+	spawnSpot(m_spawnSpot)
 {
 	m_Grid = new Grid();
-	m_player = new Player();
 	m_bullet = new Bullet();
+	
 	defendRad.setFillColor(sf::Color(0,100,0,70));
 	spawnNests();
 	
-	m_bullet->m_position.x = m_Grid->m_nestPoints[spawnSpot]->m_position.x + m_Grid->m_tileSize; 
-	m_bullet->m_position.y = m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize;
 }
 
 Nests::~Nests()
@@ -20,9 +20,17 @@ Nests::~Nests()
 
 void Nests::spawnNests()
 {
-	spawnSpot = rand() % 5;
+	m_gridX = m_Grid->m_nestPoints[spawnSpot]->m_position.x;
+	m_gridY = m_Grid->m_nestPoints[spawnSpot]->m_position.y;
 	defendRad.setPosition(m_Grid->m_nestPoints[spawnSpot]->m_position.x + (m_Grid->m_tileSize / 2), m_Grid->m_nestPoints[spawnSpot]->m_position.y + (m_Grid->m_tileSize / 2));
 	defendRad.setOrigin(400, 400);
+	
+	m_healthSystem = new HealthSystem(200, 10);
+	m_healthSystem->setPosition(m_Grid->m_nestPoints[spawnSpot]->m_position.x - 67, m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize * 1.5 );
+	m_healthSystem->setState(ENEMY);
+	m_healthSystem->m_healthValue = 5;
+	m_bullet->m_position.x = m_Grid->m_nestPoints[spawnSpot]->m_position.x + m_Grid->m_tileSize;
+	m_bullet->m_position.y = m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize;
 }
 
 void Nests::Attack(sf::Vector2f pos)
@@ -47,15 +55,17 @@ void Nests::Attack(sf::Vector2f pos)
 	}
 }
 
-void Nests::update(sf::Vector2f pos, double dt)
+
+void Nests::update(Player &m_player, double dt)
 {
 	
-	dx = pos.x - defendRad.getPosition().x+m_Grid->m_tileSize/2;
-	dy = pos.y - defendRad.getPosition().y+m_Grid->m_tileSize/2;
+	dx = m_player.getPosition().x - defendRad.getPosition().x+m_Grid->m_tileSize/2;
+	dy = m_player.getPosition().y - defendRad.getPosition().y+m_Grid->m_tileSize/2;
 	dist = sqrt((dx*dx) + (dy*dy));
+
 	if (m_bullet->nestShot)
 	{
-		m_bullet->seekShoot(pos);
+		m_bullet->seekShoot(m_player.getPosition());
 	}
 	else
 	{
@@ -77,18 +87,68 @@ void Nests::update(sf::Vector2f pos, double dt)
 	}
 
 
-	Attack(pos);
+	Attack(m_player.getPosition());
 	m_bullet->update(dt);
+	
+
+	collision(m_player);
+	m_healthSystem->update();
+
+}
+
+
+void Nests::collision(Player & m_player)
+{
+	for (int i = 0; i < m_player.m_bullet.size(); i++) {
+
+		if (m_player.m_bullet[i]->pGridX == m_Grid->m_nestPoints[spawnSpot]->m_xPos && m_player.m_bullet[i]->pGridY == m_Grid->m_nestPoints[spawnSpot]->m_yPos) {
+
+			if (m_player.m_bullet[i]->active == true)
+			{
+				m_healthSystem->m_healthValue--;
+				
+				m_player.m_bullet[i]->active = false;
+			}
+	
+		}
+	}
+
+	/*for (int i = 0; i < nests.size(); i++) {
+
+		if (getPosition().x - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().x + m_grid->m_tileSize / 2 &&
+			getPosition().x + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().x - m_grid->m_tileSize / 2 &&
+			getPosition().y - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().y + m_grid->m_tileSize / 2 &&
+			getPosition().y + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().y - m_grid->m_tileSize / 2) {
+			if (nests[i].m_bullet->nestShot == true)
+			{
+				m_healthSystem->m_healthValue--;
+
+				nests[i].m_bullet->nestShot = false;
+			}
+
+		}
+	}*/
+
+	if (m_bullet->getPosition().x - m_Grid->m_tileSize / 2 < m_player.getPosition().x + m_Grid->m_tileSize / 2 &&
+		m_bullet->getPosition().x + m_Grid->m_tileSize / 2 > m_player.getPosition().x - m_Grid->m_tileSize / 2 &&
+		m_bullet->getPosition().y - m_Grid->m_tileSize / 2 < m_player.getPosition().y + m_Grid->m_tileSize / 2 &&
+		m_bullet->getPosition().y + m_Grid->m_tileSize / 2 > m_player.getPosition().y - m_Grid->m_tileSize / 2) {
+		if (m_bullet->nestShot == true)
+		{
+			m_player.m_healthSystem->m_healthValue--;
+
+			m_bullet->nestShot = false;
+		}
+	}
 }
 
 void Nests::render(sf::RenderWindow &m_window)
 {
-	
-		m_window.draw(defendRad);
-		if (m_bullet->nestShot)
-		{
-			m_window.draw(line, 2, sf::Lines);
-			m_bullet->render(m_window);
-		}
-	
+	m_window.draw(defendRad);
+	m_healthSystem->render(m_window);
+	if (m_bullet->nestShot)
+	{
+		m_window.draw(line, 2, sf::Lines);
+		m_bullet->render(m_window);
+	}
 }

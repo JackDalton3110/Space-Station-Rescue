@@ -3,8 +3,8 @@
 #include <string>
 #include <math.h>
 #include "Grid.h"
-#include "Bullet.h"
 #include "HealthSystem.h"
+#include "Bullet.h"
 
 class Player
 {
@@ -28,11 +28,11 @@ public:
 
 	int bulletindex = 0;
 	bool fired=false;
+	HealthSystem *m_healthSystem;
+	std::vector<Bullet *> m_bullet;
 
 	std::vector<Bullet *> m_bullet;
 
-	int pGridX;
-	int pGridY;
 	int score;
 
 private:
@@ -52,9 +52,8 @@ private:
 	
 	Grid *m_grid;
 
-	HealthSystem *m_healthSystem;
-
-	
+	int pGridX;
+	int pGridY;
 
 	
 };

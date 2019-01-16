@@ -72,6 +72,10 @@ protected:
 	sf::Sprite m_MM;
 	sf::Texture m_MMT;
 
+	std::vector<int> usedSpawns;
+
+	int spawnSpot;
+
 
 };
 #endif // !GAME

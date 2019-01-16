@@ -20,7 +20,8 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow &window);
 	void shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rotation);
-	void collision();
+	void collisionWall();
+	void collisionNest(int xPos, int yPos);
 	bool getState();
 	BulletType bulletState = STANDARD;
 	void seekShoot(sf::Vector2f playerPosition);
@@ -28,7 +29,6 @@ public:
 	sf::Vector2f m_position;
 	int pGridX;
 	int pGridY;
-
 	bool active = false;
 
 private:
@@ -49,8 +49,6 @@ private:
 	float m_speed;
 
 	Grid *m_grid;
-	
-
 
 	
 };

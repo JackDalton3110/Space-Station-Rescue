@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 Player::Player() :
-	m_position(2000, 2000),
+	m_position(3000, 3000),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
@@ -26,7 +26,9 @@ Player::Player() :
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 
-	m_healthSystem = new HealthSystem();
+	m_healthSystem = new HealthSystem(0,0);
+	m_healthSystem->setState(PLAYER);
+	m_healthSystem->m_healthValue = 6;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -142,6 +144,7 @@ void Player::update(double dt)
 		if (m_bullet[i]->getState() == true){
 
 			m_bullet[i]->update(dt);
+			
 		}
 	}
 
@@ -215,7 +218,18 @@ void Player::respawn(float x, float y)
 	
 	}
 
+	  if (m_grid->m_tileGrid[pGridX - 1][pGridY - 1]->getCurrentState() == OBSTACLE)
+	  {
+		  if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
+		  {
+			  m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		  }
+
+	  }
+
+
 }
+
 
 void Player::render(sf::RenderWindow &window)
 {

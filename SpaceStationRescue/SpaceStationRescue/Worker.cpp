@@ -35,14 +35,11 @@ void Worker::collision()
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
-
 		velocity.y *= -1;
 		m_position.y += 5;
-
 	}
 	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{
-
 		velocity.y *= -1;
 		m_position.y -= 5;
 	}
@@ -51,12 +48,12 @@ void Worker::collision()
 		velocity.x *= -1;
 		m_position.x -= 5;
 	}
-
 	if (m_Grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
 		velocity.x *= -1;
 		m_position.x += 5;
 	}
+
 }
 
 sf::Vector2f Worker::getPosition()
@@ -77,11 +74,10 @@ void Worker::update()
 		rotateWorker(velocity, rotation);
 
 		workerSprite.setRotation(rotation);
-		if (count >= 50)
+		if (count >= 200)
 		{
 			velocity.x = getRandom(10, -5);
 			velocity.y = getRandom(10, -5);
-		
 			count = 0;
 		}
 
