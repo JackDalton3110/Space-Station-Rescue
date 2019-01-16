@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 Player::Player() :
-	m_position(900, 500),
+	m_position(2000, 2000),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),

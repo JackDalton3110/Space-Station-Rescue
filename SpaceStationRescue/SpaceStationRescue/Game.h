@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Worker.h"
 #include "Nests.h"
+#include "Sweeper.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -39,6 +40,7 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
+	Sweeper * m_sweeper;
  	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
@@ -49,7 +51,7 @@ protected:
 	static const int m_gridSize = 55;
 	static const int m_tileSize = 68.2;
 	float m_tileScale = 1;
-
+	
 	
 
 	//Enemy* m_pursue;

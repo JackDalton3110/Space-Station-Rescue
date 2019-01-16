@@ -35,26 +35,27 @@ void Worker::collision()
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
-			velocity.x *= -1;
-			velocity.y *= -1;
+
+		velocity.y *= -1;
+		m_position.y += 5;
 
 	}
 	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{
-			velocity.x *= -1;
-			velocity.y *= -1;
+
+		velocity.y *= -1;
+		m_position.y -= 5;
 	}
 	if (m_Grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
-
-			velocity.x *= -1;
-			velocity.y *= -1;
+		velocity.x *= -1;
+		m_position.x -= 5;
 	}
 
 	if (m_Grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
-			velocity.x *= -1;
-			velocity.y *= -1;
+		velocity.x *= -1;
+		m_position.x += 5;
 	}
 }
 
@@ -102,6 +103,7 @@ float Worker::getRandom(int x, int y)
 	float randVal = rand() % x + y;
 	return randVal;
 }
+
 
 int Worker::rotateWorker(sf::Vector2f vel, int angle)
 {
@@ -170,11 +172,7 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 
 	if (vel.x > 0 && vel.y < 0  && angle < 35)
 	{
-			rotation += 10;
-	}
-	else if (vel.x > 0 && vel.y < 0  && angle > 55)
-	{
-		rotation -= 10;
+			rotation = 45;
 	}
 	return rotation;
 	
@@ -183,6 +181,8 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 
 void Worker::render(sf::RenderWindow &window)
 {
-	window.draw(workerSprite);
+	
+		window.draw(workerSprite);
+
 }
 

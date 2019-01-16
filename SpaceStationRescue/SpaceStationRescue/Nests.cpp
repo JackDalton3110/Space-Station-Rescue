@@ -85,10 +85,12 @@ void Nests::update(sf::Vector2f pos, double dt)
 
 void Nests::render(sf::RenderWindow &m_window)
 {
-	m_window.draw(defendRad);
-	if (m_bullet->nestShot)
-	{
-		m_window.draw(line, 2, sf::Lines);
-		m_bullet->render(m_window);
-	}
+	
+		m_window.draw(defendRad);
+		if (m_bullet->nestShot)
+		{
+			m_window.draw(line, 2, sf::Lines);
+			m_bullet->render(m_window);
+		}
+	
 }

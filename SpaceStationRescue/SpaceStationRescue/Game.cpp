@@ -7,7 +7,7 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 960), "AI LabCA1", sf::Style::Default)
 {
 	srand(time(NULL));
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		workers.push_back(new Worker());
 		
@@ -18,6 +18,7 @@ Game::Game() :
 	}
 
 	m_player = new Player();
+	m_sweeper = new Sweeper();
 	//m_worker = new Worker();
 
 	/*Enemy* m_pursue = new Pursue(*this);
@@ -202,6 +203,8 @@ void Game::processGameEvents(sf::Event& event)
 }
 
 
+
+
 /// <summary>
 /// 
 /// </summary>
@@ -219,7 +222,7 @@ void Game::update(double dt)
 	{
 		nests[i]->update(m_player->getPosition(), dt);
 	}
-
+	m_sweeper->update(dt);
 	//m_worker->update();
 
 	//m_Grid->update(gameView);
@@ -247,6 +250,7 @@ void Game::render()
 	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
+	
 	for (int i = 0; i < nests.size(); i++)
 	{
 		nests[i]->render(m_window);
@@ -254,11 +258,12 @@ void Game::render()
 	m_player->render(m_window);
 	for (int i = 0; i < workers.size(); i++)
 	{
+		
 		workers[i]->render(m_window);
 	}
 
 
-
+	m_sweeper->render(m_window);
 	m_window.setView(miniMapView);
 
 	m_window.draw(m_MM);

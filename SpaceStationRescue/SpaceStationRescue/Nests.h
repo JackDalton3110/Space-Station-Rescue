@@ -23,6 +23,8 @@ private:
 	sf::Vector2f m_position;
 	sf::CircleShape defendRad;
 	bool shot,attack,time;
+	bool inView(sf::Vector2f position);
+	
 	Grid *m_Grid;
 	Player *m_player;
 	Bullet *m_bullet;
