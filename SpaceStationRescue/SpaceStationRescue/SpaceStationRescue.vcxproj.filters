@@ -28,6 +28,9 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Sweeper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h">
@@ -52,6 +55,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Worker.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sweeper.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

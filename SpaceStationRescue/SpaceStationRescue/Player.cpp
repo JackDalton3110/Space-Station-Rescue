@@ -5,7 +5,7 @@ Player::Player() :
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(20.0),
+	m_maxSpeed(50.0),
 	m_speed(0),
 	m_heading(0,0)
 

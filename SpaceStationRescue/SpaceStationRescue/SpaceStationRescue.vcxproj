@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nests.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Sweeper.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="Nests.h" />
     <ClInclude Include="HealthSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Sweeper.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Worker.h" />
   </ItemGroup>

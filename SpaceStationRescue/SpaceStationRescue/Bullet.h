@@ -51,7 +51,4 @@ private:
 	Grid *m_grid;
 
 	
-
-
-	
 };

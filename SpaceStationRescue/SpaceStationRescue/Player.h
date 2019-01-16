@@ -31,6 +31,10 @@ public:
 	HealthSystem *m_healthSystem;
 	std::vector<Bullet *> m_bullet;
 
+	std::vector<Bullet *> m_bullet;
+
+	int score;
+
 private:
 	sf::CircleShape shape;
 	sf::RectangleShape m_rect;
@@ -45,14 +49,11 @@ private:
 	float m_rotation;
 	sf::Vector2f m_heading;
 	float m_speed;
-
-	Grid *m_grid;
-
 	
-
-
+	Grid *m_grid;
 
 	int pGridX;
 	int pGridY;
 
+	
 };
