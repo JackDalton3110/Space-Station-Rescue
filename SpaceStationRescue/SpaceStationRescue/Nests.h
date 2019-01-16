@@ -15,7 +15,7 @@
 class Nests
 {
 public:
-	Nests(int m_spawnSpot);
+	Nests(int m_spawnSpot, Grid &m_grid);
 	~Nests();
 
 	void update(Player & m_player, double dt);

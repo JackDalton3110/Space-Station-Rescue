@@ -9,7 +9,7 @@
 class Player
 {
 public:
-	Player();
+	Player(Grid &m_Grid);
 	~Player();
 
 	sf::Vector2f getPosition();

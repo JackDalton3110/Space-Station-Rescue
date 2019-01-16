@@ -7,9 +7,12 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 960), "AI LabCA1", sf::Style::Default)
 {
 	srand(time(NULL));
+
+	m_Grid = new Grid();
+
 	for (int i = 0; i < 30; i++)
 	{
-		workers.push_back(new Worker());
+		workers.push_back(new Worker(*m_Grid));
 		
 	}
 	for (int i = 0; i < 3; i++)
@@ -23,14 +26,14 @@ Game::Game() :
 			{
 				spawnSpot = rand() % 5;
 			}
-			nests.push_back(new Nests(spawnSpot));
+			nests.push_back(new Nests(spawnSpot, *m_Grid));
 			
 			usedSpawns.push_back(spawnSpot);
 		
 		
 	}
 
-	m_player = new Player();
+	
 	//m_worker = new Worker();
 
 	/*Enemy* m_pursue = new Pursue(*this);
@@ -62,7 +65,9 @@ Game::Game() :
 	gameView.setCenter(640, 480);
 
 
-	m_Grid = new Grid();
+	
+
+	m_player = new Player(*m_Grid);
 
 	if (!m_playerMMT.loadFromFile("./resources/PlayerMiniMap.png")) {
 		//do something

@@ -1,12 +1,13 @@
 #include "Nests.h"
 #include <cstdlib>
 
-Nests::Nests(int m_spawnSpot):
+Nests::Nests(int m_spawnSpot, Grid &m_grid):
 	defendRad(400),
-	spawnSpot(m_spawnSpot)
+	spawnSpot(m_spawnSpot),
+	m_Grid(&m_grid)
 {
-	m_Grid = new Grid();
-	m_bullet = new Bullet();
+	
+	m_bullet = new Bullet(*m_Grid);
 	
 	defendRad.setFillColor(sf::Color(0,100,0,70));
 	spawnNests();

@@ -1,12 +1,13 @@
 #include "Worker.h"
 
-Worker::Worker():
+Worker::Worker(Grid &m_grid):
 	velocity(0,0),
 	maxSpeed(2.0f),
 	maxRotation(360),
-	rotation(90)
+	rotation(90),
+	m_Grid(&m_grid)
 {
-	m_Grid = new Grid();
+	//m_Grid = new Grid();
 	spawnWorkers();
 
 	if (!workerTxt.loadFromFile("./resources/worker.png"))

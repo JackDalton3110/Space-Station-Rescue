@@ -11,7 +11,7 @@ enum BulletType
 class Bullet
 {
 public:
-	Bullet();
+	Bullet(Grid &m_Grid);
 	~Bullet();
 
 	sf::Vector2f getPosition();
