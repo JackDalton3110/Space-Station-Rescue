@@ -1,11 +1,11 @@
 #include "Player.h"
 #include <iostream>
 Player::Player(Grid &m_Grid) :
-	m_position(3000, 3000),
+	m_position(1500, 1000),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(20.0),
+	m_maxSpeed(50.0),
 	m_speed(0),
 	m_heading(0,0),
 	m_grid(&m_Grid)
@@ -96,6 +96,7 @@ void Player::update(double dt)
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 
+	
 	collision();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -217,15 +218,6 @@ void Player::respawn(float x, float y)
 		 }
 	
 	}
-
-	  if (m_grid->m_tileGrid[pGridX - 1][pGridY - 1]->getCurrentState() == OBSTACLE)
-	  {
-		  if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
-		  {
-			  m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
-		  }
-
-	  }
 
 
 }

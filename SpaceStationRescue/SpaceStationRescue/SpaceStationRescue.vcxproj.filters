@@ -28,6 +28,9 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Predator.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h">

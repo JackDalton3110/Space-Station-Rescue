@@ -39,7 +39,20 @@ void Tile::setRotation(float rot)
 {
 	m_rotation = rot;
 	vector.setRotation(m_rotation);
+	
 }
+void Tile::setVelocity(int x, int y)
+{
+	m_velocity.x = x;
+	m_velocity.y = y;
+
+}
+sf::Vector2f Tile::getVelocity()
+{
+	return m_velocity;
+
+}
+
 
 
 void Tile::setCurrentState(State s)
@@ -146,20 +159,32 @@ void Tile::setPrevious(int x, int y) {
 
 void Tile::render(sf::RenderWindow &window)
 {
+	if (m_cost == 0) {
+		vector.setSize(sf::Vector2f(1, 1));
+	}
+	else {
+		vector.setSize(sf::Vector2f(25, 1));
+	}
+
 	window.draw(rectangle);
 
-	switch (m_drawState)
+	//switch (m_drawState)
+	//{
+	//case FLOW:
+	if (m_currentState == NONE || m_currentState == PATH)
 	{
-	case FLOW:
-		if (m_currentState == NONE || m_currentState == PATH)
-			window.draw(vector);
-		break;
-	case COST:
-		if (m_currentState == NONE || m_currentState == PATH)
-			window.draw(m_costText);
-		break;
-	default:
-		break;
+		window.draw(vector);
 	}
+	//case COST:
+	if (m_currentState == NONE || m_currentState == PATH)
+	{
+		window.draw(m_costText);
+	}
+			
+
+		//break;
+	//default:
+		//break;
+	//}
 
 }

@@ -7,8 +7,7 @@
 /// <summary>
 /// 
 /// </summary>
-Grid::Grid():
-	m_gameView(m_gameView)
+Grid::Grid()
 {
 	int mySampleMap[55][55] = { 
 	{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
@@ -116,6 +115,39 @@ Grid::Grid():
 	//gameView.setSize(1920, 1080);
 	//gameView.setCenter(960, 540);
 
+	//initGrid();
+
+	for (int i = 0; i < m_gridSize; i++)
+	{
+		for (int j = 0; j < m_gridSize; j++)
+		{
+			if (m_tileGrid[i][j]->getCurrentState() == OBSTACLE)
+			{
+				m_tileGrid[i][j]->setCost(std::numeric_limits<int>::max());
+			}
+
+		}
+
+	}
+
+
+	for (int i = 0; i < m_gridSize; i++)
+	{
+		for (int j = 0; j < m_gridSize; j++)
+		{
+			if (m_tileGrid[i][j]->getCurrentState() == NONE)
+			{
+				m_tileGrid[i][j]->setCost(1);
+				m_tileGrid[i][j]->checked = false;
+				m_tileGrid[i][j]->setVelocity(-1,0);
+				m_tileGrid[i][j]->setRotation(180);
+			}
+
+		}
+
+	}
+
+	updateCost(45, 45);
 }
 
 /// <summary>
@@ -150,20 +182,9 @@ void Grid::reset()
 }
 
 
-void Grid::initGrid(int posX, int posY)
-{
-	for (int i = 0; i < m_gridSize; i++)
-	{
-		for (int j = 0; j < m_gridSize; j++)
-		{
-			if (m_tileGrid[i][j]->getCurrentState() == OBSTACLE)
-			{
-				m_tileGrid[i][j]->setCost(std::numeric_limits<int>::max());
-				
-			}
-		}
 
-	}
+void Grid::updateCost(int posX, int posY)
+{
 
 	for (int i = 0; i < m_gridSize; i++)
 	{
@@ -172,19 +193,13 @@ void Grid::initGrid(int posX, int posY)
 			if (m_tileGrid[i][j]->getCurrentState() == NONE)
 			{
 				m_tileGrid[i][j]->setCost(0);
-				
+				m_tileGrid[i][j]->checked = false;
 			}
+
 		}
 
-		
 	}
 
-}
-
-
-
-void Grid::updateCost(int posX, int posY)
-{
 	std::list<Tile> tileQueue;
 
 
@@ -192,83 +207,109 @@ void Grid::updateCost(int posX, int posY)
 
 	m_tileGrid[posX][posY]->setCost(0);
 	int i = 0;
+	int j = 0;
 
 	auto iter = tileQueue.begin();
 
 	//for (; iter != endIter; iter++) {
-	while (tileQueue.size() != 0) {
+	while (tileQueue.size() != 0 ) {
 		i++;
+	//	std::cout << i << std::endl;
 
-		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCost() == 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() != GOAL)
+		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->checked = true;
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->setRotation(180);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(-1, 0);
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos + 1][iter->m_yPos]);
+			j++;
 		}
-
-		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCost() == 0 && m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() != GOAL)
+	
+		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() ==NONE && m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->checked = true;
 			m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->setRotation(270);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(0, -1);
 			m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos][iter->m_yPos + 1]);
+			j++;
 		}
-
-		if (iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCost() == 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() != GOAL)
+		
+		if (iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->checked = true;
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setRotation(0);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(1,0);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos - 1][iter->m_yPos]);
+			j++;
 		}
+	
 
-		if (iter->m_yPos != 0 && m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCost() == 0 && m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() != GOAL)
+		if (iter->m_yPos != 0 && m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->checked = true;
 			m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->setRotation(90);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(0, 1);
 			m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos][iter->m_yPos - 1]);
+			j++;
 		}
-		if (iter->m_xPos != m_gridSize - 1 && iter->m_yPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->getCost() == 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->getCurrentState() != GOAL)
+		
+		if (iter->m_xPos != m_gridSize - 1 && iter->m_yPos != 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->checked = true;
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setRotation(112.5);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(-1, 1);
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
+			tileQueue.push_back(*m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]);
+			j++;
+		}
+		if (iter->m_xPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->checked == false)
+		{
+			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->checked = true;
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setRotation(202.5);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(-1, -1);
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]);
+			j++;
 		}
-		if (iter->m_yPos != m_gridSize - 1 && iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->getCost() == 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->getCurrentState() != GOAL)
+		if (iter->m_yPos != m_gridSize - 1 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->checked = true;
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(1, -1);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setRotation(292.5);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]);
+			j++;
 		}
-		if (iter->m_yPos != 0 && iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->getCost() == 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->getCurrentState() != GOAL)
+		if (iter->m_yPos != 0 && iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->getCurrentState() == NONE && m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->checked == false)
 		{
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->checked = true;
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setRotation(45);
+			m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->setVelocity(1, 1);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
 			tileQueue.push_back(*m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]);
-		}
-		if (iter->m_xPos != m_gridSize - 1 && iter->m_yPos != 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->getCost() == 0 && m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->getCurrentState() != GOAL)
-		{
-			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
-			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setRotation(112.5);
-			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setPrevious(m_tileGrid[iter->m_xPos][iter->m_yPos]->m_xPos, m_tileGrid[iter->m_xPos][iter->m_yPos]->m_yPos);
-			tileQueue.push_back(*m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]);
+			j++;
 		}
 
 		//tileQueue.remove(*iter);
 		iter++;
+		//m_tileGrid[iter->m_xPos][iter->m_yPos]->checked = false;
 		tileQueue.pop_front();
-
 	}
 
-	if (m_startTile != NULL)
-	{
-		getPath(*m_startTile);
-	}
+
+	//getPath(*m_startTile);
 
 
 }

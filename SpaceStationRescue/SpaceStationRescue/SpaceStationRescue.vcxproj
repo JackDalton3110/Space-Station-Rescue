@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nests.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Predator.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>

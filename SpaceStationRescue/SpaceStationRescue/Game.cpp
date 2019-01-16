@@ -9,12 +9,12 @@ Game::Game() :
 	srand(time(NULL));
 
 	m_Grid = new Grid();
-
+/*
 	for (int i = 0; i < 30; i++)
 	{
 		workers.push_back(new Worker(*m_Grid));
 		
-	}
+	}*/
 	for (int i = 0; i < 3; i++)
 	{
 		
@@ -81,6 +81,8 @@ Game::Game() :
 	m_playerMM.setOrigin(m_playerMM.getTextureRect().width / 2, m_playerMM.getTextureRect().height / 2);
 	
 	m_MM.setTexture(m_MMT);
+
+	m_predator = new Predator(*m_Grid);
 
 }
 
@@ -188,7 +190,7 @@ void Game::processGameEvents(sf::Event& event)
 
 				m_rightPress = true;
 
-				m_Grid->initGrid(m_tilePosX, m_tilePosY);
+			//	m_Grid->initGrid(m_tilePosX, m_tilePosY);
 			}
 
 		}
@@ -237,7 +239,14 @@ void Game::update(double dt)
 	{
 		nests[i]->update(*m_player, dt);
 	}
-
+	/*if (m_player->pGridX != previousX || m_player->pGridY != previousY)
+	{
+		m_Grid->updateCost(m_player->pGridX, m_player->pGridY);
+		previousX = m_player->pGridX;
+		previousY = m_player->pGridY;
+	}*/
+	
+	m_predator->update(dt);
 	//m_worker->update();
 
 	//m_Grid->update(gameView);
@@ -275,7 +284,7 @@ void Game::render()
 		workers[i]->render(m_window);
 	}
 
-
+	m_predator->render(m_window);
 
 	m_window.setView(miniMapView);
 

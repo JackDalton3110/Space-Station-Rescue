@@ -78,7 +78,7 @@ void Nests::update(Player &m_player, double dt)
 		cumulativeTime += dt/1000;
 	}
 
-	std::cout << cumulativeTime << std::endl;
+	//std::cout << cumulativeTime << std::endl;
 
 	if (cumulativeTime >= 5)
 	{

@@ -16,6 +16,7 @@
 //#include "Seek.h"
 //#include "Wander.h"
 #include "Grid.h"
+#include "Predator.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -39,6 +40,8 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
+	Predator* m_predator;
+
  	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
@@ -73,6 +76,9 @@ protected:
 	std::vector<int> usedSpawns;
 
 	int spawnSpot;
+
+	int previousX;
+	int previousY;
 
 
 };

@@ -26,10 +26,13 @@ public:
 	float getRotation();
 
 
+
 	int bulletindex = 0;
 	bool fired=false;
 	HealthSystem *m_healthSystem;
 	std::vector<Bullet *> m_bullet;
+	int pGridX;
+	int pGridY;
 
 private:
 	sf::CircleShape shape;
@@ -48,11 +51,6 @@ private:
 
 	Grid *m_grid;
 
-	
 
-
-
-	int pGridX;
-	int pGridY;
 
 };

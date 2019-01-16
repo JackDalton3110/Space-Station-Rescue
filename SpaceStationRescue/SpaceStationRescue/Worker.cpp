@@ -38,8 +38,6 @@ void Worker::collision()
 	{
 		velocity.x *= -1;
 	    velocity.y *= -1;
-
-
 	}
 	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{

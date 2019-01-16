@@ -30,7 +30,7 @@ public:
 	std::ofstream myMap;
 
 private:
-	
+
 	void processEvents();
 	void reset();
 	void getPath(Tile m_startTile);
@@ -49,6 +49,7 @@ protected:
 
 	Tile * m_startTile;
 	Tile * m_goalTile;
+
 	sf::Font m_font;
 
 	bool m_leftPress = false;
