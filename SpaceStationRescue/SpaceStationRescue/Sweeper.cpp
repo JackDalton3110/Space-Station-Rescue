@@ -2,7 +2,7 @@
 
 Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	m_velocity(0,0),
-	maxSpeed(2.0f),
+	maxSpeed(5.0f),
 	maxRotation(360),
 	rotation(0),
 	m_heading(1,0),
@@ -111,43 +111,66 @@ void Sweeper::collision()
 	}
 }
 
+void Sweeper::kinematicFlee(sf::Vector2f pos)
+{
+	m_velocity = m_position - pos;
+	//Get magnitude of vector
+	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y* m_velocity.y);
+	//Normalize vector
+	m_velocity.x = m_velocity.x / m_velocityF;
+	m_velocity.y = m_velocity.y / m_velocityF;
+
+	m_velocity.x = m_velocity.x * maxSpeed;
+	m_velocity.y = m_velocity.y * maxSpeed;
+
+	m_orientation = getNewOrientation(m_orientation, m_velocityF);
+}
+
 void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 {
-	for (int i = 0; i < workers.size(); i++)
-	{
-		dx = workers[i]->getPosition().x - radius.getPosition().x + m_Grid->m_tileSize / 2;
-		dy = workers[i]->getPosition().y - radius.getPosition().y + m_Grid->m_tileSize / 2;
-		dist = sqrt((dx*dx) + (dy*dy));
-		if (dist < radius.getRadius())
-		{
-			if (workers[i]->alive)
-			{
-				currentState = FIND;
-			
-				kinematicSeek(workers[i]->getPosition());
-				std::cout << "SEEK" << std::endl;
-			}
-		}
-		else
-		{
-			currentState = WANDER;
-			std::cout << "SEEK TO WANDER" << std::endl;
-		}
-	}
-	dx = pos.x- radius.getPosition().x + m_Grid->m_tileSize / 2;
+	dx = pos.x - radius.getPosition().x + m_Grid->m_tileSize / 2;
 	dy = pos.y - radius.getPosition().y + m_Grid->m_tileSize / 2;
 	dist = sqrt((dx*dx) + (dy*dy));
-	//if (dist < radius.getRadius())
-	//{
-	//	//currentState = FLEE;
-	//	//kinematicFlee(pos);
-	//}
-	/*else
-		currentState = WANDER;*/
-	
+	if (dist < radius.getRadius())
+	{
+		currentState = FLEE;
+		kinematicFlee(pos);
+		std::cout << "FLEE" << std::endl;
+		radius.setFillColor(sf::Color(100, 0, 0, 70));
+	}
+	else if (currentState != FLEE)
+	{
+		for (int i = 0; i < workers.size(); i++)
+		{
+			dx = workers[i]->getPosition().x - radius.getPosition().x + m_Grid->m_tileSize / 2;
+			dy = workers[i]->getPosition().y - radius.getPosition().y + m_Grid->m_tileSize / 2;
+			dist = sqrt((dx*dx) + (dy*dy));
+			if (dist < radius.getRadius())
+			{
+				if (workers[i]->alive)
+				{
+					currentState = FIND;
 
-	
-
+					kinematicSeek(workers[i]->getPosition());
+					std::cout << "SEEK" << std::endl;
+					radius.setFillColor(sf::Color(0, 0, 100, 70));
+				}
+				else
+				{
+					currentState = WANDER;
+					std::cout << "WANDER" << std::endl;
+					radius.setFillColor(sf::Color(0, 100, 0, 70));
+				}
+			}
+			
+		}
+	}
+	else
+	{
+		currentState = WANDER;
+		std::cout << "WANDER" << std::endl;
+		radius.setFillColor(sf::Color(0, 100, 0, 70));
+	}
 }
 
 behaveState Sweeper::getCurrentState()

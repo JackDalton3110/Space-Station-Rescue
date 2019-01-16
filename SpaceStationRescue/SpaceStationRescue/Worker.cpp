@@ -2,7 +2,7 @@
 
 Worker::Worker():
 	velocity(0,0),
-	maxSpeed(2.0f),
+	maxSpeed(3.0f),
 	maxRotation(360),
 	rotation(90),
 	alive(true)
