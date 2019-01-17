@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 Player::Player(Grid &m_Grid) :
-	m_position(1500, 1000),
+	m_position(300, 3020),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),

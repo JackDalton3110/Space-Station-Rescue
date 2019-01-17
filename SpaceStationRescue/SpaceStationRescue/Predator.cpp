@@ -1,11 +1,11 @@
 #include "Predator.h"
 #include <iostream>
 Predator::Predator(Grid &m_Grid) :
-	m_position(1100, 500),
+	m_position(300, 3020),
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(15.0),
+	m_maxSpeed(2.0),
 	m_speed(10),
 	m_heading(0, 0),
 	m_grid(&m_Grid)
@@ -22,7 +22,8 @@ Predator::Predator(Grid &m_Grid) :
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
 
-
+	//m_position.x = m_grid->m_tileGrid[45][45]->m_position.x + m_grid->m_tileSize;
+	//m_position.y = m_grid->m_tileGrid[45][45]->m_position.y + m_grid->m_tileSize;
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY = m_position.y / m_grid->m_tileSize;
 
@@ -37,6 +38,7 @@ Predator::Predator(Grid &m_Grid) :
 
 	//m_grid->updateCost(pGridX, pGridY);
 
+	
 }
 Predator::~Predator()
 {
@@ -94,8 +96,8 @@ void Predator::decreaseRotation()
 void Predator::update(double dt)
 {
 
-	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
-	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
+	pGridX = floor((m_sprite.getPosition().x )/ m_grid->m_tileSize);
+	pGridY = floor((m_sprite.getPosition().y)/ m_grid->m_tileSize);
 
 	//
 
@@ -109,15 +111,64 @@ void Predator::update(double dt)
 	//	m_velocity.y = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y * 3;
 	//}
 	
-	std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x << std::endl;
-	std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y << std::endl;
+	std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x << ", " << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y << ", " << m_grid->m_tileGrid[pGridX][pGridY]->m_rotation << std::endl;
+
 
 	//m_heading.x = cos(m_rotation * (3.14 / 180));
 	//m_heading.y = sin(m_rotation * (3.14 / 180));
+	/*if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x == 0 && m_velocity.x > 0)
+	{
+		if (m_velocity.x != 0)
+		{
+			m_velocity.x--;
+		}
+		
+	}
+	else if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x == 0 && m_velocity.x < 0)
+	{
+		if (m_velocity.x != 0)
+		{
+			m_velocity.x++;
+		}
+	}
 
-	m_velocity.x = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x * 3;
-	m_velocity.y = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y * 3;
+	if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y == 0 && m_velocity.y > 0)
+	{
+		if (m_velocity.y != 0)
+		{
+			m_velocity.y--;
+		}
+	}
+	else if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y == 0 && m_velocity.y < 0)
+	{
+		if (m_velocity.y != 0)
+		{
+			m_velocity.y++;
+		}
+	}
 
+	if (m_velocity.x < m_maxSpeed && m_velocity.x > -m_maxSpeed)
+	{
+		m_velocity.x += m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x ;
+	}
+
+	if (m_velocity.y < m_maxSpeed && m_velocity.x > -m_maxSpeed)
+	{
+		m_velocity.y += m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y ;
+	}*/
+	
+	/*if (getPosition().x >= m_grid->m_tileGrid[pGridX][pGridY]->m_position.x + (m_grid->m_tileSize / 5)*4 &&
+		getPosition().x <= m_grid->m_tileGrid[pGridX][pGridY]->m_position.x - m_grid->m_tileSize / 5 &&
+		getPosition().y >= m_grid->m_tileGrid[pGridX][pGridY]->m_position.y + (m_grid->m_tileSize / 5) *4 &&
+		getPosition().y <= m_grid->m_tileGrid[pGridX][pGridY]->m_position.y - m_grid->m_tileSize / 5)
+	{*/
+		m_velocity = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity();
+		m_velocity.x *= 2;
+		m_velocity.y *= 2;
+
+		collision();
+	/*}*/
+	
 	
 
 	m_sprite.setPosition(m_sprite.getPosition().x +m_velocity.x, 

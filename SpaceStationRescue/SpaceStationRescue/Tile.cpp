@@ -39,6 +39,39 @@ void Tile::setRotation(float rot)
 {
 	m_rotation = rot;
 	vector.setRotation(m_rotation);
+
+	if (rot == 0)
+	{
+		setVelocity(1, 0);
+	}
+	else if (rot == 45)
+	{
+		setVelocity(1, 1);
+	}
+	else if (rot == 90)
+	{
+		setVelocity(0, 1);
+	}
+	else if (rot == 135)
+	{
+		setVelocity(-1, 1);
+	}
+	else if (rot == 180)
+	{
+		setVelocity(-1, 0);
+	}
+	else if (rot == 225)
+	{
+		setVelocity(-1, -1);
+	}
+	else if (rot == 270)
+	{
+		setVelocity(0, -1);
+	}
+	else if (rot == 315)
+	{
+		setVelocity(1, -1);
+	}
 	
 }
 void Tile::setVelocity(int x, int y)
