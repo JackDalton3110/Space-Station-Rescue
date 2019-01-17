@@ -27,7 +27,7 @@ Game::Game() :
 			m_sweeper.push_back(new Sweeper(workers));
 	}
 	
-
+	m_powerups = new Powerups(2, workers[1]->getPosition());
 	m_player = new Player();
 	//m_worker = new Worker();
 
@@ -224,6 +224,7 @@ void Game::update(double dt)
 	m_playerMM.setRotation(m_player->getRotation());
 	m_player->update(dt);
 	gameView.setCenter(m_player->getPosition());
+	m_powerups->update();
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->update();
@@ -263,7 +264,7 @@ void Game::render()
 	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
-	
+	m_powerups->render(m_window);
 	for (int i = 0; i < nests.size(); i++)
 	{
 		nests[i]->render(m_window);
@@ -294,7 +295,6 @@ void Game::render()
 	{
 		nests[i]->render(m_window);
 	}
-	
 	m_window.draw(m_playerMM);
 	//for (int i = 0; i < workers.size(); i++)
 	//{

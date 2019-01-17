@@ -31,6 +31,9 @@
     <ClCompile Include="Sweeper.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Powerups.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h">
@@ -60,6 +63,9 @@
     <ClInclude Include="Sweeper.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Powerups.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\Player.png">
@@ -72,6 +78,18 @@
       <Filter>Resources</Filter>
     </Image>
     <Image Include="resources\worker.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\bulletPowerup.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\healthPowerup.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\speedPowerup.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="resources\shieldPowerup.png">
       <Filter>Resources</Filter>
     </Image>
   </ItemGroup>
