@@ -204,16 +204,16 @@ void Tile::render(sf::RenderWindow &window)
 	//switch (m_drawState)
 	//{
 	//case FLOW:
-	if (m_currentState == NONE || m_currentState == PATH)
+	/*if (m_currentState == NONE || m_currentState == PATH)
 	{
 		window.draw(vector);
 	}
-	//case COST:
+	case COST:
 	if (m_currentState == NONE || m_currentState == PATH)
 	{
 		window.draw(m_costText);
 	}
-			
+			*/
 
 		//break;
 	//default:

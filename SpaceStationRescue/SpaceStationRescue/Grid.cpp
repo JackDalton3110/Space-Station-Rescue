@@ -192,7 +192,7 @@ void Grid::updateCost(int posX, int posY)
 		{
 			if (m_tileGrid[i][j]->getCurrentState() == NONE)
 			{
-				m_tileGrid[i][j]->setCost(0);
+				
 				m_tileGrid[i][j]->checked = false;
 			}
 
@@ -212,7 +212,7 @@ void Grid::updateCost(int posX, int posY)
 	auto iter = tileQueue.begin();
 
 	//for (; iter != endIter; iter++) {
-	while (tileQueue.size() != 0 ) {
+	while (tileQueue.size() !=0 && i < 300 ) {
 		i++;
 	//	std::cout << i << std::endl;
 

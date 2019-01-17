@@ -15,23 +15,7 @@ Game::Game() :
 		workers.push_back(new Worker(*m_Grid));
 		
 	}*/
-	for (int i = 0; i < 3; i++)
-	{
-		
-		
-		spawnSpot = rand() % 5;
-
-		
-			while ((std::find(usedSpawns.begin(), usedSpawns.end(), spawnSpot) != usedSpawns.end()))
-			{
-				spawnSpot = rand() % 5;
-			}
-			nests.push_back(new Nests(spawnSpot, *m_Grid));
-			
-			usedSpawns.push_back(spawnSpot);
-		
-		
-	}
+	
 
 	
 	//m_worker = new Worker();
@@ -73,16 +57,54 @@ Game::Game() :
 		//do something
 	}
 
+	if (!m_predatorMMT.loadFromFile("./resources/PredatorMiniMap.png")) {
+		//do something
+	}
+
+
 	if (!m_MMT.loadFromFile("./resources/MiniMap.png")) {
 		//do something
 	}
 
+	for (int i = 0; i < 3; i++)
+	{
+
+
+		spawnSpot = rand() % 5;
+
+
+		while ((std::find(usedSpawns.begin(), usedSpawns.end(), spawnSpot) != usedSpawns.end()))
+		{
+			spawnSpot = rand() % 5;
+		}
+		nests.push_back(new Nests(spawnSpot, *m_Grid));
+		
+		/*m_predatorMM.setTexture(m_predatorMMT);
+		m_predatorMM.setOrigin(m_predatorMM.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);*/
+		//predSprite.push_back(m_predatorMM);
+
+		usedSpawns.push_back(spawnSpot);
+		predators.push_back(new Predator(spawnSpot, *m_Grid));
+
+
+
+
+	}
+
 	m_playerMM.setTexture(m_playerMMT);
 	m_playerMM.setOrigin(m_playerMM.getTextureRect().width / 2, m_playerMM.getTextureRect().height / 2);
+
+	/*m_predatorMM.setTexture(m_predatorMMT);
+	m_predatorMM.setOrigin(m_predatorMM.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);
+
+	m_predatorMM2.setTexture(m_predatorMMT);
+	m_predatorMM2.setOrigin(m_predatorMM2.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);
+
+	m_predatorMM3.setTexture(m_predatorMMT);
+	m_predatorMM3.setOrigin(m_predatorMM3.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);*/
 	
 	m_MM.setTexture(m_MMT);
 
-	m_predator = new Predator(*m_Grid);
 
 }
 
@@ -229,6 +251,20 @@ void Game::update(double dt)
 {
 	m_playerMM.setPosition(m_player->getPosition());
 	m_playerMM.setRotation(m_player->getRotation());
+	/*m_predatorMM.setPosition(predators[1]->getPosition());
+	m_predatorMM.setRotation(predators[1]->getRotation());
+
+	m_predatorMM2.setPosition(predators[2]->getPosition());
+	m_predatorMM2.setRotation(predators[2]->getRotation());
+
+	m_predatorMM3.setPosition(predators[3]->getPosition());
+	m_predatorMM3.setRotation(predators[3]->getRotation());*/
+
+	/*for (int i = 0; i < predSprite.size(); i++)
+	{
+		predSprite[i].setPosition(predators[i]->getPosition());
+		predSprite[i].setRotation(predators[i]->getRotation());
+	}*/
 	m_player->update(dt);
 	gameView.setCenter(m_player->getPosition());
 	for (int i = 0; i < workers.size(); i++)
@@ -239,14 +275,18 @@ void Game::update(double dt)
 	{
 		nests[i]->update(*m_player, dt);
 	}
-	/*if (m_player->pGridX != previousX || m_player->pGridY != previousY)
+	for (int i = 0; i < predators.size(); i++) 
+	{
+		predators[i]->update(dt);
+	}
+	if (m_player->pGridX != previousX || m_player->pGridY != previousY)
 	{
 		m_Grid->updateCost(m_player->pGridX, m_player->pGridY);
 		previousX = m_player->pGridX;
 		previousY = m_player->pGridY;
-	}*/
+	}
 	
-	m_predator->update(dt);
+	//m_predator->update(dt);
 	//m_worker->update();
 
 	//m_Grid->update(gameView);
@@ -284,7 +324,10 @@ void Game::render()
 		workers[i]->render(m_window);
 	}
 
-	m_predator->render(m_window);
+	for (int i = 0; i < predators.size(); i++)
+	{
+		predators[i]->render(m_window);
+	}
 
 	m_window.setView(miniMapView);
 
@@ -301,8 +344,15 @@ void Game::render()
 	{
 		nests[i]->render(m_window);
 	}
-	
-	m_window.draw(m_playerMM);
+	/*for (int i = 0; i < predSprite.size(); i++)
+	{
+		m_window.draw(predSprite[i]);
+	}*/
+	/*m_window.draw(m_playerMM);
+	m_window.draw(m_predatorMM);
+	m_window.draw(m_predatorMM2);
+	m_window.draw(m_predatorMM3);*/
+
 	//for (int i = 0; i < workers.size(); i++)
 	//{
 		//workers[i]->render(m_window);

@@ -1,14 +1,14 @@
 #include "Predator.h"
 #include <iostream>
-Predator::Predator(Grid &m_Grid) :
-	m_position(300, 3020),
+Predator::Predator(int m_spawnSpot, Grid &m_Grid) :
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(2.0),
 	m_speed(10),
 	m_heading(0, 0),
-	m_grid(&m_Grid)
+	m_grid(&m_Grid),
+	spawnSpot(m_spawnSpot)
 
 {
 	if (!m_texture.loadFromFile("./resources/Player.png")) {
@@ -24,8 +24,7 @@ Predator::Predator(Grid &m_Grid) :
 
 	//m_position.x = m_grid->m_tileGrid[45][45]->m_position.x + m_grid->m_tileSize;
 	//m_position.y = m_grid->m_tileGrid[45][45]->m_position.y + m_grid->m_tileSize;
-	pGridX = m_position.x / m_grid->m_tileSize;
-	pGridY = m_position.y / m_grid->m_tileSize;
+	
 
 	m_healthSystem = new HealthSystem(0, 0);
 	m_healthSystem->setState(ENEMY);
@@ -37,8 +36,15 @@ Predator::Predator(Grid &m_Grid) :
 	}*/
 
 	//m_grid->updateCost(pGridX, pGridY);
+	m_position.x = m_grid->m_nestPoints[spawnSpot]->m_position.x + (m_grid->m_tileSize / 2);
+	m_position.y = m_grid->m_nestPoints[spawnSpot]->m_position.y + (m_grid->m_tileSize / 2);
 
-	
+	m_position.x -= 60;
+	m_position.y -= 60;
+
+	pGridX = m_position.x / m_grid->m_tileSize;
+	pGridY = m_position.y / m_grid->m_tileSize;
+
 }
 Predator::~Predator()
 {
@@ -163,8 +169,9 @@ void Predator::update(double dt)
 		getPosition().y <= m_grid->m_tileGrid[pGridX][pGridY]->m_position.y - m_grid->m_tileSize / 5)
 	{*/
 		m_velocity = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity();
-		m_velocity.x *= 2;
-		m_velocity.y *= 2;
+		m_rotation = m_grid->m_tileGrid[pGridX][pGridY]->m_rotation;
+		m_velocity.x *= 5;
+		m_velocity.y *= 5;
 
 		collision();
 	/*}*/

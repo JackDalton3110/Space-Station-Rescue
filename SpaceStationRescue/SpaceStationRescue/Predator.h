@@ -9,7 +9,7 @@
 class Predator
 {
 public:
-	Predator(Grid &m_Grid);
+	Predator(int m_spawnSpot, Grid &m_Grid);
 	~Predator();
 
 	sf::Vector2f getPosition();
@@ -30,6 +30,7 @@ public:
 	bool fired = false;
 	HealthSystem *m_healthSystem;
 	std::vector<Bullet *> m_bullet;
+	int spawnSpot;
 
 private:
 	sf::CircleShape shape;

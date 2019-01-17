@@ -40,6 +40,8 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
+	std::vector<Predator*> predators;
+	std::vector<sf::Sprite> predSprite;
 	Predator* m_predator;
 
  	sf::Vector2i m_mousePos;
@@ -69,6 +71,15 @@ protected:
 
 	sf::Sprite m_playerMM;
 	sf::Texture m_playerMMT;
+
+	sf::Sprite m_predatorMM;
+	sf::Texture m_predatorMMT;
+
+	sf::Sprite m_predatorMM2;
+	sf::Texture m_predatorMMT2;
+
+	sf::Sprite m_predatorMM3;
+	sf::Texture m_predatorMMT3;
 
 	sf::Sprite m_MM;
 	sf::Texture m_MMT;
