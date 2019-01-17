@@ -9,7 +9,7 @@
 class Predator
 {
 public:
-	Predator(int m_spawnSpot, Grid &m_Grid);
+	Predator(float x, float y, Grid &m_Grid);
 	~Predator();
 
 	sf::Vector2f getPosition();

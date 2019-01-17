@@ -84,13 +84,17 @@ Game::Game() :
 		//predSprite.push_back(m_predatorMM);
 
 		usedSpawns.push_back(spawnSpot);
-		predators.push_back(new Predator(spawnSpot, *m_Grid));
+		
 
 
 
 
 	}
 
+	for (int i = 0; i < nests.size(); i++) {
+		predators.push_back(new Predator(nests[i]->m_position.x, nests[i]->m_position.y, *m_Grid));
+	}
+	
 	m_playerMM.setTexture(m_playerMMT);
 	m_playerMM.setOrigin(m_playerMM.getTextureRect().width / 2, m_playerMM.getTextureRect().height / 2);
 

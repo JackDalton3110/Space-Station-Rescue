@@ -1,14 +1,14 @@
 #include "Predator.h"
 #include <iostream>
-Predator::Predator(int m_spawnSpot, Grid &m_Grid) :
+Predator::Predator(float x, float y, Grid &m_Grid) :
+	m_position(x,y),
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(2.0),
 	m_speed(10),
 	m_heading(0, 0),
-	m_grid(&m_Grid),
-	spawnSpot(m_spawnSpot)
+	m_grid(&m_Grid)
 
 {
 	if (!m_texture.loadFromFile("./resources/Player.png")) {
@@ -36,11 +36,7 @@ Predator::Predator(int m_spawnSpot, Grid &m_Grid) :
 	}*/
 
 	//m_grid->updateCost(pGridX, pGridY);
-	m_position.x = m_grid->m_nestPoints[spawnSpot]->m_position.x + (m_grid->m_tileSize / 2);
-	m_position.y = m_grid->m_nestPoints[spawnSpot]->m_position.y + (m_grid->m_tileSize / 2);
 
-	m_position.x -= 60;
-	m_position.y -= 60;
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY = m_position.y / m_grid->m_tileSize;

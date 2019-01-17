@@ -29,9 +29,10 @@ public:
 	int m_gridX;
 	int m_gridY;
 	Bullet *m_bullet;
+	sf::Vector2f m_position;
 
 private:
-	sf::Vector2f m_position;
+	
 	std::vector<int> usedSpawns;
 	sf::CircleShape defendRad;
 	bool shot,attack,time;
