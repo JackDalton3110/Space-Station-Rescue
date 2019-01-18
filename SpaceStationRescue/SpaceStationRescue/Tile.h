@@ -18,7 +18,8 @@ enum State
 	OBSTACLE,
 	PATH,
 	SPAWN,
-	NEST
+	NEST,
+	SWEEPER
 };
 
 

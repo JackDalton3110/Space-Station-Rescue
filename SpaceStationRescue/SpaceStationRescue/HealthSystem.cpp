@@ -135,11 +135,12 @@ void HealthSystem::update()
 		case 1:
 			innerRect.setSize(sf::Vector2f(m_hbWidth * 0.166, m_hbHeight));
 			break;
-		case 0:
-			innerRect.setSize(sf::Vector2f(m_hbWidth * 0, m_hbHeight));
-			break;
 		default:
 			break;
+		}
+		if (m_healthValue <= 0)
+		{
+			innerRect.setSize(sf::Vector2f(m_hbWidth * 0, m_hbHeight));
 		}
 	}
 	

@@ -25,7 +25,7 @@ public:
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
 	std::vector <Tile*> m_spawnPoints;
 	std::vector <Tile*> m_nestPoints;
-
+	Tile* m_sweeperSpawn;
 
 	std::ofstream myMap;
 

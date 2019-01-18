@@ -20,6 +20,7 @@ public:
 
 	int count = 0;
 	int spawn =0;
+	bool alive;
 
 protected:
 
@@ -40,4 +41,5 @@ private:
 	Grid *m_Grid;
 	int pGridX;
 	int pGridY;
+	
 };

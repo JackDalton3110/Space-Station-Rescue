@@ -2,10 +2,11 @@
 
 Worker::Worker(Grid &m_grid):
 	velocity(0,0),
-	maxSpeed(2.0f),
+	maxSpeed(3.0f),
 	maxRotation(360),
 	rotation(90),
 	m_Grid(&m_grid)
+	alive(true)
 {
 	//m_Grid = new Grid();
 	spawnWorkers();
@@ -24,7 +25,6 @@ Worker::Worker(Grid &m_grid):
 	velocity.y = getRandom(10, -5);
 	pGridX = m_position.x / m_Grid->m_tileSize;
 	pGridY = m_position.y / m_Grid->m_tileSize;
-	
 }
 
 Worker::~Worker()
@@ -36,33 +36,24 @@ void Worker::collision()
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
-		velocity.x *= -1;
-	    velocity.y *= -1;
+		velocity.y *= -1;
+		m_position.y += 5;
+
 	}
 	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{
-		//rotation = 90;
-		velocity.x *= -1;
 		velocity.y *= -1;
+		m_position.y -= 5;
 	}
 	if (m_Grid->m_tileGrid[pGridX + 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
-		//rotation = 90;
 		velocity.x *= -1;
-		velocity.y *= -1;
+		m_position.x -= 5;
 	}
-
 	if (m_Grid->m_tileGrid[pGridX - 1][pGridY]->getCurrentState() == OBSTACLE)
 	{
-		//rotation = 90;
 		velocity.x *= -1;
-	    velocity.y *= -1;
-	}
-	if (m_Grid->m_tileGrid[pGridX - 1][pGridY - 1]->getCurrentState() == OBSTACLE)
-	{
-		//rotation = 90;
-		velocity.x *= -1;
-		velocity.y *= -1;
+		m_position.x += 5;
 	}
 
 }
@@ -74,25 +65,26 @@ sf::Vector2f Worker::getPosition()
 
 void Worker::update()
 {
-
-	pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
-	pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
-	collision();
-	m_position.x += velocity.x * 30 / 100;
-	m_position.y += velocity.y * 30 / 100;
-	workerSprite.setPosition(m_position.x, m_position.y);
-	rotateWorker(velocity, rotation);
-
-	workerSprite.setRotation(rotation);
-	if (count >= 200)
+	if (alive)
 	{
-		velocity.x = getRandom(10, -5);
-		velocity.y = getRandom(10, -5);
-		
-		count = 0;
-	}
+		pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
+		pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
+		collision();
+		m_position.x += velocity.x * 30 / 100;
+		m_position.y += velocity.y * 30 / 100;
+		workerSprite.setPosition(m_position.x, m_position.y);
+		rotateWorker(velocity, rotation);
 
-	count++;
+		workerSprite.setRotation(rotation);
+		if (count >= 200)
+		{
+			velocity.x = getRandom(10, -5);
+			velocity.y = getRandom(10, -5);
+			count = 0;
+		}
+
+		count++;
+	}
 	
 }
 
@@ -111,6 +103,7 @@ float Worker::getRandom(int x, int y)
 	float randVal = rand() % x + y;
 	return randVal;
 }
+
 
 int Worker::rotateWorker(sf::Vector2f vel, int angle)
 {
@@ -179,11 +172,7 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 
 	if (vel.x > 0 && vel.y < 0  && angle < 35)
 	{
-			rotation += 10;
-	}
-	else if (vel.x > 0 && vel.y < 0  && angle > 55)
-	{
-		rotation -= 10;
+			rotation = 45;
 	}
 	return rotation;
 	
@@ -192,6 +181,8 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 
 void Worker::render(sf::RenderWindow &window)
 {
+	if(alive)
 	window.draw(workerSprite);
+
 }
 

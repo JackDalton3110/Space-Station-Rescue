@@ -6,6 +6,7 @@ Player::Player(Grid &m_Grid) :
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(40.0),
+	shieldcrc(60),
 	m_speed(0),
 	m_heading(0,0),
 	m_grid(&m_Grid)
@@ -22,6 +23,9 @@ Player::Player(Grid &m_Grid) :
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
 
+	shieldcrc.setFillColor(sf::Color(0, 0, 100, 60));
+	shieldcrc.setPosition(m_sprite.getPosition().x-m_grid->m_tileSize/2, m_sprite.getPosition().y-m_grid->m_tileSize/2);
+	shieldcrc.setOrigin(30, 30);
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
@@ -90,7 +94,7 @@ void Player::decreaseRotation()
 	
 }
 
-void Player::update(double dt)
+void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 {
 	if (m_healthSystem->m_healthValue > 0)
 	{
@@ -98,24 +102,69 @@ void Player::update(double dt)
 		pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 
 
-		collision();
+	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
+	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
+	collision(m_powerUps, dt);
+	cumulativeTime += dt / 1000;
+	shieldcrc.setPosition(m_sprite.getPosition().x - m_grid->m_tileSize / 2, m_sprite.getPosition().y - m_grid->m_tileSize / 2);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		increaseRotation();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		decreaseRotation();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		speedUp();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		speedDown();
+	}
+	
+	for (int i = 0; i < m_powerUps.size(); i++)
+	{
+		if (m_powerUps[i]->getState() == GOTTAGOFAST && m_powerUps[i]->collected)
+		{
+			if (cumulativeTime <= 10)
+			{
+				m_maxSpeed = 70.0;
+			}
+			else if (cumulativeTime >= 10 && m_speed >= m_maxSpeed)
+			{
+				m_maxSpeed = 50.0;
+				speedDown();
+			}
+		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (m_powerUps[i]->getState() == REPLENISH && m_powerUps[i]->collected)
 		{
-			increaseRotation();
+			m_healthSystem->m_healthValue = 6;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+
+		if (m_powerUps[i]->getState() == MORESHOTS && m_powerUps[i]->collected)
 		{
-			decreaseRotation();
+			if (cumulativeTime <= 15)
+			{
+				firepower = true;
+			}
+			else
+				firepower = false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+
+		if (m_powerUps[i]->getState() == NODAMAGE && m_powerUps[i]->collected)
 		{
-			speedUp();
+			if (cumulativeTime <= 15)
+			{
+				shield = true;
+			}
+			else
+				shield = false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			speedDown();
-		}
+		
+	}
 
 
 		m_heading.x = cos(m_rotation * (3.14 / 180));
@@ -185,7 +234,7 @@ void Player::respawn(float x, float y)
 	}
 }
 
- void Player::collision()
+ void Player::collision(std::vector<Powerups*>&m_powerUps, double dt)
 {
 
 	if (m_grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
@@ -222,17 +271,60 @@ void Player::respawn(float x, float y)
 	
 	}
 
+	  if (m_grid->m_tileGrid[pGridX - 1][pGridY - 1]->getCurrentState() == OBSTACLE)
+	  {
+		  if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
+		  {
+			  m_sprite.setPosition(m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize + (m_grid->m_tileSize / 2), m_sprite.getPosition().y);
+		  }
+
+	  }
+
+	  for (int i = 0; i < m_powerUps.size(); i++)
+	  {
+		  if (pGridX == m_powerUps[i]->pGridX  &&
+			  pGridY == m_powerUps[i]->pGridY)
+		  {
+			  if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == MORESHOTS)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+				  
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == GOTTAGOFAST)
+			  {
+				  m_powerUps[i]->collected = true;
+				  cumulativeTime = 0;
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == REPLENISH)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == NODAMAGE)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+			  }
+		  }
+	  }
+
 
 }
 
 
 void Player::render(sf::RenderWindow &window)
 {
+
 	if (m_healthSystem->m_healthValue > 0)
 	{
 		window.draw(m_sprite);
 	}
 	
+	if (shield)
+	{
+		window.draw(shieldcrc);
+	}
 
 	m_healthSystem->render(window);
 

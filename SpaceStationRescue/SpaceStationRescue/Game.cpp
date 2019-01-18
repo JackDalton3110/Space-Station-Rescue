@@ -10,6 +10,64 @@ Game::Game() :
 
 	m_Grid = new Grid();
 
+	for (int i = 0; i < 20; i++)
+	{
+		workers.push_back(new Worker());
+		
+	}
+	for (int i = 0; i < 3; i++)
+	{	
+		spawnSpot = rand() % 5;
+
+		
+			while ((std::find(usedSpawns.begin(), usedSpawns.end(), spawnSpot) != usedSpawns.end()))
+			{
+				spawnSpot = rand() % 5;
+			}
+			nests.push_back(new Nests(spawnSpot));
+			
+			usedSpawns.push_back(spawnSpot);
+			m_sweeper.push_back(new Sweeper(workers));
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		int PowerupType = rand() % 4;
+
+
+		while ((std::find(usedTypes.begin(), usedTypes.end(), PowerupType) != usedTypes.end()))
+		{
+			PowerupType = rand() % 4;
+		}
+		m_powerups.push_back(new Powerups(PowerupType));
+
+		usedTypes.push_back(PowerupType);
+	}
+	
+	
+	m_player = new Player();
+	//m_worker = new Worker();
+
+	/*Enemy* m_pursue = new Pursue(*this);
+	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
+	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
+	Enemy* m_seek = new Seek();
+	Enemy* m_wander = new Wander();*/
+
+	//Factory* factory = new EnemyFactory;
+
+	/*enemies.push_back(factory->CreateEnemy());
+	enemies.push_back(factory->CreateEnemy());
+	enemies.push_back(factory->CreateEnemy());
+	enemies.push_back(factory->CreateEnemy());
+	enemies.push_back(factory->CreateEnemy());*/
+
+	//enemies.push_back(m_pursue);
+	//enemies.push_back(m_arriveFast);
+	//enemies.push_back(m_arriveSlow);
+	//enemies.push_back(m_seek);
+	////enemies.push_back(m_flee);
+	//enemies.push_back(m_wander);
+
 	miniMapView.setViewport(sf::FloatRect(0.64f, 0.02f, 0.3f, 0.3f));
 	miniMapView.setSize(3750, 3750);
 	miniMapView.setCenter(1875, 1875);
@@ -232,11 +290,14 @@ void Game::processGameEvents(sf::Event& event)
 }
 
 
+
+
 /// <summary>
 /// 
 /// </summary>
 void Game::update(double dt)
 {
+
 	m_player->update(dt);
 
 	if (m_player->m_healthSystem->m_healthValue > 0)
@@ -249,14 +310,19 @@ void Game::update(double dt)
 		m_predatorMM2.setPosition(predators[1]->getPosition());
 		m_predatorMM2.setRotation(predators[1]->getRotation());
 
+
+	for (int i = 0; i < m_sweeper.size(); i++)
+	{
+		m_sweeper[i]->update(m_player->getPosition(), dt, *m_player);
+	}
+	for (int i = 0; i < m_powerups.size(); i++)
+	{
+		m_powerups[i]->update();
+	}
+
+
 		m_predatorMM3.setPosition(predators[2]->getPosition());
 		m_predatorMM3.setRotation(predators[2]->getRotation());
-
-		/*for (int i = 0; i < predSprite.size(); i++)
-		{
-		predSprite[i].setPosition(predators[i]->getPosition());
-		predSprite[i].setRotation(predators[i]->getRotation());
-		}*/
 		
 		gameView.setCenter(m_player->getPosition());
 		for (int i = 0; i < workers.size(); i++)
@@ -296,15 +362,19 @@ void Game::render()
 	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
-	for (int i = 0; i < nests.size(); i++)
+	int i;
+	for (i = 0; i < nests.size(); i++)
 	{
 		nests[i]->render(m_window);
+
 	}
 	m_player->render(m_window);
-	for (int i = 0; i < workers.size(); i++)
+	for (i = 0; i < workers.size(); i++)
 	{
+		
 		workers[i]->render(m_window);
 	}
+
 
 	for (int i = 0; i < predators.size(); i++)
 	{
@@ -316,6 +386,16 @@ void Game::render()
 		m_text.setString("YOU LOSE");
 		m_text.setPosition(m_player->getPosition().x - 400, m_player->getPosition().y - 100);
 		m_window.draw(m_text);
+	}
+
+
+	for (i = 0; i < m_sweeper.size(); i++)
+	{
+		m_sweeper[i]->render(m_window);
+	}
+	for (i = 0; i < m_powerups.size(); i++)
+	{
+		m_powerups[i]->render(m_window);
 	}
 
 	m_window.setView(miniMapView);
@@ -333,10 +413,7 @@ void Game::render()
 	{
 		nests[i]->render(m_window);
 	}
-	/*for (int i = 0; i < predSprite.size(); i++)
-	{
-		m_window.draw(predSprite[i]);
-	}*/
+
 	m_window.draw(m_playerMM);
 	m_window.draw(m_predatorMM);
 	m_window.draw(m_predatorMM2);

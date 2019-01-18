@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "Worker.h"
 #include "Nests.h"
+#include "Sweeper.h"
+#include "Powerups.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -40,11 +42,15 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
+
 	std::vector<Predator*> predators;
 	std::vector<sf::Sprite> predSprite;
 	Predator* m_predator;
 
  	sf::Vector2i m_mousePos;
+
+	std::vector<Sweeper*> m_sweeper;
+	std::vector<Powerups*> m_powerups;
 
 	Tile * m_startTile;
 	Tile * m_goalTile;
@@ -54,7 +60,7 @@ protected:
 	static const int m_gridSize = 55;
 	static const int m_tileSize = 68.2;
 	float m_tileScale = 1;
-
+	
 	
 
 	//Enemy* m_pursue;
@@ -85,6 +91,7 @@ protected:
 	sf::Texture m_MMT;
 
 	std::vector<int> usedSpawns;
+	std::vector<int> usedTypes;
 
 	int spawnSpot;
 

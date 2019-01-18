@@ -124,6 +124,9 @@ void Tile::setCurrentState(State s)
 	case NEST:
 		rectangle.setFillColor(sf::Color::Blue);
 		break;
+	case SWEEPER:
+		rectangle.setFillColor(sf::Color::Magenta);
+		break;
 	default:
 		break;
 	}

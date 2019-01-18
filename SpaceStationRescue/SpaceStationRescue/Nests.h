@@ -38,6 +38,8 @@ private:
 	std::vector<int> usedSpawns;
 	sf::CircleShape defendRad;
 	bool shot,attack,time;
+	bool inView(sf::Vector2f position);
+	
 	Grid *m_Grid;
 
 	
