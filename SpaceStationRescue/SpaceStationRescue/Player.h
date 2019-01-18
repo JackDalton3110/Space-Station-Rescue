@@ -54,8 +54,6 @@ private:
 	sf::CircleShape shieldcrc;
 	Grid *m_grid;
 
-	int pGridX;
-	int pGridY;
 
 
 };

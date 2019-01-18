@@ -12,7 +12,7 @@ Game::Game() :
 
 	for (int i = 0; i < 20; i++)
 	{
-		workers.push_back(new Worker());
+		workers.push_back(new Worker(*m_Grid));
 		
 	}
 	for (int i = 0; i < 3; i++)
@@ -24,7 +24,7 @@ Game::Game() :
 			{
 				spawnSpot = rand() % 5;
 			}
-			nests.push_back(new Nests(spawnSpot));
+			nests.push_back(new Nests(spawnSpot, *m_Grid));
 			
 			usedSpawns.push_back(spawnSpot);
 			m_sweeper.push_back(new Sweeper(workers));
@@ -44,29 +44,8 @@ Game::Game() :
 	}
 	
 	
-	m_player = new Player();
-	//m_worker = new Worker();
-
-	/*Enemy* m_pursue = new Pursue(*this);
-	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
-	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
-	Enemy* m_seek = new Seek();
-	Enemy* m_wander = new Wander();*/
-
-	//Factory* factory = new EnemyFactory;
-
-	/*enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());*/
-
-	//enemies.push_back(m_pursue);
-	//enemies.push_back(m_arriveFast);
-	//enemies.push_back(m_arriveSlow);
-	//enemies.push_back(m_seek);
-	////enemies.push_back(m_flee);
-	//enemies.push_back(m_wander);
+	m_player = new Player(*m_Grid);
+	
 
 	miniMapView.setViewport(sf::FloatRect(0.64f, 0.02f, 0.3f, 0.3f));
 	miniMapView.setSize(3750, 3750);
@@ -77,9 +56,7 @@ Game::Game() :
 	gameView.setCenter(640, 480);
 
 
-	
 
-	m_player = new Player(*m_Grid);
 
 	if (!m_playerMMT.loadFromFile("./resources/PlayerMiniMap.png")) {
 		//do something
@@ -103,32 +80,9 @@ Game::Game() :
 	m_text.setCharacterSize(200);
 	m_text.setFillColor(sf::Color::Red);
 
-	for (int i = 0; i < 3; i++)
-	{
-
-
-		spawnSpot = rand() % 5;
-
-
-		while ((std::find(usedSpawns.begin(), usedSpawns.end(), spawnSpot) != usedSpawns.end()))
-		{
-			spawnSpot = rand() % 5;
-		}
-		nests.push_back(new Nests(spawnSpot, *m_Grid));
-		
-		/*m_predatorMM.setTexture(m_predatorMMT);
-		m_predatorMM.setOrigin(m_predatorMM.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);*/
-		//predSprite.push_back(m_predatorMM);
-
-		usedSpawns.push_back(spawnSpot);
-		
-
-
-
-
-	}
 
 	m_Grid->updateCost(m_player->pGridX, m_player->pGridY, 4000);
+
 	for (int i = 0; i < nests.size(); i++) {
 		predators.push_back(new Predator(nests[i]->getPosition().x, nests[i]->getPosition().y, *m_Grid));
 	}
@@ -298,7 +252,7 @@ void Game::processGameEvents(sf::Event& event)
 void Game::update(double dt)
 {
 
-	m_player->update(dt);
+	m_player->update(dt, m_powerups);
 
 	if (m_player->m_healthSystem->m_healthValue > 0)
 	{
@@ -311,14 +265,14 @@ void Game::update(double dt)
 		m_predatorMM2.setRotation(predators[1]->getRotation());
 
 
-	for (int i = 0; i < m_sweeper.size(); i++)
-	{
-		m_sweeper[i]->update(m_player->getPosition(), dt, *m_player);
-	}
-	for (int i = 0; i < m_powerups.size(); i++)
-	{
-		m_powerups[i]->update();
-	}
+		for (int i = 0; i < m_sweeper.size(); i++)
+		{
+			m_sweeper[i]->update(m_player->getPosition(), dt, *m_player);
+		}
+		for (int i = 0; i < m_powerups.size(); i++)
+		{
+			m_powerups[i]->update();
+		}
 
 
 		m_predatorMM3.setPosition(predators[2]->getPosition());
@@ -414,10 +368,23 @@ void Game::render()
 		nests[i]->render(m_window);
 	}
 
+	
 	m_window.draw(m_playerMM);
-	m_window.draw(m_predatorMM);
-	m_window.draw(m_predatorMM2);
-	m_window.draw(m_predatorMM3);
+	if (predators[0]->m_healthSystem->m_healthValue > 0)
+	{
+		m_window.draw(m_predatorMM);
+	}
+
+	if (predators[1]->m_healthSystem->m_healthValue > 0)
+	{
+		m_window.draw(m_predatorMM2);
+	}
+	
+	if (predators[2]->m_healthSystem->m_healthValue > 0)
+	{
+		m_window.draw(m_predatorMM3);
+	}
+	
 	if (m_player->m_healthSystem->m_healthValue <= 0)
 	{
 		m_window.draw(m_gameOverBG);

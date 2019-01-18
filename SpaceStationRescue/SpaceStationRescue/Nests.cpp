@@ -37,7 +37,7 @@ void Nests::spawnNests()
 void Nests::Attack(sf::Vector2f pos)
 {
 	
-	if (dist<defendRad.getRadius()+m_Grid->m_tileSize/2)
+	if (dist<defendRad.getRadius()+m_Grid->m_tileSize/2 && m_healthSystem->m_healthValue > 0)
 	{
 		defendRad.setFillColor(sf::Color(100,0,0,70));
 		

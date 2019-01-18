@@ -85,8 +85,8 @@ void Bullet::seekShoot(sf::Vector2f playerPosition)
 		m_velocity.x = m_velocity.x / m_velocityF;
 		m_velocity.y = m_velocity.y / m_velocityF;
 
-		m_velocity.x = m_velocity.x * m_speed/40;
-		m_velocity.y = m_velocity.y * m_speed/40;
+		m_velocity.x = m_velocity.x * m_speed/35;
+		m_velocity.y = m_velocity.y * m_speed/35;
 
 		m_rotation = getNewOrientation(m_rotation, m_velocityF) + 90;
 

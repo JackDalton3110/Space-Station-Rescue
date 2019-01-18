@@ -5,7 +5,7 @@ Worker::Worker(Grid &m_grid):
 	maxSpeed(3.0f),
 	maxRotation(360),
 	rotation(90),
-	m_Grid(&m_grid)
+	m_Grid(&m_grid),
 	alive(true)
 {
 	//m_Grid = new Grid();

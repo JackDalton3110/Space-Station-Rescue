@@ -5,7 +5,7 @@ Predator::Predator(float x, float y, Grid &m_Grid) :
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(4.0),
+	m_maxSpeed(3.0),
 	m_speed(10),
 	m_heading(0, 0),
 	m_grid(&m_Grid),
@@ -32,7 +32,7 @@ Predator::Predator(float x, float y, Grid &m_Grid) :
 	m_healthSystem->m_healthValue = 6;
 
 	m_bullet = new Bullet(*m_grid);
-	m_bullet->m_speed = 50;
+	m_bullet->m_speed = 30;
 	//m_grid->updateCost(pGridX, pGridY);
 
 
@@ -99,8 +99,21 @@ void Predator::respawn(std::vector<Nests*> &nests)
 
 
 		int val = rand() % 3;
- 		m_sprite.setPosition(nests[val]->getPosition());
-	m_healthSystem->m_healthValue = 6;
+		int deathVal = 0;
+
+		while (nests[val]->m_healthSystem->m_healthValue <= 0)
+		{
+			int val = rand() % 3;
+			deathVal++;
+		}
+
+		if (deathVal < 3)
+		{
+			m_sprite.setPosition(nests[val]->getPosition());
+			m_healthSystem->m_healthValue = 6;
+		}
+		
+
 
 }
 
@@ -224,17 +237,18 @@ void Predator::collision()
 
 void Predator::collisionPlayer(Player & m_player)
 {
-
-	
-
 	if (m_bullet->getPosition().x - m_grid->m_tileSize / 2 < m_player.getPosition().x + m_grid->m_tileSize / 2 &&
 		m_bullet->getPosition().x + m_grid->m_tileSize / 2 > m_player.getPosition().x - m_grid->m_tileSize / 2 &&
 		m_bullet->getPosition().y - m_grid->m_tileSize / 2 < m_player.getPosition().y + m_grid->m_tileSize / 2 &&
 		m_bullet->getPosition().y + m_grid->m_tileSize / 2 > m_player.getPosition().y - m_grid->m_tileSize / 2) {
-		if (m_bullet->active == true)
+		if (m_bullet->active == true && !m_player.shield)
 		{
-			m_player.m_healthSystem->m_healthValue-=2;
+			m_player.m_healthSystem->m_healthValue--;
 
+			m_bullet->active = false;
+		}
+		if (m_bullet->active == true && m_player.shield)
+		{
 			m_bullet->active = false;
 		}
 	}
@@ -243,16 +257,21 @@ void Predator::collisionPlayer(Player & m_player)
 
 		if (m_player.m_bullet[i]->pGridX == pGridX && m_player.m_bullet[i]->pGridY == pGridY) {
 
-			if (m_player.m_bullet[i]->active == true)
+			if (m_player.m_bullet[i]->active == true && !m_player.firepower)
 			{
 				m_healthSystem->m_healthValue -=2;
+
+				m_player.m_bullet[i]->active = false;
+			}
+			else if (m_player.m_bullet[i]->active == true && m_player.firepower)
+			{
+				m_healthSystem->m_healthValue -= 3;
 
 				m_player.m_bullet[i]->active = false;
 			}
 
 		}
 	}
-	
 	
 }
 
