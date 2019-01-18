@@ -1,5 +1,9 @@
 #include "Powerups.h"
-
+/// <summary>
+/// Constructor method for Powerups
+/// Loads all images for powerups then assigns state to Powerup
+/// </summary>
+/// <param name="state"></param>
 Powerups::Powerups(int state):
 	m_scale(0.3),
 	collected(false)
@@ -21,7 +25,6 @@ Powerups::Powerups(int state):
 	{
 		std::cout << "error loading health Powerup image" << std::endl;
 	}
-	//setImage(currentPowerup);
 	setState(state);
 	PowerupSprite.setScale(m_scale, m_scale);
 	pGridX = m_position.x / m_Grid->m_tileSize;
@@ -32,33 +35,20 @@ Powerups::~Powerups()
 {
 
 }
-
+/// <summary>
+/// Gets current Powerup state
+/// </summary>
+/// <returns></returns>
 Powerup Powerups::getState()
 {
 	return currentPowerup;
 }
 
-void Powerups::setImage(Powerup s)
-{
-	if (getState() == MORESHOTS)
-	{
-		
-	}
-	else if (getState() == GOTTAGOFAST)
-	{
-		
-	}
-	else if (getState() == NODAMAGE)
-	{
-		PowerupSprite.setTexture(PowerupTxt3);
-	}
-	else if (getState() == REPLENISH)
-	{
-		PowerupSprite.setTexture(PowerupTxt4);
-	}
-
-}
-
+/// <summary>
+/// Sets State of each Powerup to designate type of Powerup
+/// Sets position and Image for every Powerup created.
+/// </summary>
+/// <param name="i"></param>
 void Powerups::setState(int i)
 {
 	if (i == 0)
@@ -95,7 +85,9 @@ sf::Vector2f Powerups::getPosition()
 {
 	return PowerupSprite.getPosition();
 }
-
+/// <summary>
+/// Updates Powerups continuously 
+/// </summary>
 void Powerups::update()
 {
 	rotation += 1;
@@ -106,9 +98,11 @@ void Powerups::update()
 	PowerupSprite.setRotation(rotation);
 	pGridX = floor(PowerupSprite.getPosition().x / m_Grid->m_tileSize);
 	pGridY = floor(PowerupSprite.getPosition().y / m_Grid->m_tileSize);
-	//std::cout << m_position.x <<" , "<< m_position.y << std::endl;
 }
-
+/// <summary>
+/// Renders Powerups if they have not been collected yet.
+/// </summary>
+/// <param name="m_window"></param>
 void Powerups::render(sf::RenderWindow &m_window)
 {
 	if(!collected)

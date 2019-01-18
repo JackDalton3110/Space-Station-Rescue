@@ -28,7 +28,6 @@ public:
 	bool shrink = false;
 	Powerup currentPowerup = MORESHOTS;
 private:
-	void setImage(Powerup S);
 	
 	sf::Vector2f m_position;
 	float rotation;
