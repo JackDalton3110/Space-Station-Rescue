@@ -113,7 +113,7 @@ void Predator::update(double dt)
 	//	m_velocity.y = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y * 3;
 	//}
 	
-	std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x << ", " << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y << ", " << m_grid->m_tileGrid[pGridX][pGridY]->m_rotation << std::endl;
+	//std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x << ", " << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y << ", " << m_grid->m_tileGrid[pGridX][pGridY]->m_rotation << std::endl;
 
 
 	//m_heading.x = cos(m_rotation * (3.14 / 180));

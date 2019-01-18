@@ -22,7 +22,9 @@ public:
 	void render(sf::RenderWindow &m_window);
 	void collision(Player & m_player);
 	void spawnNests();
+	sf::Vector2f getPosition();
 	int spawnSpot;
+
 	sf::Vertex line[2];
 	//State m_currentState = PLAYER;
 	HealthSystem *m_healthSystem;

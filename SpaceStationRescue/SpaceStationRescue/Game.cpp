@@ -92,7 +92,7 @@ Game::Game() :
 	}
 
 	for (int i = 0; i < nests.size(); i++) {
-		predators.push_back(new Predator(nests[i]->m_position.x, nests[i]->m_position.y, *m_Grid));
+		predators.push_back(new Predator(nests[i]->getPosition().x, nests[i]->getPosition().y, *m_Grid));
 	}
 	
 	m_playerMM.setTexture(m_playerMMT);

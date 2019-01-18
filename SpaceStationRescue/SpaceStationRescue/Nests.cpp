@@ -145,6 +145,11 @@ void Nests::collision(Player & m_player)
 	}
 }
 
+sf::Vector2f Nests::getPosition()
+{
+	return defendRad.getPosition();
+}
+
 void Nests::render(sf::RenderWindow &m_window)
 {
 	m_window.draw(defendRad);
