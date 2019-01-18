@@ -169,6 +169,7 @@
     <ClInclude Include="Worker.h" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="resources\Adventure.otf" />
     <Font Include="resources\OCRAEXT.TTF" />
   </ItemGroup>
   <ItemGroup>

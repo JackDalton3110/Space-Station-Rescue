@@ -147,7 +147,6 @@ Grid::Grid()
 
 	}
 
-	updateCost(45, 25);
 }
 
 /// <summary>
@@ -183,14 +182,14 @@ void Grid::reset()
 
 
 
-void Grid::updateCost(int posX, int posY)
+void Grid::updateCost(int posX, int posY, int radius)
 {
 
 	for (int i = 0; i < m_gridSize; i++)
 	{
 		for (int j = 0; j < m_gridSize; j++)
 		{
-			if (m_tileGrid[i][j]->getCurrentState() == NONE)
+			if (m_tileGrid[i][j]->getCurrentState() != OBSTACLE)
 			{
 				
 				m_tileGrid[i][j]->checked = false;
@@ -202,17 +201,17 @@ void Grid::updateCost(int posX, int posY)
 
 	std::list<Tile> tileQueue;
 
-
 	tileQueue.push_back(*m_tileGrid[posX][posY]);
 
 	m_tileGrid[posX][posY]->setCost(0);
+
 	int i = 0;
 	int j = 0;
 
 	auto iter = tileQueue.begin();
 
 	//for (; iter != endIter; iter++) {
-	while (tileQueue.size() !=0 && i < 300 ) {
+	while (tileQueue.size() !=0 && i < radius ) {
 		i++;
 	//	std::cout << i << std::endl;
 
@@ -262,12 +261,12 @@ void Grid::updateCost(int posX, int posY)
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 		
 
-			if (m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() != NONE)
+			if (m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setRotation(0);
 
 			}
-			else if (m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() != NONE)
+			else if (m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos - 1][iter->m_yPos - 1]->setRotation(90);
 
@@ -286,12 +285,12 @@ void Grid::updateCost(int posX, int posY)
 		{
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->checked = true;
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
-			if (m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() != NONE)
+			if (m_tileGrid[iter->m_xPos][iter->m_yPos - 1]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setRotation(90);
 				
 			}
-			else if(m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() != NONE)
+			else if(m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos + 1][iter->m_yPos - 1]->setRotation(180);
 			
@@ -310,12 +309,12 @@ void Grid::updateCost(int posX, int posY)
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->checked = true;
 			m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 
-			if (m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() != NONE)
+			if (m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setRotation(270);
 
 			}
-			else if (m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() != NONE)
+			else if (m_tileGrid[iter->m_xPos + 1][iter->m_yPos]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos + 1][iter->m_yPos + 1]->setRotation(180);
 
@@ -335,12 +334,12 @@ void Grid::updateCost(int posX, int posY)
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setCost(m_tileGrid[iter->m_xPos][iter->m_yPos]->getCost() + 1);
 			m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setRotation(315);
 
-			if (m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() != NONE)
+			if (m_tileGrid[iter->m_xPos][iter->m_yPos + 1]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setRotation(270);
 
 			}
-			else if (m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() != NONE)
+			else if (m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() == OBSTACLE)
 			{
 				m_tileGrid[iter->m_xPos - 1][iter->m_yPos + 1]->setRotation(0);
 

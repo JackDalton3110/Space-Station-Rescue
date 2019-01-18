@@ -4,7 +4,8 @@
 #include <math.h>
 #include "Grid.h"
 #include "HealthSystem.h"
-#include "Bullet.h"
+#include "Player.h"
+#include "Nests.h"
 
 class Predator
 {
@@ -18,10 +19,13 @@ public:
 	void speedDown();
 	void increaseRotation();
 	void decreaseRotation();
-	void respawn(float x, float y);
-	void update(double dt);
+	void shoot();
+	void respawn(std::vector<Nests*> &nests);
+	void update(Player &m_player, std::vector<Nests*> &nests, double dt);
 	void render(sf::RenderWindow &window);
 	void collision();
+	void collisionPlayer(Player & m_player);
+	void respawn();
 
 	float getRotation();
 
@@ -29,7 +33,7 @@ public:
 	int bulletindex = 0;
 	bool fired = false;
 	HealthSystem *m_healthSystem;
-	std::vector<Bullet *> m_bullet;
+	Bullet* m_bullet;
 	int spawnSpot;
 
 private:
@@ -39,7 +43,9 @@ private:
 	sf::Texture m_texture;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_position;
+	sf::Vector2f m_headingBullet;
 	float m_orientation;
+	float dist, dx, dy;
 
 	float  DEG_TO_RAD;
 	float m_maxSpeed;
@@ -49,5 +55,8 @@ private:
 	Grid *m_grid;
 	int pGridX;
 	int pGridY;
+	float m_shootDist;
+	int bulletDelay;
+
 
 };

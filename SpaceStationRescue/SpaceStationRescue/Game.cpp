@@ -9,37 +9,7 @@ Game::Game() :
 	srand(time(NULL));
 
 	m_Grid = new Grid();
-/*
-	for (int i = 0; i < 30; i++)
-	{
-		workers.push_back(new Worker(*m_Grid));
-		
-	}*/
-	
 
-	
-	//m_worker = new Worker();
-
-	/*Enemy* m_pursue = new Pursue(*this);
-	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
-	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
-	Enemy* m_seek = new Seek();
-	Enemy* m_wander = new Wander();*/
-
-	//Factory* factory = new EnemyFactory;
-
-	/*enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());*/
-
-	//enemies.push_back(m_pursue);
-	//enemies.push_back(m_arriveFast);
-	//enemies.push_back(m_arriveSlow);
-	//enemies.push_back(m_seek);
-	////enemies.push_back(m_flee);
-	//enemies.push_back(m_wander);
 	miniMapView.setViewport(sf::FloatRect(0.64f, 0.02f, 0.3f, 0.3f));
 	miniMapView.setSize(3750, 3750);
 	miniMapView.setCenter(1875, 1875);
@@ -66,6 +36,15 @@ Game::Game() :
 		//do something
 	}
 
+	if (!m_font.loadFromFile("./resources/Adventure.otf")) {
+		//do something
+	}
+
+	m_text.setFont(m_font);
+	m_text.setString("YOU LOSE");
+	m_text.setCharacterSize(200);
+	m_text.setFillColor(sf::Color::Red);
+
 	for (int i = 0; i < 3; i++)
 	{
 
@@ -91,6 +70,7 @@ Game::Game() :
 
 	}
 
+	m_Grid->updateCost(m_player->pGridX, m_player->pGridY, 4000);
 	for (int i = 0; i < nests.size(); i++) {
 		predators.push_back(new Predator(nests[i]->getPosition().x, nests[i]->getPosition().y, *m_Grid));
 	}
@@ -98,16 +78,20 @@ Game::Game() :
 	m_playerMM.setTexture(m_playerMMT);
 	m_playerMM.setOrigin(m_playerMM.getTextureRect().width / 2, m_playerMM.getTextureRect().height / 2);
 
-	/*m_predatorMM.setTexture(m_predatorMMT);
+	m_predatorMM.setTexture(m_predatorMMT);
 	m_predatorMM.setOrigin(m_predatorMM.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);
 
 	m_predatorMM2.setTexture(m_predatorMMT);
 	m_predatorMM2.setOrigin(m_predatorMM2.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);
 
 	m_predatorMM3.setTexture(m_predatorMMT);
-	m_predatorMM3.setOrigin(m_predatorMM3.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);*/
+	m_predatorMM3.setOrigin(m_predatorMM3.getTextureRect().width / 2, m_predatorMM.getTextureRect().height / 2);
 	
 	m_MM.setTexture(m_MMT);
+
+	m_gameOverBG.setSize(sf::Vector2f(3751, 3751));
+	m_gameOverBG.setFillColor(sf::Color(255, 255, 255, 200));
+
 
 
 }
@@ -253,59 +237,53 @@ void Game::processGameEvents(sf::Event& event)
 /// </summary>
 void Game::update(double dt)
 {
-	m_playerMM.setPosition(m_player->getPosition());
-	m_playerMM.setRotation(m_player->getRotation());
-	/*m_predatorMM.setPosition(predators[1]->getPosition());
-	m_predatorMM.setRotation(predators[1]->getRotation());
+	m_player->update(dt);
 
-	m_predatorMM2.setPosition(predators[2]->getPosition());
-	m_predatorMM2.setRotation(predators[2]->getRotation());
-
-	m_predatorMM3.setPosition(predators[3]->getPosition());
-	m_predatorMM3.setRotation(predators[3]->getRotation());*/
-
-	/*for (int i = 0; i < predSprite.size(); i++)
+	if (m_player->m_healthSystem->m_healthValue > 0)
 	{
+		m_playerMM.setPosition(m_player->getPosition());
+		m_playerMM.setRotation(m_player->getRotation());
+		m_predatorMM.setPosition(predators[0]->getPosition());
+		m_predatorMM.setRotation(predators[0]->getRotation());
+
+		m_predatorMM2.setPosition(predators[1]->getPosition());
+		m_predatorMM2.setRotation(predators[1]->getRotation());
+
+		m_predatorMM3.setPosition(predators[2]->getPosition());
+		m_predatorMM3.setRotation(predators[2]->getRotation());
+
+		/*for (int i = 0; i < predSprite.size(); i++)
+		{
 		predSprite[i].setPosition(predators[i]->getPosition());
 		predSprite[i].setRotation(predators[i]->getRotation());
-	}*/
-	m_player->update(dt);
-	gameView.setCenter(m_player->getPosition());
-	for (int i = 0; i < workers.size(); i++)
-	{
-		workers[i]->update();
+		}*/
+		
+		gameView.setCenter(m_player->getPosition());
+		for (int i = 0; i < workers.size(); i++)
+		{
+			workers[i]->update();
+		}
+		for (int i = 0; i < nests.size(); i++)
+		{
+			nests[i]->update(*m_player, dt);
+		}
+		for (int i = 0; i < predators.size(); i++)
+		{
+			predators[i]->update(*m_player, nests, dt);
+		}
+		if (m_player->pGridX != previousX || m_player->pGridY != previousY)
+		{
+			m_Grid->updateCost(m_player->pGridX, m_player->pGridY, 500);
+			previousX = m_player->pGridX;
+			previousY = m_player->pGridY;
+		}
+
 	}
-	for (int i = 0; i < nests.size(); i++)
+	else
 	{
-		nests[i]->update(*m_player, dt);
-	}
-	for (int i = 0; i < predators.size(); i++) 
-	{
-		predators[i]->update(dt);
-	}
-	if (m_player->pGridX != previousX || m_player->pGridY != previousY)
-	{
-		m_Grid->updateCost(m_player->pGridX, m_player->pGridY);
-		previousX = m_player->pGridX;
-		previousY = m_player->pGridY;
+
 	}
 	
-	//m_predator->update(dt);
-	//m_worker->update();
-
-	//m_Grid->update(gameView);
-
-	/*for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->update(m_player->getPosition(), m_player->getVelocity());
-		enemies[i]->collisionAvoidance(enemies);
-	}*/
-	//m_enemy->update(m_player->getPosition());
-	//m_enemySeek->update(m_player->getPosition());
-
-	//	m_enemyFlee->update(m_player->getPosition());
-	//m_enemyPursue->update(m_player->getPosition(), m_player->getVelocity());
-
 }
 
 /// <summary>
@@ -332,6 +310,13 @@ void Game::render()
 	{
 		predators[i]->render(m_window);
 	}
+	if (m_player->m_healthSystem->m_healthValue <= 0)
+	{
+		m_window.draw(m_gameOverBG);
+		m_text.setString("YOU LOSE");
+		m_text.setPosition(m_player->getPosition().x - 400, m_player->getPosition().y - 100);
+		m_window.draw(m_text);
+	}
 
 	m_window.setView(miniMapView);
 
@@ -352,10 +337,15 @@ void Game::render()
 	{
 		m_window.draw(predSprite[i]);
 	}*/
-	/*m_window.draw(m_playerMM);
+	m_window.draw(m_playerMM);
 	m_window.draw(m_predatorMM);
 	m_window.draw(m_predatorMM2);
-	m_window.draw(m_predatorMM3);*/
+	m_window.draw(m_predatorMM3);
+	if (m_player->m_healthSystem->m_healthValue <= 0)
+	{
+		m_window.draw(m_gameOverBG);
+	
+	}
 
 	//for (int i = 0; i < workers.size(); i++)
 	//{

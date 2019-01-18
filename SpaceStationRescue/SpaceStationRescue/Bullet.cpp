@@ -46,7 +46,14 @@ void Bullet::shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rota
 {
 	if (active == false)
 	{
-		m_velocity = m_heading * m_speed;
+		/*if (m_heading.x >= 0 && m_heading.y >= 0)
+		{*/
+			m_velocity = m_heading * m_speed;
+	/*	}
+		else {
+			m_velocity = m_heading * -m_speed;
+		}*/
+		
 
 		m_sprite.setPosition(m_position);
 		m_sprite.setRotation(m_rotation);

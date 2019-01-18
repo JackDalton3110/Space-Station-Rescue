@@ -116,21 +116,6 @@ void Nests::collision(Player & m_player)
 		}
 	}
 
-	/*for (int i = 0; i < nests.size(); i++) {
-
-		if (getPosition().x - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().x + m_grid->m_tileSize / 2 &&
-			getPosition().x + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().x - m_grid->m_tileSize / 2 &&
-			getPosition().y - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().y + m_grid->m_tileSize / 2 &&
-			getPosition().y + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().y - m_grid->m_tileSize / 2) {
-			if (nests[i].m_bullet->nestShot == true)
-			{
-				m_healthSystem->m_healthValue--;
-
-				nests[i].m_bullet->nestShot = false;
-			}
-
-		}
-	}*/
 
 	if (m_bullet->getPosition().x - m_Grid->m_tileSize / 2 < m_player.getPosition().x + m_Grid->m_tileSize / 2 &&
 		m_bullet->getPosition().x + m_Grid->m_tileSize / 2 > m_player.getPosition().x - m_Grid->m_tileSize / 2 &&

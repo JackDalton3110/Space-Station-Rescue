@@ -30,7 +30,7 @@ public:
 	int pGridX;
 	int pGridY;
 	bool active = false;
-
+	float m_speed;
 private:
 	float getNewOrientation(float currentOrientation, float velocity);
 
@@ -46,7 +46,7 @@ private:
 	float m_maxSpeed;
 	float m_rotation;
 	sf::Vector2f m_heading;
-	float m_speed;
+	
 
 	Grid *m_grid;
 

@@ -5,19 +5,20 @@ Predator::Predator(float x, float y, Grid &m_Grid) :
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(2.0),
+	m_maxSpeed(4.0),
 	m_speed(10),
 	m_heading(0, 0),
-	m_grid(&m_Grid)
+	m_grid(&m_Grid),
+	m_shootDist(400)
 
 {
-	if (!m_texture.loadFromFile("./resources/Player.png")) {
+	if (!m_texture.loadFromFile("./resources/Predator.png")) {
 		//do something
 	}
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
-	m_sprite.setScale(0.1, 0.1);
+	m_sprite.setScale(0.17, 0.17);
 	m_sprite.setRotation(90);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
@@ -30,11 +31,8 @@ Predator::Predator(float x, float y, Grid &m_Grid) :
 	m_healthSystem->setState(ENEMY);
 	m_healthSystem->m_healthValue = 6;
 
-	/*for (int i = 0; i < 3; i++)
-	{
-		m_bullet.push_back(new Bullet(*m_grid));
-	}*/
-
+	m_bullet = new Bullet(*m_grid);
+	m_bullet->m_speed = 50;
 	//m_grid->updateCost(pGridX, pGridY);
 
 
@@ -95,118 +93,89 @@ void Predator::decreaseRotation()
 
 }
 
-void Predator::update(double dt)
+
+void Predator::respawn(std::vector<Nests*> &nests)
 {
 
-	pGridX = floor((m_sprite.getPosition().x )/ m_grid->m_tileSize);
-	pGridY = floor((m_sprite.getPosition().y)/ m_grid->m_tileSize);
 
-	//
+		int val = rand() % 3;
+ 		m_sprite.setPosition(nests[val]->getPosition());
+	m_healthSystem->m_healthValue = 6;
 
-	//m_velocity = m_grid->m_tileGrid[pGridX][pGridY]->
+}
 
-	//if (m_velocity.x < m_maxSpeed) {
-	//	m_velocity.x = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x * 3;
-	//}
-	//if (m_velocity.y < m_maxSpeed)
-	//{
-	//	m_velocity.y = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y * 3;
-	//}
-	
-	//std::cout << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x << ", " << m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y << ", " << m_grid->m_tileGrid[pGridX][pGridY]->m_rotation << std::endl;
-
-
-	//m_heading.x = cos(m_rotation * (3.14 / 180));
-	//m_heading.y = sin(m_rotation * (3.14 / 180));
-	/*if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x == 0 && m_velocity.x > 0)
+void Predator::update(Player &m_player, std::vector<Nests*> &nests, double dt)
+{
+	if (m_healthSystem->m_healthValue > 0 )
 	{
-		if (m_velocity.x != 0)
-		{
-			m_velocity.x--;
-		}
-		
-	}
-	else if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x == 0 && m_velocity.x < 0)
-	{
-		if (m_velocity.x != 0)
-		{
-			m_velocity.x++;
-		}
-	}
+		dx = m_player.getPosition().x - m_sprite.getPosition().x + m_grid->m_tileSize / 2;
+		dy = m_player.getPosition().y - m_sprite.getPosition().y + m_grid->m_tileSize / 2;
+		dist = sqrt((dx*dx) + (dy*dy));
+		shoot();
 
-	if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y == 0 && m_velocity.y > 0)
-	{
-		if (m_velocity.y != 0)
-		{
-			m_velocity.y--;
-		}
-	}
-	else if (m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y == 0 && m_velocity.y < 0)
-	{
-		if (m_velocity.y != 0)
-		{
-			m_velocity.y++;
-		}
-	}
+		pGridX = floor((m_sprite.getPosition().x) / m_grid->m_tileSize);
+		pGridY = floor((m_sprite.getPosition().y) / m_grid->m_tileSize);
 
-	if (m_velocity.x < m_maxSpeed && m_velocity.x > -m_maxSpeed)
-	{
-		m_velocity.x += m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().x ;
-	}
-
-	if (m_velocity.y < m_maxSpeed && m_velocity.x > -m_maxSpeed)
-	{
-		m_velocity.y += m_grid->m_tileGrid[pGridX][pGridY]->getVelocity().y ;
-	}*/
-	
-	/*if (getPosition().x >= m_grid->m_tileGrid[pGridX][pGridY]->m_position.x + (m_grid->m_tileSize / 5)*4 &&
-		getPosition().x <= m_grid->m_tileGrid[pGridX][pGridY]->m_position.x - m_grid->m_tileSize / 5 &&
-		getPosition().y >= m_grid->m_tileGrid[pGridX][pGridY]->m_position.y + (m_grid->m_tileSize / 5) *4 &&
-		getPosition().y <= m_grid->m_tileGrid[pGridX][pGridY]->m_position.y - m_grid->m_tileSize / 5)
-	{*/
 		m_velocity = m_grid->m_tileGrid[pGridX][pGridY]->getVelocity();
 		m_rotation = m_grid->m_tileGrid[pGridX][pGridY]->m_rotation;
-		m_velocity.x *= 5;
-		m_velocity.y *= 5;
+		m_velocity.x *= m_maxSpeed;
+		m_velocity.y *= m_maxSpeed;
 
 		collision();
-	/*}*/
-	
+		if (m_healthSystem->m_healthValue != 0)
+		{
+			collisionPlayer(m_player);
+		}
+		if(m_healthSystem->m_healthValue == 0)
+		{
+			respawn(nests);
+		}
+
 	
 
-	m_sprite.setPosition(m_sprite.getPosition().x +m_velocity.x, 
-						m_sprite.getPosition().y +m_velocity.y);
-	m_sprite.setRotation(m_rotation);
-	//collision();
-	
 
-	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
-	m_healthSystem->update();
+
+		m_bullet->update(dt);
+
+
+
+		
+		
+			m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x,
+				m_sprite.getPosition().y + m_velocity.y);
+			m_sprite.setRotation(m_rotation);
+		
+		
+
+
+		m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+		m_healthSystem->update();
+	}
+	
 
 
 
 }
 
-void Predator::respawn(float x, float y)
+
+void Predator::shoot()
 {
-	if (y >= 1000 + 100)
+	if (dist<m_shootDist + m_grid->m_tileSize / 2)
 	{
-		//m_sprite.setPosition(m_sprite.getPosition().x, -200);
+
+
+			m_headingBullet.x = cos(m_rotation * (3.14 / 180));
+			m_headingBullet.y = sin(m_rotation * (3.14 / 180));
+
+			m_bullet->shoot(m_headingBullet, m_sprite.getPosition(), m_rotation);
+			
+		
+		
+		//m_bullet->shoot(test, m_Grid->m_nestPoints[spawnSpot]->m_position, 0);
 	}
 
-	else if (y < -200)
-	{
-		//m_sprite.setPosition(m_sprite.getPosition().x,1100);
-	}
-	else if (x < -200)
-	{
-		//m_sprite.setPosition(2100, m_sprite.getPosition().y);
-	}
-	else if (x >= 2100)
-	{
-		//m_sprite.setPosition(200, m_sprite.getPosition().y);
-	}
 }
+
 
 void Predator::collision()
 {
@@ -253,17 +222,54 @@ void Predator::collision()
 }
 
 
+void Predator::collisionPlayer(Player & m_player)
+{
+
+	
+
+	if (m_bullet->getPosition().x - m_grid->m_tileSize / 2 < m_player.getPosition().x + m_grid->m_tileSize / 2 &&
+		m_bullet->getPosition().x + m_grid->m_tileSize / 2 > m_player.getPosition().x - m_grid->m_tileSize / 2 &&
+		m_bullet->getPosition().y - m_grid->m_tileSize / 2 < m_player.getPosition().y + m_grid->m_tileSize / 2 &&
+		m_bullet->getPosition().y + m_grid->m_tileSize / 2 > m_player.getPosition().y - m_grid->m_tileSize / 2) {
+		if (m_bullet->active == true)
+		{
+			m_player.m_healthSystem->m_healthValue-=2;
+
+			m_bullet->active = false;
+		}
+	}
+	
+	for (int i = 0; i < m_player.m_bullet.size(); i++) {
+
+		if (m_player.m_bullet[i]->pGridX == pGridX && m_player.m_bullet[i]->pGridY == pGridY) {
+
+			if (m_player.m_bullet[i]->active == true)
+			{
+				m_healthSystem->m_healthValue -=2;
+
+				m_player.m_bullet[i]->active = false;
+			}
+
+		}
+	}
+	
+	
+}
+
 void Predator::render(sf::RenderWindow &window)
 {
-	window.draw(m_sprite);
+	if (m_healthSystem->m_healthValue > 0) {
 
-	m_healthSystem->render(window);
-
-	/*for (int i = 0; i < m_bullet.size(); i++)
-	{
-		if (m_bullet[i]->getState() == true) {
-			m_bullet[i]->render(window);
+		window.draw(m_sprite);
+		if (m_bullet->getState() == true) {
+			m_bullet->render(window);
 		}
-	}*/
+	}
+	
+
+
+
+		
+	
 
 }

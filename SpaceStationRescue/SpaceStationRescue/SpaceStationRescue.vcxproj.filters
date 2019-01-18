@@ -90,5 +90,8 @@
     <Font Include="resources\OCRAEXT.TTF">
       <Filter>Resources</Filter>
     </Font>
+    <Font Include="resources\Adventure.otf">
+      <Filter>Resources</Filter>
+    </Font>
   </ItemGroup>
 </Project>
