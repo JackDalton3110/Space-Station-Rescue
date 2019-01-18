@@ -101,7 +101,7 @@ protected:
 	sf::RectangleShape m_gameOverBG;
 
 	sf::Font m_font;
-	sf::Text m_text;
+	sf::Text m_text, m_text2;
 
 };
 #endif // !GAME

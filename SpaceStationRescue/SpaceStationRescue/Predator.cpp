@@ -161,10 +161,10 @@ void Predator::update(Player &m_player, std::vector<Nests*> &nests, double dt)
 		
 
 
-		m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
-		m_healthSystem->update();
 	}
 	
+	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+	m_healthSystem->update();
 
 
 

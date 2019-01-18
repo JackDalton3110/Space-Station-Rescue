@@ -181,7 +181,6 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x * (dt / 100), m_sprite.getPosition().y + m_velocity.y * (dt / 100));
 		m_sprite.setRotation(m_rotation);
 
-		respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
 		if (bulletindex <= 2)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false)

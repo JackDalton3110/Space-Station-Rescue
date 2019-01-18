@@ -259,7 +259,7 @@ void Game::update(double dt)
 		workers[i]->update(*m_player);
 	}
 
-	if (m_player->m_healthSystem->m_healthValue > 0)
+	if (m_player->m_healthSystem->m_healthValue > 0 || !m_player->score==200)
 	{
 		m_playerMM.setPosition(m_player->getPosition());
 		m_playerMM.setRotation(m_player->getRotation());
@@ -339,7 +339,22 @@ void Game::render()
 		m_text.setPosition(m_player->getPosition().x - 400, m_player->getPosition().y - 100);
 		m_window.draw(m_text);
 	}
-
+	if (m_player->score == 200)
+	{
+		m_window.draw(m_gameOverBG);
+		m_text.setFont(m_font);
+		m_text2.setFont(m_font);
+		m_text.setString("ALL WORKERS ARE SAFE");
+		m_text2.setString("YOU WIN!");
+		m_text2.setCharacterSize(100);
+		m_text.setCharacterSize(100);
+		m_text.setFillColor(sf::Color::Green);
+		m_text2.setFillColor(sf::Color::Green);
+		m_text.setPosition(m_player->getPosition().x - 600, m_player->getPosition().y - 100);
+		m_text2.setPosition(m_player->getPosition().x - 200, m_player->getPosition().y);
+		m_window.draw(m_text);
+		m_window.draw(m_text2);
+	}
 
 	for (i = 0; i < m_sweeper.size(); i++)
 	{
@@ -379,10 +394,11 @@ void Game::render()
 		m_window.draw(m_predatorMM3);
 	}
 	
-	if (m_player->m_healthSystem->m_healthValue <= 0)
+	if (m_player->m_healthSystem->m_healthValue <= 0 || m_player->score==200)
 	{
 		m_window.draw(m_gameOverBG);
 	
 	}
+	
 	m_window.display();
 }
