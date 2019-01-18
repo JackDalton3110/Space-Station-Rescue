@@ -10,6 +10,7 @@
 #include "Worker.h"
 #include "Nests.h"
 #include "Sweeper.h"
+#include "Powerups.h"
 //#include "Enemy.h"
 //#include "Pursue.h"
 //#include "Arrive.h"
@@ -41,7 +42,8 @@ protected:
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
 	std::vector<Sweeper*> m_sweeper;
- 	sf::Vector2i m_mousePos;
+	std::vector<Powerups*> m_powerups;
+	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
 	Tile * m_goalTile;
@@ -73,6 +75,7 @@ protected:
 	sf::Texture m_MMT;
 
 	std::vector<int> usedSpawns;
+	std::vector<int> usedTypes;
 
 	int spawnSpot;
 

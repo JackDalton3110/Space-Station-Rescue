@@ -28,7 +28,7 @@ void Nests::spawnNests()
 	m_healthSystem = new HealthSystem(200, 10);
 	m_healthSystem->setPosition(m_Grid->m_nestPoints[spawnSpot]->m_position.x - 67, m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize * 1.5 );
 	m_healthSystem->setState(ENEMY);
-	m_healthSystem->m_healthValue = 5;
+	m_healthSystem->m_healthValue = 6;
 	m_bullet->m_position.x = m_Grid->m_nestPoints[spawnSpot]->m_position.x + m_Grid->m_tileSize;
 	m_bullet->m_position.y = m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize;
 }
@@ -103,10 +103,16 @@ void Nests::collision(Player & m_player)
 
 		if (m_player.m_bullet[i]->pGridX == m_Grid->m_nestPoints[spawnSpot]->m_xPos && m_player.m_bullet[i]->pGridY == m_Grid->m_nestPoints[spawnSpot]->m_yPos) {
 
-			if (m_player.m_bullet[i]->active == true)
+			if (m_player.m_bullet[i]->active == true && !m_player.firepower)
 			{
 				m_healthSystem->m_healthValue--;
 				
+				m_player.m_bullet[i]->active = false;
+			}
+			else if (m_player.m_bullet[i]->active == true && m_player.firepower)
+			{
+				m_healthSystem->m_healthValue -=2;
+
 				m_player.m_bullet[i]->active = false;
 			}
 	
@@ -133,10 +139,14 @@ void Nests::collision(Player & m_player)
 		m_bullet->getPosition().x + m_Grid->m_tileSize / 2 > m_player.getPosition().x - m_Grid->m_tileSize / 2 &&
 		m_bullet->getPosition().y - m_Grid->m_tileSize / 2 < m_player.getPosition().y + m_Grid->m_tileSize / 2 &&
 		m_bullet->getPosition().y + m_Grid->m_tileSize / 2 > m_player.getPosition().y - m_Grid->m_tileSize / 2) {
-		if (m_bullet->nestShot == true)
+		if (m_bullet->nestShot == true && !m_player.shield)
 		{
 			m_player.m_healthSystem->m_healthValue--;
 
+			m_bullet->nestShot = false;
+		}
+		if (m_bullet->nestShot == true && m_player.shield)
+		{
 			m_bullet->nestShot = false;
 		}
 	}
