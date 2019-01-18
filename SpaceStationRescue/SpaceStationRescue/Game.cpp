@@ -299,10 +299,7 @@ void Game::update(double dt)
 		}
 
 	}
-	else
-	{
-
-	}
+	
 	
 }
 

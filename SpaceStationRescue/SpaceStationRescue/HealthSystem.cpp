@@ -65,15 +65,28 @@ HealthSystem::~HealthSystem()
 
 }
 
+/// <summary>
+/// Sets the state of the healthsystem
+/// </summary>
+/// <param name="state"></param>
 void HealthSystem::setState(hsState state)
 {
 	m_currentState = state;
 }
 
+
+/// <summary>
+/// Returns the state of the health system
+/// </summary>
+/// <returns></returns>
 hsState HealthSystem::getState()
 {
 	return m_currentState;
 }
+/// <summary>
+/// If the healthsystem state is set to player, the hearts png is chnaged depending on the helthvalue
+/// If the healthsystem state is set to enemy, the percentage that the health bar is filled is changed depending on the health value
+/// </summary>
 void HealthSystem::update()
 {
 
@@ -148,13 +161,22 @@ void HealthSystem::update()
 
 }
 
+/// <summary>
+/// Method that sets the position of the health bar / hearts 
+/// </summary>
+/// <param name="x"></param>
+/// <param name="y"></param>
 void HealthSystem::setPosition(float x, float y)
 {
 	m_position.x = x;
 	m_position.y = y;
 }
 
-
+/// <summary>
+/// Renders and sets the position of the hearts if state is player
+/// renders and sets the position of the healthbar if state is enemy
+/// </summary>
+/// <param name="window"></param>
 void HealthSystem::render(sf::RenderWindow &window)
 {
 	if (getState() == PLAYER)
