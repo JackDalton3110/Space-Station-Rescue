@@ -1,6 +1,13 @@
 #include "Nests.h"
 #include <cstdlib>
 
+/// <summary>
+/// Nests contructor method
+/// Passes in which nest spot will be active
+/// Passes in the grid after it is created
+/// </summary>
+/// <param name="m_spawnSpot"></param>
+/// <param name="m_grid"></param>
 Nests::Nests(int m_spawnSpot, Grid &m_grid):
 	defendRad(400),
 	spawnSpot(m_spawnSpot),
@@ -19,6 +26,11 @@ Nests::~Nests()
 
 }
 
+/// <summary>
+/// Sets a radius around active Nests 
+/// Gives the Nests a health system to track how much health they have
+/// Assigns bullet to fire seeking bullet from this position
+/// </summary>
 void Nests::spawnNests()
 {
 	m_gridX = m_Grid->m_nestPoints[spawnSpot]->m_position.x;
@@ -34,6 +46,11 @@ void Nests::spawnNests()
 	m_bullet->m_position.y = m_Grid->m_nestPoints[spawnSpot]->m_position.y + m_Grid->m_tileSize;
 }
 
+/// <summary>
+/// Attacks the player once they entered the radius of the nest
+/// Fires one bullet at a time
+/// </summary>
+/// <param name="pos"></param>
 void Nests::Attack(sf::Vector2f pos)
 {
 	
@@ -56,7 +73,11 @@ void Nests::Attack(sf::Vector2f pos)
 	}
 }
 
-
+/// <summary>
+/// Updates the nest values while the game is still active and the nest is alive
+/// </summary>
+/// <param name="m_player"></param>
+/// <param name="dt"></param>
 void Nests::update(Player &m_player, double dt)
 {
 	
@@ -98,7 +119,13 @@ void Nests::update(Player &m_player, double dt)
 
 }
 
-
+/// <summary>
+/// Checks for collision between the nests bullet and the player
+/// If the nests bullet collides with the player the players health is decremented
+/// Checks for collsision between the players bullet and the nest
+/// If the player's bullet hits the nest the nests' health is decremented
+/// </summary>
+/// <param name="m_player"></param>
 void Nests::collision(Player & m_player)
 {
 	for (int i = 0; i < m_player.m_bullet.size(); i++) {
@@ -139,11 +166,19 @@ void Nests::collision(Player & m_player)
 	}
 }
 
+/// <summary>
+/// Returns the position of the nest
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Nests::getPosition()
 {
 	return defendRad.getPosition();
 }
 
+/// <summary>
+/// Renders the nest, radius, Line of sight to the player and its bullet
+/// </summary>
+/// <param name="m_window"></param>
 void Nests::render(sf::RenderWindow &m_window)
 {
 	m_window.draw(defendRad);

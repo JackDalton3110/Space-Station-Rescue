@@ -1,5 +1,9 @@
 #include "Sweeper.h"
-
+/// <summary>
+/// Constructor method; sets position, image, rotation and scale of Sweeper
+/// Creates radius surrounding Sweepers
+/// </summary>
+/// <param name="m_worker"></param>
 Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	m_velocity(0,0),
 	maxSpeed(4.0f),
@@ -46,6 +50,13 @@ Sweeper::~Sweeper()
 
 }
 
+/// <summary>
+/// Returns new orientation for Sweepers if the Sweepers Velocity is more than 0
+/// Orientation is later used in Seek method
+/// </summary>
+/// <param name="currentOrientation"></param>
+/// <param name="vel"></param>
+/// <returns></returns>
 float Sweeper::getNewOrientation(float currentOrientation, float vel)
 {
 	if (vel > 0)
@@ -56,6 +67,12 @@ float Sweeper::getNewOrientation(float currentOrientation, float vel)
 		return currentOrientation;
 }
 
+/// <summary>
+/// Method used to seek out targets.
+/// Is only active within the FIND state
+/// Sweepers seek out workers by using the WorkersPos variable which is passed in.
+/// </summary>
+/// <param name="workerPos"></param>
 void Sweeper::kinematicSeek(sf::Vector2f workerPos)
 {
 	if (currentState == FIND)
@@ -74,11 +91,22 @@ void Sweeper::kinematicSeek(sf::Vector2f workerPos)
 	}
 }
 
+/// <summary>
+/// Returns Sweepers position
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Sweeper::getPosition()
 {
 	return sweeperSprite.getPosition();
 }
 
+/// <summary>
+/// Collision checking for Sweepers.
+/// Checks for Collision between Sweepers and Walls
+/// Checks if Sweepers have collected Workers. If so it increments the Sweepers' score and removes worker.
+/// Checks if Sweepers have been shot and Destroyed by the player
+/// </summary>
+/// <param name="m_player"></param>
 void Sweeper::collision(Player &m_player)
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
@@ -140,6 +168,11 @@ void Sweeper::collision(Player &m_player)
 	}
 }
 
+/// <summary>
+/// Makes the sweeper flee from the player if the player is within a certain distance
+/// Sweeper prioritises fleeing the player over seeking workers.
+/// </summary>
+/// <param name="pos"></param>
 void Sweeper::kinematicFlee(sf::Vector2f pos)
 {
 	m_velocity = m_position - pos;
@@ -155,16 +188,23 @@ void Sweeper::kinematicFlee(sf::Vector2f pos)
 	m_orientation = getNewOrientation(m_orientation, m_velocityF);
 }
 
+/// <summary>
+/// Sets the Sweepers behaviour state
+/// Default state is WANDER
+/// If the player is near the Sweeper will FLEE
+/// If workers are near and the player is not the Sweeper will seek out workers within the FIND state.
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="S"></param>
 void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 {
 	dx = pos.x - radius.getPosition().x + m_Grid->m_tileSize / 2;
 	dy = pos.y - radius.getPosition().y + m_Grid->m_tileSize / 2;
-	dist = sqrt((dx*dx) + (dy*dy));
+	dist = sqrt((dx*dx) + (dy*dy)); // distance formula to calculate if the player is too close 
 	if (dist < radius.getRadius())
 	{
 		currentState = FLEE;
 		kinematicFlee(pos);
-		//std::cout << "FLEE" << std::endl;
 		radius.setFillColor(sf::Color(100, 0, 0, 70));
 	}
 	else if (currentState != FLEE)
@@ -173,21 +213,18 @@ void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 		{
 			dx = workers[i]->getPosition().x - radius.getPosition().x + m_Grid->m_tileSize / 2;
 			dy = workers[i]->getPosition().y - radius.getPosition().y + m_Grid->m_tileSize / 2;
-			dist = sqrt((dx*dx) + (dy*dy));
+			dist = sqrt((dx*dx) + (dy*dy));//distance formula to calculate if a worker is near
 			if (dist < radius.getRadius())
 			{
 				if (workers[i]->alive)
 				{
 					currentState = FIND;
-
-					kinematicSeek(workers[i]->getPosition());
-					//std::cout << "SEEK" << std::endl;
+					kinematicSeek(workers[i]->getPosition());//seeks out workers if they are close enough
 					radius.setFillColor(sf::Color(0, 0, 100, 70));
 				}
 				else
 				{
 					currentState = WANDER;
-					//std::cout << "WANDER" << std::endl;
 					radius.setFillColor(sf::Color(0, 100, 0, 70));
 				}
 			}
@@ -197,16 +234,25 @@ void Sweeper::setBehaveState(sf::Vector2f pos, behaveState S)
 	else
 	{
 		currentState = WANDER;
-		//std::cout << "WANDER" << std::endl;
 		radius.setFillColor(sf::Color(0, 100, 0, 70));
 	}
 }
 
+/// <summary>
+/// returns the Sweepers current behave State.
+/// </summary>
+/// <returns></returns>
 behaveState Sweeper::getCurrentState()
 {
 	return currentState;
 }
 
+/// <summary>
+/// Rotates sweepers based on the Sweepers velocity so that it faces the correct direction
+/// </summary>
+/// <param name="vel"></param>
+/// <param name="rot"></param>
+/// <returns></returns>
 float Sweeper::rotateSweeper(sf::Vector2f vel, float rot)
 {
 	if (vel.x > 0.0 && rot < 80)
@@ -277,6 +323,12 @@ float Sweeper::rotateSweeper(sf::Vector2f vel, float rot)
 	return rotation;
 }
 
+/// <summary>
+/// Updates the Sweepers position, rotation, collision, and wandering behaviour
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="dt"></param>
+/// <param name="m_player"></param>
 void Sweeper::update(sf::Vector2f pos, double dt, Player &m_player)
 {
 	if (alive)
@@ -310,6 +362,10 @@ void Sweeper::update(sf::Vector2f pos, double dt, Player &m_player)
 	
 }
 
+/// <summary>
+/// Renders Sweeper while it is still alive.
+/// </summary>
+/// <param name="window"></param>
 void Sweeper::render(sf::RenderWindow &window)
 {
 	if (alive)

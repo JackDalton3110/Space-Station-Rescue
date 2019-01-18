@@ -1,5 +1,9 @@
 #include "Worker.h"
-
+/// <summary>
+/// Worker Constructor method
+/// Sets image, rotation, velocity, scale.
+/// </summary>
+/// <param name="m_grid"></param>
 Worker::Worker(Grid &m_grid):
 	velocity(0,0),
 	maxSpeed(3.0f),
@@ -32,6 +36,12 @@ Worker::~Worker()
 
 }
 
+/// <summary>
+/// Checks collision for workers
+/// Checks for collisions between walls, and player
+/// if collides with player, alive is rendered false and players score is incremented.
+/// </summary>
+/// <param name="m_player"></param>
 void Worker::collision(Player &m_player)
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
@@ -71,11 +81,19 @@ void Worker::collision(Player &m_player)
 
 }
 
+/// <summary>
+/// returns workers current position
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Worker::getPosition()
 {
 	return workerSprite.getPosition();
 }
 
+/// <summary>
+/// Updates workers position, rotation and wander direction
+/// </summary>
+/// <param name="m_player"></param>
 void Worker::update(Player &m_player)
 {
 	if (alive)
@@ -101,6 +119,9 @@ void Worker::update(Player &m_player)
 	
 }
 
+/// <summary>
+/// gives workers initial velocity and direction
+/// </summary>
 void Worker::spawnWorkers()
 {
 	spawn = rand() % 5;
@@ -108,6 +129,12 @@ void Worker::spawnWorkers()
 	m_position.y = m_Grid->m_spawnPoints[spawn]->m_position.y;
 }
 
+/// <summary>
+/// randomises value for workers x and y velocity 
+/// </summary>
+/// <param name="x"></param>
+/// <param name="y"></param>
+/// <returns></returns>
 float Worker::getRandom(int x, int y)
 {
 	
@@ -117,7 +144,12 @@ float Worker::getRandom(int x, int y)
 	return randVal;
 }
 
-
+/// <summary>
+/// rotates worker so that it faces the correct direction based on its velocity
+/// </summary>
+/// <param name="vel"></param>
+/// <param name="angle"></param>
+/// <returns></returns>
 int Worker::rotateWorker(sf::Vector2f vel, int angle)
 {
 	if (vel.x > 0 && angle < 80)
@@ -191,7 +223,10 @@ int Worker::rotateWorker(sf::Vector2f vel, int angle)
 	
 }
 
-
+/// <summary>
+/// renders the worker while it is alive
+/// </summary>
+/// <param name="window"></param>
 void Worker::render(sf::RenderWindow &window)
 {
 	if(alive)
