@@ -1,0 +1,206 @@
+\hypertarget{class_grid}{}\section{Grid Class Reference}
+\label{class_grid}\index{Grid@{Grid}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}{Grid}} ()
+\item 
+\mbox{\Hypertarget{class_grid_a0735bd663af0196a76cecb4e5a688542}\label{class_grid_a0735bd663af0196a76cecb4e5a688542}} 
+void {\bfseries run} ()
+\item 
+\mbox{\Hypertarget{class_grid_a532d6f18e6bb2bf8ece8077f9f9e7b7b}\label{class_grid_a532d6f18e6bb2bf8ece8077f9f9e7b7b}} 
+void {\bfseries update} (sf\+::\+View \&m\+\_\+game\+View)
+\item 
+void \mbox{\hyperlink{class_grid_aa30713317eef1336131d413213483c0c}{render}} (sf\+::\+Render\+Window \&window, sf\+::\+View \&m\+\_\+game\+View, bool draw)
+\begin{DoxyCompactList}\small\item\em Renders all the tiles in the map only if they are in the game view This will improve performance \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_grid_a328dbe72e123c3e1fbae0cb018f61402}{in\+View}} (sf\+::\+Vector2f position, sf\+::\+View \&m\+\_\+game\+View)
+\begin{DoxyCompactList}\small\item\em Checks if a position that is passed in, is wihin the gameview If it is true is returned If not false is returned \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grid_aab59888bd892a8f1a0dfcce2d665a15e}\label{class_grid_aab59888bd892a8f1a0dfcce2d665a15e}} 
+void {\bfseries process\+Game\+Events} (sf\+::\+Event \&event)
+\item 
+\mbox{\Hypertarget{class_grid_ae1886296e8e2b5ac7cc81b03ccb82eb3}\label{class_grid_ae1886296e8e2b5ac7cc81b03ccb82eb3}} 
+void {\bfseries init\+Grid} (int posX, int posY)
+\item 
+void \mbox{\hyperlink{class_grid_ada7a1971d0a1a29d793eb76551d6e4fa}{update\+Cost}} (int posX, int posY, int radius)
+\begin{DoxyCompactList}\small\item\em Updates the flowfield thats used for the predator pathfinding Pos x and Pos Y is the players grid position, the player is acting as the goal to the preadtors radius is how many loops the updates cost loop does, the higher the ny,be the more of the map is updates initially the entire maps costs are updated but as the game runs more than half of the map is updated as the player moves for efficiency \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grid_a5bf5954db3a1f042a61b1a401516c8fc}\label{class_grid_a5bf5954db3a1f042a61b1a401516c8fc}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+tile\+Grid} \mbox{[}m\+\_\+grid\+Size\mbox{]}\mbox{[}m\+\_\+grid\+Size\mbox{]}
+\item 
+\mbox{\Hypertarget{class_grid_a25dc059d0531a3c7d1cfbc8734149bb4}\label{class_grid_a25dc059d0531a3c7d1cfbc8734149bb4}} 
+std\+::vector$<$ \mbox{\hyperlink{class_tile}{Tile}} $\ast$ $>$ {\bfseries m\+\_\+spawn\+Points}
+\item 
+\mbox{\Hypertarget{class_grid_abbffd863ba487e5008577ae9fff7cb8b}\label{class_grid_abbffd863ba487e5008577ae9fff7cb8b}} 
+std\+::vector$<$ \mbox{\hyperlink{class_tile}{Tile}} $\ast$ $>$ {\bfseries m\+\_\+nest\+Points}
+\item 
+\mbox{\Hypertarget{class_grid_a8892db395a32d20ea8d33a9d2c76cc02}\label{class_grid_a8892db395a32d20ea8d33a9d2c76cc02}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+sweeper\+Spawn}
+\item 
+\mbox{\Hypertarget{class_grid_a6d4645cfec23eff4a965d939f17fb531}\label{class_grid_a6d4645cfec23eff4a965d939f17fb531}} 
+std\+::ofstream {\bfseries my\+Map}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grid_a9d4a2f15f6e33badcf872ce2252f27f1}\label{class_grid_a9d4a2f15f6e33badcf872ce2252f27f1}} 
+static const int {\bfseries m\+\_\+grid\+Size} = 55
+\item 
+\mbox{\Hypertarget{class_grid_a773a3f87032f074f42e2983ef4ce71e1}\label{class_grid_a773a3f87032f074f42e2983ef4ce71e1}} 
+static const int {\bfseries m\+\_\+tile\+Size} = 68.\+2
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grid_af1979a0764afd2a0250d884f3043447c}\label{class_grid_af1979a0764afd2a0250d884f3043447c}} 
+float {\bfseries m\+\_\+tile\+Scale} = 1
+\item 
+\mbox{\Hypertarget{class_grid_a248764f64e2d852af8eea8dbf5f002e6}\label{class_grid_a248764f64e2d852af8eea8dbf5f002e6}} 
+int {\bfseries x} = 0
+\item 
+\mbox{\Hypertarget{class_grid_a2d2ff805d92a1b8a571045d63efa83c7}\label{class_grid_a2d2ff805d92a1b8a571045d63efa83c7}} 
+int {\bfseries y} = 0
+\item 
+\mbox{\Hypertarget{class_grid_aa51f2b09447305358c16e1c6e9cb2d5b}\label{class_grid_aa51f2b09447305358c16e1c6e9cb2d5b}} 
+int {\bfseries m\+\_\+tile\+PosX} = 0
+\item 
+\mbox{\Hypertarget{class_grid_a06b1d07d5741a534370675444a201440}\label{class_grid_a06b1d07d5741a534370675444a201440}} 
+int {\bfseries m\+\_\+tile\+PosY} = 0
+\item 
+\mbox{\Hypertarget{class_grid_ac36f0e3a8ee0a71df36cee8fcfac07ab}\label{class_grid_ac36f0e3a8ee0a71df36cee8fcfac07ab}} 
+sf\+::\+Vector2i {\bfseries m\+\_\+mouse\+Pos}
+\item 
+\mbox{\Hypertarget{class_grid_ac786ba70325d129cedee2decefc0256e}\label{class_grid_ac786ba70325d129cedee2decefc0256e}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+start\+Tile}
+\item 
+\mbox{\Hypertarget{class_grid_a7553899282bdbb083033c934629b0b86}\label{class_grid_a7553899282bdbb083033c934629b0b86}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+goal\+Tile}
+\item 
+\mbox{\Hypertarget{class_grid_acd9e58a0b07a16c129336c89237b1eb8}\label{class_grid_acd9e58a0b07a16c129336c89237b1eb8}} 
+sf\+::\+Font {\bfseries m\+\_\+font}
+\item 
+\mbox{\Hypertarget{class_grid_a737d5f9cb9cb17edfb0d6559fb6cfc0f}\label{class_grid_a737d5f9cb9cb17edfb0d6559fb6cfc0f}} 
+bool {\bfseries m\+\_\+left\+Press} = false
+\item 
+\mbox{\Hypertarget{class_grid_abff1c2c8765deeeb886a703da0e95059}\label{class_grid_abff1c2c8765deeeb886a703da0e95059}} 
+bool {\bfseries m\+\_\+right\+Press} = false
+\item 
+\mbox{\Hypertarget{class_grid_a9c2b3bec7b9fe4af5c714cdb48942f39}\label{class_grid_a9c2b3bec7b9fe4af5c714cdb48942f39}} 
+sf\+::\+View {\bfseries m\+\_\+game\+View}
+\item 
+\mbox{\Hypertarget{class_grid_af8fbded1d16cffc323f4b67014cbbfc5}\label{class_grid_af8fbded1d16cffc323f4b67014cbbfc5}} 
+sf\+::\+View {\bfseries mini\+Map\+View}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grid_aa2e8854a59c73d3e077177942cd0712b}\label{class_grid_aa2e8854a59c73d3e077177942cd0712b}} 
+void {\bfseries process\+Events} ()
+\item 
+void \mbox{\hyperlink{class_grid_a153095310e11b93d349d12f218b5e73e}{reset}} ()
+\item 
+void \mbox{\hyperlink{class_grid_a602801a4d9bdcded43e2cf7f4240ccad}{get\+Path}} (\mbox{\hyperlink{class_tile}{Tile}} m\+\_\+start\+Tile)
+\begin{DoxyCompactList}\small\item\em Calculates the optimal path through the flowfield \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}\label{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grid_a602801a4d9bdcded43e2cf7f4240ccad}\label{class_grid_a602801a4d9bdcded43e2cf7f4240ccad}} 
+\index{Grid@{Grid}!getPath@{getPath}}
+\index{getPath@{getPath}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily void Grid\+::get\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{m\+\_\+start\+Tile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates the optimal path through the flowfield 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+start\+Tile} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a328dbe72e123c3e1fbae0cb018f61402}\label{class_grid_a328dbe72e123c3e1fbae0cb018f61402}} 
+\index{Grid@{Grid}!inView@{inView}}
+\index{inView@{inView}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{inView()}{inView()}}
+{\footnotesize\ttfamily bool Grid\+::in\+View (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{position,  }\item[{sf\+::\+View \&}]{m\+\_\+game\+View }\end{DoxyParamCaption})}
+
+
+
+Checks if a position that is passed in, is wihin the gameview If it is true is returned If not false is returned 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+{\em m\+\_\+game\+View} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_grid_aa30713317eef1336131d413213483c0c}\label{class_grid_aa30713317eef1336131d413213483c0c}} 
+\index{Grid@{Grid}!render@{render}}
+\index{render@{render}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Grid\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window,  }\item[{sf\+::\+View \&}]{m\+\_\+game\+View,  }\item[{bool}]{draw }\end{DoxyParamCaption})}
+
+
+
+Renders all the tiles in the map only if they are in the game view This will improve performance 
+
+\mbox{\Hypertarget{class_grid_a153095310e11b93d349d12f218b5e73e}\label{class_grid_a153095310e11b93d349d12f218b5e73e}} 
+\index{Grid@{Grid}!reset@{reset}}
+\index{reset@{reset}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void Grid\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+
+
+\mbox{\Hypertarget{class_grid_ada7a1971d0a1a29d793eb76551d6e4fa}\label{class_grid_ada7a1971d0a1a29d793eb76551d6e4fa}} 
+\index{Grid@{Grid}!updateCost@{updateCost}}
+\index{updateCost@{updateCost}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{updateCost()}{updateCost()}}
+{\footnotesize\ttfamily void Grid\+::update\+Cost (\begin{DoxyParamCaption}\item[{int}]{posX,  }\item[{int}]{posY,  }\item[{int}]{radius }\end{DoxyParamCaption})}
+
+
+
+Updates the flowfield thats used for the predator pathfinding Pos x and Pos Y is the players grid position, the player is acting as the goal to the preadtors radius is how many loops the updates cost loop does, the higher the ny,be the more of the map is updates initially the entire maps costs are updated but as the game runs more than half of the map is updated as the player moves for efficiency 
+
+when called all the tiles that arent obstacles are set to unchecked
+
+the tiles are then checked around the player going further away, updating the tiles costs (how far away they are from the player As it does this the rotation for the tile vector is set to point at the previous tile
+
+These checks are done in 8 directions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em posX} & \\
+\hline
+{\em posY} & \\
+\hline
+{\em radius} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Grid.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Grid.\+cpp\end{DoxyCompactItemize}

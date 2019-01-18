@@ -1,0 +1,215 @@
+\hypertarget{class_game}{}\section{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}} ()
+\begin{DoxyCompactList}\small\item\em Games Constructor method Creates all things that will be displayed in the game Window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}{run}} ()
+\begin{DoxyCompactList}\small\item\em While the window is open Run the game render, and update methods \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}\label{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}} 
+sf\+::\+Render\+Window {\bfseries m\+\_\+window}
+\item 
+\mbox{\Hypertarget{class_game_a371bdca8d00e1837a11a06e59fa9f44a}\label{class_game_a371bdca8d00e1837a11a06e59fa9f44a}} 
+\mbox{\hyperlink{class_player}{Player}} $\ast$ {\bfseries m\+\_\+player}
+\item 
+\mbox{\Hypertarget{class_game_adfcf58551ecd8d9c2462f745a667499d}\label{class_game_adfcf58551ecd8d9c2462f745a667499d}} 
+std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ {\bfseries workers}
+\item 
+\mbox{\Hypertarget{class_game_ad98d9aa32853b70314715f6c4e86fc67}\label{class_game_ad98d9aa32853b70314715f6c4e86fc67}} 
+std\+::vector$<$ \mbox{\hyperlink{class_nests}{Nests}} $\ast$ $>$ {\bfseries nests}
+\item 
+\mbox{\Hypertarget{class_game_a2eb8d42aba87f93484eed7c5976705ea}\label{class_game_a2eb8d42aba87f93484eed7c5976705ea}} 
+std\+::vector$<$ \mbox{\hyperlink{class_predator}{Predator}} $\ast$ $>$ {\bfseries predators}
+\item 
+\mbox{\Hypertarget{class_game_a931d6d28ce8bc12baae244f89b153952}\label{class_game_a931d6d28ce8bc12baae244f89b153952}} 
+std\+::vector$<$ sf\+::\+Sprite $>$ {\bfseries pred\+Sprite}
+\item 
+\mbox{\Hypertarget{class_game_ac4dd416633ffdde44e4c7c642dafecd4}\label{class_game_ac4dd416633ffdde44e4c7c642dafecd4}} 
+\mbox{\hyperlink{class_predator}{Predator}} $\ast$ {\bfseries m\+\_\+predator}
+\item 
+\mbox{\Hypertarget{class_game_abe9795084351ad1ff08bf0cf0e9cb88b}\label{class_game_abe9795084351ad1ff08bf0cf0e9cb88b}} 
+sf\+::\+Vector2i {\bfseries m\+\_\+mouse\+Pos}
+\item 
+\mbox{\Hypertarget{class_game_aed075e7db53f65d82e190df72c0a5a0b}\label{class_game_aed075e7db53f65d82e190df72c0a5a0b}} 
+std\+::vector$<$ \mbox{\hyperlink{class_sweeper}{Sweeper}} $\ast$ $>$ {\bfseries m\+\_\+sweeper}
+\item 
+\mbox{\Hypertarget{class_game_acf5df8c39aef66d1365c6be21af87611}\label{class_game_acf5df8c39aef66d1365c6be21af87611}} 
+std\+::vector$<$ \mbox{\hyperlink{class_powerups}{Powerups}} $\ast$ $>$ {\bfseries m\+\_\+powerups}
+\item 
+\mbox{\Hypertarget{class_game_a5397c757cfdf84cc71cbd5bc8773946e}\label{class_game_a5397c757cfdf84cc71cbd5bc8773946e}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+start\+Tile}
+\item 
+\mbox{\Hypertarget{class_game_a5b377ddae4985e6805ffd91e930732dd}\label{class_game_a5b377ddae4985e6805ffd91e930732dd}} 
+\mbox{\hyperlink{class_tile}{Tile}} $\ast$ {\bfseries m\+\_\+goal\+Tile}
+\item 
+\mbox{\Hypertarget{class_game_ac1b58414688e86697db7ab38100ec6ff}\label{class_game_ac1b58414688e86697db7ab38100ec6ff}} 
+int {\bfseries m\+\_\+tile\+PosX} = 0
+\item 
+\mbox{\Hypertarget{class_game_aad6b868989c30f7c7eb400a9dd7a4360}\label{class_game_aad6b868989c30f7c7eb400a9dd7a4360}} 
+int {\bfseries m\+\_\+tile\+PosY} = 0
+\item 
+\mbox{\Hypertarget{class_game_a226b3387ef1d345062e5d0e5511b230d}\label{class_game_a226b3387ef1d345062e5d0e5511b230d}} 
+float {\bfseries m\+\_\+tile\+Scale} = 1
+\item 
+\mbox{\Hypertarget{class_game_ae0d09cefbe6b80ea75b314f51ff487c7}\label{class_game_ae0d09cefbe6b80ea75b314f51ff487c7}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+\+Grid}
+\item 
+\mbox{\Hypertarget{class_game_ae14803a88e767fc6b1c3b20ca46e7549}\label{class_game_ae14803a88e767fc6b1c3b20ca46e7549}} 
+sf\+::\+View {\bfseries game\+View}
+\item 
+\mbox{\Hypertarget{class_game_a5269f9d554c77225312fb9c39ec4e5a6}\label{class_game_a5269f9d554c77225312fb9c39ec4e5a6}} 
+sf\+::\+View {\bfseries mini\+Map\+View}
+\item 
+\mbox{\Hypertarget{class_game_a5144aea200c680c072d1a58bd7cf03e2}\label{class_game_a5144aea200c680c072d1a58bd7cf03e2}} 
+sf\+::\+View {\bfseries follow}
+\item 
+\mbox{\Hypertarget{class_game_ac528f18137444992693c1a12193e36c2}\label{class_game_ac528f18137444992693c1a12193e36c2}} 
+bool {\bfseries m\+\_\+left\+Press} = false
+\item 
+\mbox{\Hypertarget{class_game_a68af36062d80903c67d7ca08dc2c0232}\label{class_game_a68af36062d80903c67d7ca08dc2c0232}} 
+bool {\bfseries m\+\_\+right\+Press} = false
+\item 
+\mbox{\Hypertarget{class_game_ab5d289c7555712050a1433447b0884e4}\label{class_game_ab5d289c7555712050a1433447b0884e4}} 
+sf\+::\+Sprite {\bfseries m\+\_\+player\+MM}
+\item 
+\mbox{\Hypertarget{class_game_af2e49f26ce539350ce084d975c687212}\label{class_game_af2e49f26ce539350ce084d975c687212}} 
+sf\+::\+Texture {\bfseries m\+\_\+player\+M\+MT}
+\item 
+\mbox{\Hypertarget{class_game_a5c37be26a7b745026175335c8be74ad9}\label{class_game_a5c37be26a7b745026175335c8be74ad9}} 
+sf\+::\+Sprite {\bfseries m\+\_\+predator\+MM}
+\item 
+\mbox{\Hypertarget{class_game_aad4a4886713e5cb090165328e662017f}\label{class_game_aad4a4886713e5cb090165328e662017f}} 
+sf\+::\+Texture {\bfseries m\+\_\+predator\+M\+MT}
+\item 
+\mbox{\Hypertarget{class_game_a7dfa883da5e0086ca4ccc0169d6ff9fa}\label{class_game_a7dfa883da5e0086ca4ccc0169d6ff9fa}} 
+sf\+::\+Sprite {\bfseries m\+\_\+predator\+M\+M2}
+\item 
+\mbox{\Hypertarget{class_game_a453bb2977441c4e005fbe0ade5e7205a}\label{class_game_a453bb2977441c4e005fbe0ade5e7205a}} 
+sf\+::\+Texture {\bfseries m\+\_\+predator\+M\+M\+T2}
+\item 
+\mbox{\Hypertarget{class_game_aa7476a5723a412e293ca35bcd8347e25}\label{class_game_aa7476a5723a412e293ca35bcd8347e25}} 
+sf\+::\+Sprite {\bfseries m\+\_\+predator\+M\+M3}
+\item 
+\mbox{\Hypertarget{class_game_af7ffae23fdb8c91745c65e40d0b8f05d}\label{class_game_af7ffae23fdb8c91745c65e40d0b8f05d}} 
+sf\+::\+Texture {\bfseries m\+\_\+predator\+M\+M\+T3}
+\item 
+\mbox{\Hypertarget{class_game_a39a3039ca22f3a4bd1efdf75377b089e}\label{class_game_a39a3039ca22f3a4bd1efdf75377b089e}} 
+sf\+::\+Sprite {\bfseries m\+\_\+\+MM}
+\item 
+\mbox{\Hypertarget{class_game_a9b8a2308fa03bbaaa08842063141e0bf}\label{class_game_a9b8a2308fa03bbaaa08842063141e0bf}} 
+sf\+::\+Texture {\bfseries m\+\_\+\+M\+MT}
+\item 
+\mbox{\Hypertarget{class_game_a23d75638cea74e13f2efa309fce6a14c}\label{class_game_a23d75638cea74e13f2efa309fce6a14c}} 
+std\+::vector$<$ int $>$ {\bfseries used\+Spawns}
+\item 
+\mbox{\Hypertarget{class_game_a8ca28be4eef28fc7030117d57c1dfe5a}\label{class_game_a8ca28be4eef28fc7030117d57c1dfe5a}} 
+std\+::vector$<$ int $>$ {\bfseries used\+Types}
+\item 
+\mbox{\Hypertarget{class_game_aba5932ec3c2290cfec9098cff469b46d}\label{class_game_aba5932ec3c2290cfec9098cff469b46d}} 
+int {\bfseries spawn\+Spot}
+\item 
+\mbox{\Hypertarget{class_game_a7ed82996ee32d8f532c2ae425f635534}\label{class_game_a7ed82996ee32d8f532c2ae425f635534}} 
+int {\bfseries previousX}
+\item 
+\mbox{\Hypertarget{class_game_a294902e2d41223bd5c81726473b75fb3}\label{class_game_a294902e2d41223bd5c81726473b75fb3}} 
+int {\bfseries previousY}
+\item 
+\mbox{\Hypertarget{class_game_af99854521f6825d3e5332c059235003d}\label{class_game_af99854521f6825d3e5332c059235003d}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+game\+Over\+BG}
+\item 
+\mbox{\Hypertarget{class_game_af5c5c39d0eabe68c3bfff3509900a489}\label{class_game_af5c5c39d0eabe68c3bfff3509900a489}} 
+sf\+::\+Font {\bfseries m\+\_\+font}
+\item 
+\mbox{\Hypertarget{class_game_aa1a3ccd391299adad3ccb167ce3c1ee7}\label{class_game_aa1a3ccd391299adad3ccb167ce3c1ee7}} 
+sf\+::\+Text {\bfseries m\+\_\+text}
+\item 
+\mbox{\Hypertarget{class_game_a6ad0e5cbb4f3d05ca6d346ae1c4fc0c3}\label{class_game_a6ad0e5cbb4f3d05ca6d346ae1c4fc0c3}} 
+sf\+::\+Text {\bfseries m\+\_\+text2}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_ae3b203dd7785eaff210e0e282bc2aae0}\label{class_game_ae3b203dd7785eaff210e0e282bc2aae0}} 
+static const int {\bfseries m\+\_\+grid\+Size} = 55
+\item 
+\mbox{\Hypertarget{class_game_a09aee7951c9a15571f63c975b48710b3}\label{class_game_a09aee7951c9a15571f63c975b48710b3}} 
+static const int {\bfseries m\+\_\+tile\+Size} = 68.\+2
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_aa8c8ca9efb596230614be2f2f9e61b86}{update}} (double dt)
+\begin{DoxyCompactList}\small\item\em Calls all update methods for all elements in the game \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a15ddd769261d923827a3cdf41499c843}{render}} ()
+\begin{DoxyCompactList}\small\item\em Renders and draws all instances of the game the game view \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_ae7e28abc55af4902c9c39899708d08d7}{Process\+Events}} ()
+\begin{DoxyCompactList}\small\item\em Processes whether the window is open or closed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_a7569931b96c10ae775569991f6f705bc}\label{class_game_a7569931b96c10ae775569991f6f705bc}} 
+void {\bfseries process\+Game\+Events} (sf\+::\+Event \&event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_ad59df6562a58a614fda24622d3715b65}\label{class_game_ad59df6562a58a614fda24622d3715b65}} 
+\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection{\texorpdfstring{Game()}{Game()}}
+{\footnotesize\ttfamily Game\+::\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Games Constructor method Creates all things that will be displayed in the game Window. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_ae7e28abc55af4902c9c39899708d08d7}\label{class_game_ae7e28abc55af4902c9c39899708d08d7}} 
+\index{Game@{Game}!ProcessEvents@{ProcessEvents}}
+\index{ProcessEvents@{ProcessEvents}!Game@{Game}}
+\subsubsection{\texorpdfstring{ProcessEvents()}{ProcessEvents()}}
+{\footnotesize\ttfamily void Game\+::\+Process\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes whether the window is open or closed 
+
+\mbox{\Hypertarget{class_game_a15ddd769261d923827a3cdf41499c843}\label{class_game_a15ddd769261d923827a3cdf41499c843}} 
+\index{Game@{Game}!render@{render}}
+\index{render@{render}!Game@{Game}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Game\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Renders and draws all instances of the game the game view 
+
+\mbox{\Hypertarget{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}\label{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}} 
+\index{Game@{Game}!run@{run}}
+\index{run@{run}!Game@{Game}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Game\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+While the window is open Run the game render, and update methods 
+
+\mbox{\Hypertarget{class_game_aa8c8ca9efb596230614be2f2f9e61b86}\label{class_game_aa8c8ca9efb596230614be2f2f9e61b86}} 
+\index{Game@{Game}!update@{update}}
+\index{update@{update}!Game@{Game}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Game\+::update (\begin{DoxyParamCaption}\item[{double}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calls all update methods for all elements in the game 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Game.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Game.\+cpp\end{DoxyCompactItemize}

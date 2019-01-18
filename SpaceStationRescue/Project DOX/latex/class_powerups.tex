@@ -1,0 +1,152 @@
+\hypertarget{class_powerups}{}\section{Powerups Class Reference}
+\label{class_powerups}\index{Powerups@{Powerups}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_powerups_acfac7ce2910181c27fe04bf746d86ea5}{Powerups}} (int state)
+\begin{DoxyCompactList}\small\item\em Constructor method for \mbox{\hyperlink{class_powerups}{Powerups}} Loads all images for powerups then assigns state to Powerup \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_powerups_a6cba2ed2ca0432f4d3cf3a7c30b11c4f}{update}} ()
+\begin{DoxyCompactList}\small\item\em Updates \mbox{\hyperlink{class_powerups}{Powerups}} continuously \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_powerups_a2ec98b6e80e478d6690f34db632c691c}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders \mbox{\hyperlink{class_powerups}{Powerups}} if they have not been collected yet. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_powerups_a2d32a4123814dfbf86de90e1b9be18fd}\label{class_powerups_a2d32a4123814dfbf86de90e1b9be18fd}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+Powerup \mbox{\hyperlink{class_powerups_a71da1d29130fcbd9957815044eba11a7}{get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Gets current Powerup state \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_powerups_aac5a818659975d3e6db3f19eceaf6beb}{set\+State}} (int S)
+\begin{DoxyCompactList}\small\item\em Sets State of each Powerup to designate type of Powerup Sets position and Image for every Powerup created. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_powerups_a92d156191f1cbda81d58142d20ee40e6}\label{class_powerups_a92d156191f1cbda81d58142d20ee40e6}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_powerups_a01b555def1e4bdad60723b8577735ebc}\label{class_powerups_a01b555def1e4bdad60723b8577735ebc}} 
+int {\bfseries p\+GridY}
+\item 
+\mbox{\Hypertarget{class_powerups_a7e6e32d10f34b6c01c54d0e62a35a056}\label{class_powerups_a7e6e32d10f34b6c01c54d0e62a35a056}} 
+bool {\bfseries collected}
+\item 
+\mbox{\Hypertarget{class_powerups_aa7db9d8070d760ea6ad99a0f2d7656fd}\label{class_powerups_aa7db9d8070d760ea6ad99a0f2d7656fd}} 
+bool {\bfseries shrink} = false
+\item 
+\mbox{\Hypertarget{class_powerups_aa5ed86bb691ba0010e5464f631984f82}\label{class_powerups_aa5ed86bb691ba0010e5464f631984f82}} 
+Powerup {\bfseries current\+Powerup} = M\+O\+R\+E\+S\+H\+O\+TS
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_powerups_a359e40be3840e7a23f57436682ea81e7}\label{class_powerups_a359e40be3840e7a23f57436682ea81e7}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_powerups_aba3c576932f06fca0980ccd9d130e395}\label{class_powerups_aba3c576932f06fca0980ccd9d130e395}} 
+float {\bfseries rotation}
+\item 
+\mbox{\Hypertarget{class_powerups_a278ed19401f2ed63b8d6cd39857444c9}\label{class_powerups_a278ed19401f2ed63b8d6cd39857444c9}} 
+float {\bfseries max\+Rotation}
+\item 
+\mbox{\Hypertarget{class_powerups_aaf3f6bbf0da4da13d116f9cecf66195e}\label{class_powerups_aaf3f6bbf0da4da13d116f9cecf66195e}} 
+float {\bfseries m\+\_\+scale}
+\item 
+\mbox{\Hypertarget{class_powerups_accfa8f1f5b4fe4a4e986fcce7d42ec47}\label{class_powerups_accfa8f1f5b4fe4a4e986fcce7d42ec47}} 
+sf\+::\+Texture {\bfseries Powerup\+Txt}
+\item 
+\mbox{\Hypertarget{class_powerups_a4c8efb6ec1bb857b0b3a23fd13de386c}\label{class_powerups_a4c8efb6ec1bb857b0b3a23fd13de386c}} 
+sf\+::\+Texture {\bfseries Powerup\+Txt2}
+\item 
+\mbox{\Hypertarget{class_powerups_aab7ae57f8c4e3fbf868ee621f0f3d17c}\label{class_powerups_aab7ae57f8c4e3fbf868ee621f0f3d17c}} 
+sf\+::\+Texture {\bfseries Powerup\+Txt3}
+\item 
+\mbox{\Hypertarget{class_powerups_a20c37391345010305420c2c92a9885c0}\label{class_powerups_a20c37391345010305420c2c92a9885c0}} 
+sf\+::\+Texture {\bfseries Powerup\+Txt4}
+\item 
+\mbox{\Hypertarget{class_powerups_aa3f0d5f0aad6638db1a490ef398de822}\label{class_powerups_aa3f0d5f0aad6638db1a490ef398de822}} 
+sf\+::\+Sprite {\bfseries Powerup\+Sprite}
+\item 
+\mbox{\Hypertarget{class_powerups_ac9b00d2b14dd0f6e1ec7990462bc2b7f}\label{class_powerups_ac9b00d2b14dd0f6e1ec7990462bc2b7f}} 
+sf\+::\+Rectangle\+Shape {\bfseries p\+\_\+shape}
+\item 
+\mbox{\Hypertarget{class_powerups_aac35e003516249b28a2885604aee789c}\label{class_powerups_aac35e003516249b28a2885604aee789c}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+\+Grid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_powerups_acfac7ce2910181c27fe04bf746d86ea5}\label{class_powerups_acfac7ce2910181c27fe04bf746d86ea5}} 
+\index{Powerups@{Powerups}!Powerups@{Powerups}}
+\index{Powerups@{Powerups}!Powerups@{Powerups}}
+\subsubsection{\texorpdfstring{Powerups()}{Powerups()}}
+{\footnotesize\ttfamily Powerups\+::\+Powerups (\begin{DoxyParamCaption}\item[{int}]{state }\end{DoxyParamCaption})}
+
+
+
+Constructor method for \mbox{\hyperlink{class_powerups}{Powerups}} Loads all images for powerups then assigns state to Powerup 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_powerups_a71da1d29130fcbd9957815044eba11a7}\label{class_powerups_a71da1d29130fcbd9957815044eba11a7}} 
+\index{Powerups@{Powerups}!getState@{getState}}
+\index{getState@{getState}!Powerups@{Powerups}}
+\subsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily Powerup Powerups\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets current Powerup state 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_powerups_a2ec98b6e80e478d6690f34db632c691c}\label{class_powerups_a2ec98b6e80e478d6690f34db632c691c}} 
+\index{Powerups@{Powerups}!render@{render}}
+\index{render@{render}!Powerups@{Powerups}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Powerups\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{m\+\_\+window }\end{DoxyParamCaption})}
+
+
+
+Renders \mbox{\hyperlink{class_powerups}{Powerups}} if they have not been collected yet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_powerups_aac5a818659975d3e6db3f19eceaf6beb}\label{class_powerups_aac5a818659975d3e6db3f19eceaf6beb}} 
+\index{Powerups@{Powerups}!setState@{setState}}
+\index{setState@{setState}!Powerups@{Powerups}}
+\subsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Powerups\+::set\+State (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Sets State of each Powerup to designate type of Powerup Sets position and Image for every Powerup created. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_powerups_a6cba2ed2ca0432f4d3cf3a7c30b11c4f}\label{class_powerups_a6cba2ed2ca0432f4d3cf3a7c30b11c4f}} 
+\index{Powerups@{Powerups}!update@{update}}
+\index{update@{update}!Powerups@{Powerups}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Powerups\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates \mbox{\hyperlink{class_powerups}{Powerups}} continuously 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Powerups.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Powerups.\+cpp\end{DoxyCompactItemize}

@@ -11,19 +11,16 @@ Powerups::Powerups(int state):
 	
 	if (!PowerupTxt.loadFromFile("resources/bulletPowerup.png"))
 	{
-		std::cout << "error loading bullet Powerup image" << std::endl;
+		
 	}
 	if (!PowerupTxt2.loadFromFile("resources/speedPowerup.png"));
 	{
-		std::cout << "error loading speed Powerup image" << std::endl;
 	}
 	if (!PowerupTxt3.loadFromFile("resources/shieldPowerup.png"));
 	{
-		std::cout << "error loading shield Powerup image" << std::endl;
 	}
 	if (!PowerupTxt4.loadFromFile("resources/healthPowerup.png"));
 	{
-		std::cout << "error loading health Powerup image" << std::endl;
 	}
 	setState(state);
 	PowerupSprite.setScale(m_scale, m_scale);

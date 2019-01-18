@@ -1,0 +1,266 @@
+\hypertarget{class_tile}{}\section{Tile Class Reference}
+\label{class_tile}\index{Tile@{Tile}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_a6176d4227dede77fa0e722191a7e2522}\label{class_tile_a6176d4227dede77fa0e722191a7e2522}} 
+{\bfseries Tile} (float x, float y, int tile\+Size, float m\+\_\+tile\+Scale, int x\+Pos, int y\+Pos, sf\+::\+Font \&font)
+\item 
+\mbox{\Hypertarget{class_tile_a07ce694c5b16fc1c5e0a3711e682fa74}\label{class_tile_a07ce694c5b16fc1c5e0a3711e682fa74}} 
+void {\bfseries update} ()
+\item 
+\mbox{\Hypertarget{class_tile_a3f0a5f2ce7a435122aaaf4e8c7916cf3}\label{class_tile_a3f0a5f2ce7a435122aaaf4e8c7916cf3}} 
+void {\bfseries mouse\+Detection} (sf\+::\+Vector2i mouse\+Pos, int val)
+\item 
+void \mbox{\hyperlink{class_tile_ad6c3bfc01ae47ff98aba94890ce104a6}{set\+Rotation}} (float rot)
+\begin{DoxyCompactList}\small\item\em handles rotation of teh flow field vectors Also sets the velocity of this tile depending on the rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a25e810638e63d695b3525bc7349e50ef}{set\+Cost}} (int cost)
+\begin{DoxyCompactList}\small\item\em Sets the cost of teh tile \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a0bfaf04d2c485e94225817ee87e88305}{set\+Velocity}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the velocity of the tile \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_tile_ad2cc4a02a84288f6c68a15a8e96901ee}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em Returns the velocity of the player \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a9358e7dd4f3537140f0d03fb24663b7c}{set\+Previous}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the previous tile that was visited \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tile_a80b48572e18fc5b34c0e707302d97d8c}{get\+Cost}} ()
+\begin{DoxyCompactList}\small\item\em returns the cost of the tile \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a4a26f555d4268b105e94dc789fe4a74d}{set\+Draw\+State}} (Draw ds)
+\begin{DoxyCompactList}\small\item\em Sets the draw state of the tyle \end{DoxyCompactList}\item 
+Draw \mbox{\hyperlink{class_tile_af8db5d7a281dab571aaec3efbb2758c2}{get\+Draw\+State}} ()
+\begin{DoxyCompactList}\small\item\em Returns the drawstate of the tile \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a57444de210a362d359197d5a6b5e16e9}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Draws the vectors of the flowfield on the tile If commented outthe red vectors will disappear \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_aa5028a9f698e54f7c0263a255ec99732}{set\+Current\+State}} (State s)
+\begin{DoxyCompactList}\small\item\em Sets the current state of the tile depending on the tile type the tile is coloured differently \end{DoxyCompactList}\item 
+State \mbox{\hyperlink{class_tile_a429ce5c06e30fccbc94c5f0a0bcc53c5}{get\+Current\+State}} ()
+\begin{DoxyCompactList}\small\item\em Get current state of the tile \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_a5d125877d1ef0ee7618b3503db6a77e2}\label{class_tile_a5d125877d1ef0ee7618b3503db6a77e2}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_tile_af967570561ac98a4ecf9d7032d709637}\label{class_tile_af967570561ac98a4ecf9d7032d709637}} 
+sf\+::\+Rectangle\+Shape {\bfseries rectangle}
+\item 
+\mbox{\Hypertarget{class_tile_a774c0efbed55d7d09bd5aeaca12836c1}\label{class_tile_a774c0efbed55d7d09bd5aeaca12836c1}} 
+sf\+::\+Font {\bfseries m\+\_\+font}
+\item 
+\mbox{\Hypertarget{class_tile_aa8a17967f5bf44cf350ada514a22de75}\label{class_tile_aa8a17967f5bf44cf350ada514a22de75}} 
+sf\+::\+Text {\bfseries m\+\_\+cost\+Text}
+\item 
+\mbox{\Hypertarget{class_tile_ab83a1b995bcee15701170329b8a96a7f}\label{class_tile_ab83a1b995bcee15701170329b8a96a7f}} 
+sf\+::\+String {\bfseries m\+\_\+cost\+String}
+\item 
+\mbox{\Hypertarget{class_tile_afff1e69b60047374a446da3e779e66c8}\label{class_tile_afff1e69b60047374a446da3e779e66c8}} 
+sf\+::\+Text {\bfseries m\+\_\+heuristictext}
+\item 
+\mbox{\Hypertarget{class_tile_a861685575cb4c0e107064ba91f336d03}\label{class_tile_a861685575cb4c0e107064ba91f336d03}} 
+sf\+::\+String {\bfseries m\+\_\+heuristic\+String}
+\item 
+\mbox{\Hypertarget{class_tile_a29e483115eaa7cac4d78504d51ea2de5}\label{class_tile_a29e483115eaa7cac4d78504d51ea2de5}} 
+State {\bfseries m\+\_\+current\+State} = N\+O\+NE
+\item 
+\mbox{\Hypertarget{class_tile_a1ffe241b0545ed4be103b7780e6169d7}\label{class_tile_a1ffe241b0545ed4be103b7780e6169d7}} 
+Draw {\bfseries m\+\_\+draw\+State} = C\+L\+E\+AR
+\item 
+\mbox{\Hypertarget{class_tile_a831fdebf7692edc6d6d716fb1dd0dc1b}\label{class_tile_a831fdebf7692edc6d6d716fb1dd0dc1b}} 
+int {\bfseries m\+\_\+tile\+Size}
+\item 
+\mbox{\Hypertarget{class_tile_a5394a4e1ecf07f939e0c4b775f7b0a2c}\label{class_tile_a5394a4e1ecf07f939e0c4b775f7b0a2c}} 
+float {\bfseries m\+\_\+tile\+Scale}
+\item 
+\mbox{\Hypertarget{class_tile_abc51d238c3442bff65389f7f5e9117ce}\label{class_tile_abc51d238c3442bff65389f7f5e9117ce}} 
+int {\bfseries m\+\_\+cost} = 0
+\item 
+\mbox{\Hypertarget{class_tile_a745808194d4744166950988bb0325287}\label{class_tile_a745808194d4744166950988bb0325287}} 
+bool {\bfseries checked} = false
+\item 
+\mbox{\Hypertarget{class_tile_a4b7834863baca03da20b6610a78fb92c}\label{class_tile_a4b7834863baca03da20b6610a78fb92c}} 
+int {\bfseries m\+\_\+x\+Pos}
+\item 
+\mbox{\Hypertarget{class_tile_a8dbd026dadf07dd48f67482b1e1a5c34}\label{class_tile_a8dbd026dadf07dd48f67482b1e1a5c34}} 
+int {\bfseries m\+\_\+y\+Pos}
+\item 
+\mbox{\Hypertarget{class_tile_a7cbd93244de9145a765ce94b7debf908}\label{class_tile_a7cbd93244de9145a765ce94b7debf908}} 
+float {\bfseries m\+\_\+rotation} = 0
+\item 
+\mbox{\Hypertarget{class_tile_a03d3ff2535fa7a8efb00150040abc7a2}\label{class_tile_a03d3ff2535fa7a8efb00150040abc7a2}} 
+sf\+::\+Rectangle\+Shape {\bfseries vector}
+\item 
+\mbox{\Hypertarget{class_tile_aae83b7f825a28703b83197af08a00cbb}\label{class_tile_aae83b7f825a28703b83197af08a00cbb}} 
+std\+::pair$<$ int, int $>$ {\bfseries m\+\_\+previous}
+\item 
+\mbox{\Hypertarget{class_tile_a4932f9e2ac170cbadec3ed0c84220b5c}\label{class_tile_a4932f9e2ac170cbadec3ed0c84220b5c}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tile_a80b48572e18fc5b34c0e707302d97d8c}\label{class_tile_a80b48572e18fc5b34c0e707302d97d8c}} 
+\index{Tile@{Tile}!getCost@{getCost}}
+\index{getCost@{getCost}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{getCost()}{getCost()}}
+{\footnotesize\ttfamily int Tile\+::get\+Cost (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns the cost of the tile 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tile_a429ce5c06e30fccbc94c5f0a0bcc53c5}\label{class_tile_a429ce5c06e30fccbc94c5f0a0bcc53c5}} 
+\index{Tile@{Tile}!getCurrentState@{getCurrentState}}
+\index{getCurrentState@{getCurrentState}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{getCurrentState()}{getCurrentState()}}
+{\footnotesize\ttfamily State Tile\+::get\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get current state of the tile 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tile_af8db5d7a281dab571aaec3efbb2758c2}\label{class_tile_af8db5d7a281dab571aaec3efbb2758c2}} 
+\index{Tile@{Tile}!getDrawState@{getDrawState}}
+\index{getDrawState@{getDrawState}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{getDrawState()}{getDrawState()}}
+{\footnotesize\ttfamily Draw Tile\+::get\+Draw\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the drawstate of the tile 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tile_ad2cc4a02a84288f6c68a15a8e96901ee}\label{class_tile_ad2cc4a02a84288f6c68a15a8e96901ee}} 
+\index{Tile@{Tile}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Tile\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the velocity of the player 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_tile_a57444de210a362d359197d5a6b5e16e9}\label{class_tile_a57444de210a362d359197d5a6b5e16e9}} 
+\index{Tile@{Tile}!render@{render}}
+\index{render@{render}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Tile\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Draws the vectors of the flowfield on the tile If commented outthe red vectors will disappear 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_a25e810638e63d695b3525bc7349e50ef}\label{class_tile_a25e810638e63d695b3525bc7349e50ef}} 
+\index{Tile@{Tile}!setCost@{setCost}}
+\index{setCost@{setCost}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setCost()}{setCost()}}
+{\footnotesize\ttfamily void Tile\+::set\+Cost (\begin{DoxyParamCaption}\item[{int}]{cost }\end{DoxyParamCaption})}
+
+
+
+Sets the cost of teh tile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cost} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_aa5028a9f698e54f7c0263a255ec99732}\label{class_tile_aa5028a9f698e54f7c0263a255ec99732}} 
+\index{Tile@{Tile}!setCurrentState@{setCurrentState}}
+\index{setCurrentState@{setCurrentState}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setCurrentState()}{setCurrentState()}}
+{\footnotesize\ttfamily void Tile\+::set\+Current\+State (\begin{DoxyParamCaption}\item[{State}]{s }\end{DoxyParamCaption})}
+
+
+
+Sets the current state of the tile depending on the tile type the tile is coloured differently 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_a4a26f555d4268b105e94dc789fe4a74d}\label{class_tile_a4a26f555d4268b105e94dc789fe4a74d}} 
+\index{Tile@{Tile}!setDrawState@{setDrawState}}
+\index{setDrawState@{setDrawState}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setDrawState()}{setDrawState()}}
+{\footnotesize\ttfamily void Tile\+::set\+Draw\+State (\begin{DoxyParamCaption}\item[{Draw}]{ds }\end{DoxyParamCaption})}
+
+
+
+Sets the draw state of the tyle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ds} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_a9358e7dd4f3537140f0d03fb24663b7c}\label{class_tile_a9358e7dd4f3537140f0d03fb24663b7c}} 
+\index{Tile@{Tile}!setPrevious@{setPrevious}}
+\index{setPrevious@{setPrevious}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setPrevious()}{setPrevious()}}
+{\footnotesize\ttfamily void Tile\+::set\+Previous (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Sets the previous tile that was visited 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_ad6c3bfc01ae47ff98aba94890ce104a6}\label{class_tile_ad6c3bfc01ae47ff98aba94890ce104a6}} 
+\index{Tile@{Tile}!setRotation@{setRotation}}
+\index{setRotation@{setRotation}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setRotation()}{setRotation()}}
+{\footnotesize\ttfamily void Tile\+::set\+Rotation (\begin{DoxyParamCaption}\item[{float}]{rot }\end{DoxyParamCaption})}
+
+
+
+handles rotation of teh flow field vectors Also sets the velocity of this tile depending on the rotation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rot} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tile_a0bfaf04d2c485e94225817ee87e88305}\label{class_tile_a0bfaf04d2c485e94225817ee87e88305}} 
+\index{Tile@{Tile}!setVelocity@{setVelocity}}
+\index{setVelocity@{setVelocity}!Tile@{Tile}}
+\subsubsection{\texorpdfstring{setVelocity()}{setVelocity()}}
+{\footnotesize\ttfamily void Tile\+::set\+Velocity (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Sets the velocity of the tile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Tile.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Tile.\+cpp\end{DoxyCompactItemize}

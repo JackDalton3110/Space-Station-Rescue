@@ -1,0 +1,204 @@
+\hypertarget{class_worker}{}\section{Worker Class Reference}
+\label{class_worker}\index{Worker@{Worker}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_worker_a82c83970e5f0d42f2e81390153f9c312}{Worker}} (\mbox{\hyperlink{class_grid}{Grid}} \&m\+\_\+grid)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_worker}{Worker}} Constructor method Sets image, rotation, velocity, scale. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_worker_a876d7118b9196abe5d3299a941ee5643}{update}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Updates workers position, rotation and wander direction \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_worker_a18940af5e921feefc2373e120d66ff24}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em renders the worker while it is alive \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_worker_adc26f6c33bf87fe8464924b688b35924}{get\+Random}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em randomises value for workers x and y velocity \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_worker_a47aa8d5eb21900530255e6a66b7801d9}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em returns workers current position \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_worker_a6b05fdee2acc4a485e68814f98cd1075}{collision}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Checks collision for workers Checks for collisions between walls, and player if collides with player, alive is rendered false and players score is incremented. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_worker_ad640050b40d834102eddd619d1a12ebf}\label{class_worker_ad640050b40d834102eddd619d1a12ebf}} 
+int {\bfseries count} = 0
+\item 
+\mbox{\Hypertarget{class_worker_a7c2d73a1a23ed1a876056d159e811ce4}\label{class_worker_a7c2d73a1a23ed1a876056d159e811ce4}} 
+int {\bfseries spawn} =0
+\item 
+\mbox{\Hypertarget{class_worker_af93f164ed5eb8b1c3421fa7a23762a2e}\label{class_worker_af93f164ed5eb8b1c3421fa7a23762a2e}} 
+bool {\bfseries alive}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_worker_a4bc0c766d4aaddc7a564d8601ee114e4}{rotate\+Worker}} (sf\+::\+Vector2f vel, int rotate)
+\begin{DoxyCompactList}\small\item\em rotates worker so that it faces the correct direction based on its velocity \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_worker_adc379fc84951cfc33613dcfcae06bc98}{spawn\+Workers}} ()
+\begin{DoxyCompactList}\small\item\em gives workers initial velocity and direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_worker_ac745841f864d7ac22607c10a6762f802}\label{class_worker_ac745841f864d7ac22607c10a6762f802}} 
+sf\+::\+Vector2f {\bfseries velocity}
+\item 
+\mbox{\Hypertarget{class_worker_a00add12299316bd66a2dd67c7bc1e25f}\label{class_worker_a00add12299316bd66a2dd67c7bc1e25f}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_worker_ac0bf4c1c6a84072a3f903d4a46543a3c}\label{class_worker_ac0bf4c1c6a84072a3f903d4a46543a3c}} 
+float {\bfseries max\+Speed}
+\item 
+\mbox{\Hypertarget{class_worker_afeee3ec85139816b299728649316da40}\label{class_worker_afeee3ec85139816b299728649316da40}} 
+float {\bfseries rotation}
+\item 
+\mbox{\Hypertarget{class_worker_a9e295390f9a860295e924aa816f3a012}\label{class_worker_a9e295390f9a860295e924aa816f3a012}} 
+float {\bfseries max\+Rotation}
+\item 
+\mbox{\Hypertarget{class_worker_a4284732ef800e36ae75aa633cf9fbeef}\label{class_worker_a4284732ef800e36ae75aa633cf9fbeef}} 
+sf\+::\+Texture {\bfseries worker\+Txt}
+\item 
+\mbox{\Hypertarget{class_worker_a5ac6c7c1089e5d30f46ef0f83c22721f}\label{class_worker_a5ac6c7c1089e5d30f46ef0f83c22721f}} 
+sf\+::\+Sprite {\bfseries worker\+Sprite}
+\item 
+\mbox{\Hypertarget{class_worker_a4d9e89347555f5983d73dca89c910e26}\label{class_worker_a4d9e89347555f5983d73dca89c910e26}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+\+Grid}
+\item 
+\mbox{\Hypertarget{class_worker_af1c735d6441baf4004b7b2bfa9025cb4}\label{class_worker_af1c735d6441baf4004b7b2bfa9025cb4}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_worker_a6dd801b49806f0943867b90e5f6499ae}\label{class_worker_a6dd801b49806f0943867b90e5f6499ae}} 
+int {\bfseries p\+GridY}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_worker_a82c83970e5f0d42f2e81390153f9c312}\label{class_worker_a82c83970e5f0d42f2e81390153f9c312}} 
+\index{Worker@{Worker}!Worker@{Worker}}
+\index{Worker@{Worker}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{Worker()}{Worker()}}
+{\footnotesize\ttfamily Worker\+::\+Worker (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_grid}{Grid}} \&}]{m\+\_\+grid }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_worker}{Worker}} Constructor method Sets image, rotation, velocity, scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+grid} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_worker_a6b05fdee2acc4a485e68814f98cd1075}\label{class_worker_a6b05fdee2acc4a485e68814f98cd1075}} 
+\index{Worker@{Worker}!collision@{collision}}
+\index{collision@{collision}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily void Worker\+::collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Checks collision for workers Checks for collisions between walls, and player if collides with player, alive is rendered false and players score is incremented. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_worker_a47aa8d5eb21900530255e6a66b7801d9}\label{class_worker_a47aa8d5eb21900530255e6a66b7801d9}} 
+\index{Worker@{Worker}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Worker\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns workers current position 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_worker_adc26f6c33bf87fe8464924b688b35924}\label{class_worker_adc26f6c33bf87fe8464924b688b35924}} 
+\index{Worker@{Worker}!getRandom@{getRandom}}
+\index{getRandom@{getRandom}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{getRandom()}{getRandom()}}
+{\footnotesize\ttfamily float Worker\+::get\+Random (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+randomises value for workers x and y velocity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_worker_a18940af5e921feefc2373e120d66ff24}\label{class_worker_a18940af5e921feefc2373e120d66ff24}} 
+\index{Worker@{Worker}!render@{render}}
+\index{render@{render}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Worker\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+renders the worker while it is alive 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_worker_a4bc0c766d4aaddc7a564d8601ee114e4}\label{class_worker_a4bc0c766d4aaddc7a564d8601ee114e4}} 
+\index{Worker@{Worker}!rotateWorker@{rotateWorker}}
+\index{rotateWorker@{rotateWorker}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{rotateWorker()}{rotateWorker()}}
+{\footnotesize\ttfamily int Worker\+::rotate\+Worker (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{vel,  }\item[{int}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+rotates worker so that it faces the correct direction based on its velocity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vel} & \\
+\hline
+{\em angle} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_worker_adc379fc84951cfc33613dcfcae06bc98}\label{class_worker_adc379fc84951cfc33613dcfcae06bc98}} 
+\index{Worker@{Worker}!spawnWorkers@{spawnWorkers}}
+\index{spawnWorkers@{spawnWorkers}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{spawnWorkers()}{spawnWorkers()}}
+{\footnotesize\ttfamily void Worker\+::spawn\+Workers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+gives workers initial velocity and direction 
+
+\mbox{\Hypertarget{class_worker_a876d7118b9196abe5d3299a941ee5643}\label{class_worker_a876d7118b9196abe5d3299a941ee5643}} 
+\index{Worker@{Worker}!update@{update}}
+\index{update@{update}!Worker@{Worker}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Worker\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Updates workers position, rotation and wander direction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Worker.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Worker.\+cpp\end{DoxyCompactItemize}

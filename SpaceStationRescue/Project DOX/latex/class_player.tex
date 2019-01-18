@@ -1,0 +1,254 @@
+\hypertarget{class_player}{}\section{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a9dce6fc3b1978d2800dc4df434e3a3f9}\label{class_player_a9dce6fc3b1978d2800dc4df434e3a3f9}} 
+{\bfseries Player} (\mbox{\hyperlink{class_grid}{Grid}} \&m\+\_\+\+Grid)
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_player_a23356f99a9de86d3d47eadb679b332dc}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Returns the position of the player sprite \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_player_a363489e11401d5a1549e315c8c8aa220}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em Returns the velocity of the player sprite \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_ade1fb063559bb1ae1a07bf407cdeb5af}{speed\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Increases the player speed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a0a416eba4d3682c7a527d0639cfb2644}{speed\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Decreases the playe speed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a0f6f4bb800443551229331a68c3c3234}{increase\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Increases the player rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_ad65092429c9fcb4d15f6af2591726b81}{decrease\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Decreases the player rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a825e707c1bf75f4488c11997be6adadc}{update}} (double dt, std\+::vector$<$ \mbox{\hyperlink{class_powerups}{Powerups}} $\ast$ $>$ \&m\+\_\+power\+Ups)
+\begin{DoxyCompactList}\small\item\em only updates the player if the player is alive calculates the players grid position handles all keyboard input for the player updates powerups fires bullet when spacebar is clicked, allowing for 3 bullets to be fired at a time updates healthsystem position and values updates player sprite position \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a53938857e80374e79726309e78d1c15c}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Only draws player sprite if player is alive only draws the player shield if shield is active Renders healthsystem hearts to the screen as a H\+UD loops through the bullet vector and renders \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a220b112385e59f3218c98a2e7842236d}{collision}} (std\+::vector$<$ \mbox{\hyperlink{class_powerups}{Powerups}} $\ast$ $>$ \&m\+\_\+power\+Ups, double dt)
+\begin{DoxyCompactList}\small\item\em Handles collision with world walls in all directions Checks the adjacent walls if they are of type obstacle and performs rectangle collision at these points \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_aa2890f51b31e33f439f6bd67092168f7}{get\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Returns the sprite rotation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a99a734c14d6e6944aeb2ccfead048cec}\label{class_player_a99a734c14d6e6944aeb2ccfead048cec}} 
+bool {\bfseries firepower}
+\item 
+\mbox{\Hypertarget{class_player_a9344b3d4b21620e95eea29fca8d420bc}\label{class_player_a9344b3d4b21620e95eea29fca8d420bc}} 
+bool {\bfseries shield} = false
+\item 
+\mbox{\Hypertarget{class_player_a2a5b1dd4fa4e0f9e5310a457d4b51d3e}\label{class_player_a2a5b1dd4fa4e0f9e5310a457d4b51d3e}} 
+int {\bfseries bulletindex} = 0
+\item 
+\mbox{\Hypertarget{class_player_ae5511e5935bb5ab6d6c7cb8b483a0783}\label{class_player_ae5511e5935bb5ab6d6c7cb8b483a0783}} 
+bool {\bfseries fired} =false
+\item 
+\mbox{\Hypertarget{class_player_a00c55ba2903f0068f3fee237c89c8363}\label{class_player_a00c55ba2903f0068f3fee237c89c8363}} 
+\mbox{\hyperlink{class_health_system}{Health\+System}} $\ast$ {\bfseries m\+\_\+health\+System}
+\item 
+\mbox{\Hypertarget{class_player_a450660f5985e1a52cb2e2f17d02c9932}\label{class_player_a450660f5985e1a52cb2e2f17d02c9932}} 
+std\+::vector$<$ \mbox{\hyperlink{class_bullet}{Bullet}} $\ast$ $>$ {\bfseries m\+\_\+bullet}
+\item 
+\mbox{\Hypertarget{class_player_a4f011b312116eceaa5bd62b7c309a9bd}\label{class_player_a4f011b312116eceaa5bd62b7c309a9bd}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_player_ad4e99d34e5e0d700f4787d50dc45f3e7}\label{class_player_ad4e99d34e5e0d700f4787d50dc45f3e7}} 
+int {\bfseries p\+GridY}
+\item 
+\mbox{\Hypertarget{class_player_ace6abae8d66534ad0a1fd6458f786a6e}\label{class_player_ace6abae8d66534ad0a1fd6458f786a6e}} 
+int {\bfseries score}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a91899cffc2451af7cc102ba8d4f49073}\label{class_player_a91899cffc2451af7cc102ba8d4f49073}} 
+sf\+::\+Circle\+Shape {\bfseries shape}
+\item 
+\mbox{\Hypertarget{class_player_a1dc3cc1671c4823a0d3ef807a248f3eb}\label{class_player_a1dc3cc1671c4823a0d3ef807a248f3eb}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+rect}
+\item 
+\mbox{\Hypertarget{class_player_acea3e1bbd92be7a0fbf26764ec919b24}\label{class_player_acea3e1bbd92be7a0fbf26764ec919b24}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_player_a032cc077cd941af92b185e147eb6fb76}\label{class_player_a032cc077cd941af92b185e147eb6fb76}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_player_a59323f7c0100a4b82ae0fa149ebddad7}\label{class_player_a59323f7c0100a4b82ae0fa149ebddad7}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_player_a36aa39fc04866810640a5e361b8c8246}\label{class_player_a36aa39fc04866810640a5e361b8c8246}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_player_a38d02a00c164d5dffcc134a48945901d}\label{class_player_a38d02a00c164d5dffcc134a48945901d}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_player_aa1dbb532d2c99d54c1e61126a447ab3b}\label{class_player_aa1dbb532d2c99d54c1e61126a447ab3b}} 
+float {\bfseries D\+E\+G\+\_\+\+T\+O\+\_\+\+R\+AD}
+\item 
+\mbox{\Hypertarget{class_player_a7e964b3791758b55b4978662f7ac2272}\label{class_player_a7e964b3791758b55b4978662f7ac2272}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_player_acd5f8e9953ff8d643954f425e2a0b197}\label{class_player_acd5f8e9953ff8d643954f425e2a0b197}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_player_ab2a3683da4491590ed956a6341f513ca}\label{class_player_ab2a3683da4491590ed956a6341f513ca}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+heading}
+\item 
+\mbox{\Hypertarget{class_player_ac872b310930295033b218f1551a27e34}\label{class_player_ac872b310930295033b218f1551a27e34}} 
+float {\bfseries m\+\_\+speed}
+\item 
+\mbox{\Hypertarget{class_player_a7158b013eca5fd46648a91f99d4e5473}\label{class_player_a7158b013eca5fd46648a91f99d4e5473}} 
+double {\bfseries cumulative\+Time}
+\item 
+\mbox{\Hypertarget{class_player_a8acc499bd0a906777b0e5e22898b41a8}\label{class_player_a8acc499bd0a906777b0e5e22898b41a8}} 
+sf\+::\+Circle\+Shape {\bfseries shieldcrc}
+\item 
+\mbox{\Hypertarget{class_player_a611fcd438eeda1226d5522408430c0f7}\label{class_player_a611fcd438eeda1226d5522408430c0f7}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+grid}
+\item 
+\mbox{\Hypertarget{class_player_ae22f41c415f73ca8703a55beb34682b1}\label{class_player_ae22f41c415f73ca8703a55beb34682b1}} 
+sf\+::\+Text {\bfseries player\+Text}
+\item 
+\mbox{\Hypertarget{class_player_a41be577569fc82dda91cdf2c3a56d636}\label{class_player_a41be577569fc82dda91cdf2c3a56d636}} 
+sf\+::\+Text {\bfseries enemy\+Text}
+\item 
+\mbox{\Hypertarget{class_player_a3b6b2902f7755600b8a784928ecd1ae7}\label{class_player_a3b6b2902f7755600b8a784928ecd1ae7}} 
+sf\+::\+Font {\bfseries m\+\_\+font}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_a220b112385e59f3218c98a2e7842236d}\label{class_player_a220b112385e59f3218c98a2e7842236d}} 
+\index{Player@{Player}!collision@{collision}}
+\index{collision@{collision}!Player@{Player}}
+\subsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily void Player\+::collision (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_powerups}{Powerups}} $\ast$ $>$ \&}]{m\+\_\+power\+Ups,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Handles collision with world walls in all directions Checks the adjacent walls if they are of type obstacle and performs rectangle collision at these points 
+
+Also checks collision with powerups, checking if its in the same grid position as the player, Checks the typr of powerup and sets timer to 0 and picked up to false 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+power\+Ups} & \\
+\hline
+{\em dt} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_ad65092429c9fcb4d15f6af2591726b81}\label{class_player_ad65092429c9fcb4d15f6af2591726b81}} 
+\index{Player@{Player}!decreaseRotation@{decreaseRotation}}
+\index{decreaseRotation@{decreaseRotation}!Player@{Player}}
+\subsubsection{\texorpdfstring{decreaseRotation()}{decreaseRotation()}}
+{\footnotesize\ttfamily void Player\+::decrease\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Decreases the player rotation 
+
+\mbox{\Hypertarget{class_player_a23356f99a9de86d3d47eadb679b332dc}\label{class_player_a23356f99a9de86d3d47eadb679b332dc}} 
+\index{Player@{Player}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Player@{Player}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Player\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the position of the player sprite 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_aa2890f51b31e33f439f6bd67092168f7}\label{class_player_aa2890f51b31e33f439f6bd67092168f7}} 
+\index{Player@{Player}!getRotation@{getRotation}}
+\index{getRotation@{getRotation}!Player@{Player}}
+\subsubsection{\texorpdfstring{getRotation()}{getRotation()}}
+{\footnotesize\ttfamily float Player\+::get\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the sprite rotation 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a363489e11401d5a1549e315c8c8aa220}\label{class_player_a363489e11401d5a1549e315c8c8aa220}} 
+\index{Player@{Player}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Player@{Player}}
+\subsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Player\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the velocity of the player sprite 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a0f6f4bb800443551229331a68c3c3234}\label{class_player_a0f6f4bb800443551229331a68c3c3234}} 
+\index{Player@{Player}!increaseRotation@{increaseRotation}}
+\index{increaseRotation@{increaseRotation}!Player@{Player}}
+\subsubsection{\texorpdfstring{increaseRotation()}{increaseRotation()}}
+{\footnotesize\ttfamily void Player\+::increase\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Increases the player rotation 
+
+\mbox{\Hypertarget{class_player_a53938857e80374e79726309e78d1c15c}\label{class_player_a53938857e80374e79726309e78d1c15c}} 
+\index{Player@{Player}!render@{render}}
+\index{render@{render}!Player@{Player}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Player\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Only draws player sprite if player is alive only draws the player shield if shield is active Renders healthsystem hearts to the screen as a H\+UD loops through the bullet vector and renders 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a0a416eba4d3682c7a527d0639cfb2644}\label{class_player_a0a416eba4d3682c7a527d0639cfb2644}} 
+\index{Player@{Player}!speedDown@{speedDown}}
+\index{speedDown@{speedDown}!Player@{Player}}
+\subsubsection{\texorpdfstring{speedDown()}{speedDown()}}
+{\footnotesize\ttfamily void Player\+::speed\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Decreases the playe speed 
+
+\mbox{\Hypertarget{class_player_ade1fb063559bb1ae1a07bf407cdeb5af}\label{class_player_ade1fb063559bb1ae1a07bf407cdeb5af}} 
+\index{Player@{Player}!speedUp@{speedUp}}
+\index{speedUp@{speedUp}!Player@{Player}}
+\subsubsection{\texorpdfstring{speedUp()}{speedUp()}}
+{\footnotesize\ttfamily void Player\+::speed\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Increases the player speed 
+
+\mbox{\Hypertarget{class_player_a825e707c1bf75f4488c11997be6adadc}\label{class_player_a825e707c1bf75f4488c11997be6adadc}} 
+\index{Player@{Player}!update@{update}}
+\index{update@{update}!Player@{Player}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Player\+::update (\begin{DoxyParamCaption}\item[{double}]{dt,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_powerups}{Powerups}} $\ast$ $>$ \&}]{m\+\_\+power\+Ups }\end{DoxyParamCaption})}
+
+
+
+only updates the player if the player is alive calculates the players grid position handles all keyboard input for the player updates powerups fires bullet when spacebar is clicked, allowing for 3 bullets to be fired at a time updates healthsystem position and values updates player sprite position 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & \\
+\hline
+{\em m\+\_\+power\+Ups} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Player.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Player.\+cpp\end{DoxyCompactItemize}

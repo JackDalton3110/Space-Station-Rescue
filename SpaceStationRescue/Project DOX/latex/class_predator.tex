@@ -1,0 +1,259 @@
+\hypertarget{class_predator}{}\section{Predator Class Reference}
+\label{class_predator}\index{Predator@{Predator}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator_ae03e3ab3b6041c390e15e816d89e9044}\label{class_predator_ae03e3ab3b6041c390e15e816d89e9044}} 
+{\bfseries Predator} (float x, float y, \mbox{\hyperlink{class_grid}{Grid}} \&m\+\_\+\+Grid)
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_predator_aedebee8eb0a1f05ae209a44a014b3e97}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Returns the predator position \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_predator_a64ef7e1c8e4f9060200d539ab8aeef9a}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em Returns the predators velocity \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_predator_aeea21bd462a09914350ebb34ef3a8f12}\label{class_predator_aeea21bd462a09914350ebb34ef3a8f12}} 
+void {\bfseries speed\+Up} ()
+\item 
+\mbox{\Hypertarget{class_predator_a64137f8aca447a8172e151c0e419e8b3}\label{class_predator_a64137f8aca447a8172e151c0e419e8b3}} 
+void {\bfseries speed\+Down} ()
+\item 
+\mbox{\Hypertarget{class_predator_a916e1cdedef158acc62474d64e767266}\label{class_predator_a916e1cdedef158acc62474d64e767266}} 
+void {\bfseries increase\+Rotation} ()
+\item 
+\mbox{\Hypertarget{class_predator_a58d84a6839f77f2ebdfb0f25838edaf5}\label{class_predator_a58d84a6839f77f2ebdfb0f25838edaf5}} 
+void {\bfseries decrease\+Rotation} ()
+\item 
+void \mbox{\hyperlink{class_predator_ac078fe0abadc023f09ee100b7623be49}{shoot}} ()
+\begin{DoxyCompactList}\small\item\em IS called when the player is within the predators radius Calculates the bullets heading and calls the shoot method for the normal bullet \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_predator_acf5250b053f3680563a40d8b7ae3c383}{respawn}} (std\+::vector$<$ \mbox{\hyperlink{class_nests}{Nests}} $\ast$ $>$ \&nests)
+\begin{DoxyCompactList}\small\item\em Handles predator respawning when they die Randomly picks one of the 3 nests to spawn at If it picks a nest that is dead a random number is generated again If this nest is alive the predator will spawn here If all 3 nests are dead the predator will not respawn \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_predator_a56dd513f17d7a3e4f3504d44b3deb3c0}{update}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player, std\+::vector$<$ \mbox{\hyperlink{class_nests}{Nests}} $\ast$ $>$ \&nests, double dt)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_predator}{Predator}} only updates when they are alive calculates the distance from the predator to the player calculates the predators grid position respawns when health is 0 updates health system \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_predator_acf84bdda5a2ad7120ae182fbeac59516}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders the predator and bullet when the predator is alive \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_predator_aefe19fc634893644a2a4244dda82ad9c}{collision}} ()
+\begin{DoxyCompactList}\small\item\em Checks collision with the world walls Checks the ssquares that are nieghbouring the predator in the grid If an obstacle is detected the predator will be bumped back from the wall \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_predator_a69c268f1736c04f1bea413a71e087fe4}{collision\+Player}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Hnadles bullet collision related to the predator Detects collision with the predator bullet and the player, minus the player health if hit Checks if the predator is being hit by the predator bullet, if so the predators health gets deducted Bullets are destroyed when collision is detected \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_predator_a5b3b260b95d7e15c4c8750fd5c57471a}\label{class_predator_a5b3b260b95d7e15c4c8750fd5c57471a}} 
+void {\bfseries respawn} ()
+\item 
+float \mbox{\hyperlink{class_predator_ad181dbe8dae22c982a893c25b7cedc93}{get\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Returns the predators rotation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator_a59a0a1a634f9c8d21087d3723e210562}\label{class_predator_a59a0a1a634f9c8d21087d3723e210562}} 
+int {\bfseries bulletindex} = 0
+\item 
+\mbox{\Hypertarget{class_predator_adc9cb02bb15d57d8f3f51e25a8e5e540}\label{class_predator_adc9cb02bb15d57d8f3f51e25a8e5e540}} 
+bool {\bfseries fired} = false
+\item 
+\mbox{\Hypertarget{class_predator_ae1154981d0d603c8f702e782bb46e24b}\label{class_predator_ae1154981d0d603c8f702e782bb46e24b}} 
+\mbox{\hyperlink{class_health_system}{Health\+System}} $\ast$ {\bfseries m\+\_\+health\+System}
+\item 
+\mbox{\Hypertarget{class_predator_a198639a52b8a4477af7f8a5168e4c0da}\label{class_predator_a198639a52b8a4477af7f8a5168e4c0da}} 
+\mbox{\hyperlink{class_bullet}{Bullet}} $\ast$ {\bfseries m\+\_\+bullet}
+\item 
+\mbox{\Hypertarget{class_predator_a3d7e8fcbaabba31a31d30ac20509fa00}\label{class_predator_a3d7e8fcbaabba31a31d30ac20509fa00}} 
+int {\bfseries spawn\+Spot}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator_a619ccbef2687f89ce1a3a4789673f9ab}\label{class_predator_a619ccbef2687f89ce1a3a4789673f9ab}} 
+sf\+::\+Circle\+Shape {\bfseries shape}
+\item 
+\mbox{\Hypertarget{class_predator_ab9df9553550cb635e218797550d3bcd6}\label{class_predator_ab9df9553550cb635e218797550d3bcd6}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+rect}
+\item 
+\mbox{\Hypertarget{class_predator_a7432632dda7dac443163f2f5e32b2918}\label{class_predator_a7432632dda7dac443163f2f5e32b2918}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_predator_aa86c82da700536a3bfad6c58993e91f3}\label{class_predator_aa86c82da700536a3bfad6c58993e91f3}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_predator_a2eb1a4b816c548644e26aa84933fb33b}\label{class_predator_a2eb1a4b816c548644e26aa84933fb33b}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_predator_ae5a0a1ef37e321f318f14f8bcfb85eb1}\label{class_predator_ae5a0a1ef37e321f318f14f8bcfb85eb1}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_predator_a467831a46e0cd59697503ad4ae178815}\label{class_predator_a467831a46e0cd59697503ad4ae178815}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+heading\+Bullet}
+\item 
+\mbox{\Hypertarget{class_predator_a026fc84f7931139e5213b7f8908e8782}\label{class_predator_a026fc84f7931139e5213b7f8908e8782}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_predator_a6b870c8af46d4172305cbc397bd13613}\label{class_predator_a6b870c8af46d4172305cbc397bd13613}} 
+float {\bfseries dist}
+\item 
+\mbox{\Hypertarget{class_predator_abf4389f0b2f157495e1e836d81e720a2}\label{class_predator_abf4389f0b2f157495e1e836d81e720a2}} 
+float {\bfseries dx}
+\item 
+\mbox{\Hypertarget{class_predator_a9b0276b7daf58fbd6963e17ee1b7f88f}\label{class_predator_a9b0276b7daf58fbd6963e17ee1b7f88f}} 
+float {\bfseries dy}
+\item 
+\mbox{\Hypertarget{class_predator_aeb0176a3c6ba8ab3a817c19a529e7e74}\label{class_predator_aeb0176a3c6ba8ab3a817c19a529e7e74}} 
+float {\bfseries D\+E\+G\+\_\+\+T\+O\+\_\+\+R\+AD}
+\item 
+\mbox{\Hypertarget{class_predator_a138b0a60e74c5ee42c4a7eafb33b25ac}\label{class_predator_a138b0a60e74c5ee42c4a7eafb33b25ac}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_predator_a100410c1f5ca7b6c31c83571dab301ac}\label{class_predator_a100410c1f5ca7b6c31c83571dab301ac}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_predator_af9a1e975d30230f63ea2bb73438385a9}\label{class_predator_af9a1e975d30230f63ea2bb73438385a9}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+heading}
+\item 
+\mbox{\Hypertarget{class_predator_a299d3a779921b4835a6fed06fa090561}\label{class_predator_a299d3a779921b4835a6fed06fa090561}} 
+float {\bfseries m\+\_\+speed}
+\item 
+\mbox{\Hypertarget{class_predator_a4245af2757509639551ceb75b85daa42}\label{class_predator_a4245af2757509639551ceb75b85daa42}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+grid}
+\item 
+\mbox{\Hypertarget{class_predator_afb4342513b5df20b6ff3b6893f2f89e9}\label{class_predator_afb4342513b5df20b6ff3b6893f2f89e9}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_predator_a904ca89e68b174a5c9396b92ec73eeeb}\label{class_predator_a904ca89e68b174a5c9396b92ec73eeeb}} 
+int {\bfseries p\+GridY}
+\item 
+\mbox{\Hypertarget{class_predator_ad2c8e8e6bf5fbe09086f89e778eae80f}\label{class_predator_ad2c8e8e6bf5fbe09086f89e778eae80f}} 
+float {\bfseries m\+\_\+shoot\+Dist}
+\item 
+\mbox{\Hypertarget{class_predator_a92ca5dc5c3354780facc0b768041af12}\label{class_predator_a92ca5dc5c3354780facc0b768041af12}} 
+int {\bfseries bullet\+Delay}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_predator_aefe19fc634893644a2a4244dda82ad9c}\label{class_predator_aefe19fc634893644a2a4244dda82ad9c}} 
+\index{Predator@{Predator}!collision@{collision}}
+\index{collision@{collision}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily void Predator\+::collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks collision with the world walls Checks the ssquares that are nieghbouring the predator in the grid If an obstacle is detected the predator will be bumped back from the wall 
+
+\mbox{\Hypertarget{class_predator_a69c268f1736c04f1bea413a71e087fe4}\label{class_predator_a69c268f1736c04f1bea413a71e087fe4}} 
+\index{Predator@{Predator}!collisionPlayer@{collisionPlayer}}
+\index{collisionPlayer@{collisionPlayer}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{collisionPlayer()}{collisionPlayer()}}
+{\footnotesize\ttfamily void Predator\+::collision\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Hnadles bullet collision related to the predator Detects collision with the predator bullet and the player, minus the player health if hit Checks if the predator is being hit by the predator bullet, if so the predators health gets deducted Bullets are destroyed when collision is detected 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_predator_aedebee8eb0a1f05ae209a44a014b3e97}\label{class_predator_aedebee8eb0a1f05ae209a44a014b3e97}} 
+\index{Predator@{Predator}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Predator\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the predator position 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_predator_ad181dbe8dae22c982a893c25b7cedc93}\label{class_predator_ad181dbe8dae22c982a893c25b7cedc93}} 
+\index{Predator@{Predator}!getRotation@{getRotation}}
+\index{getRotation@{getRotation}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{getRotation()}{getRotation()}}
+{\footnotesize\ttfamily float Predator\+::get\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the predators rotation 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_predator_a64ef7e1c8e4f9060200d539ab8aeef9a}\label{class_predator_a64ef7e1c8e4f9060200d539ab8aeef9a}} 
+\index{Predator@{Predator}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Predator\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the predators velocity 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_predator_acf84bdda5a2ad7120ae182fbeac59516}\label{class_predator_acf84bdda5a2ad7120ae182fbeac59516}} 
+\index{Predator@{Predator}!render@{render}}
+\index{render@{render}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Predator\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Renders the predator and bullet when the predator is alive 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_predator_acf5250b053f3680563a40d8b7ae3c383}\label{class_predator_acf5250b053f3680563a40d8b7ae3c383}} 
+\index{Predator@{Predator}!respawn@{respawn}}
+\index{respawn@{respawn}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{respawn()}{respawn()}}
+{\footnotesize\ttfamily void Predator\+::respawn (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_nests}{Nests}} $\ast$ $>$ \&}]{nests }\end{DoxyParamCaption})}
+
+
+
+Handles predator respawning when they die Randomly picks one of the 3 nests to spawn at If it picks a nest that is dead a random number is generated again If this nest is alive the predator will spawn here If all 3 nests are dead the predator will not respawn 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nests} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_predator_ac078fe0abadc023f09ee100b7623be49}\label{class_predator_ac078fe0abadc023f09ee100b7623be49}} 
+\index{Predator@{Predator}!shoot@{shoot}}
+\index{shoot@{shoot}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily void Predator\+::shoot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+IS called when the player is within the predators radius Calculates the bullets heading and calls the shoot method for the normal bullet 
+
+\mbox{\Hypertarget{class_predator_a56dd513f17d7a3e4f3504d44b3deb3c0}\label{class_predator_a56dd513f17d7a3e4f3504d44b3deb3c0}} 
+\index{Predator@{Predator}!update@{update}}
+\index{update@{update}!Predator@{Predator}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Predator\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_nests}{Nests}} $\ast$ $>$ \&}]{nests,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_predator}{Predator}} only updates when they are alive calculates the distance from the predator to the player calculates the predators grid position respawns when health is 0 updates health system 
+
+Retrieves the vector from teh current tile the predator is on, within the flowfield This vector is then multiplied by a speed allowing the predator to move along the flowfield to reach the player The tile rotation is also set to the predator sprite making it face in the correct direction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+{\em nests} & \\
+\hline
+{\em dt} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Predator.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Predator.\+cpp\end{DoxyCompactItemize}
