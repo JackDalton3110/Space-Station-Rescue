@@ -15,7 +15,13 @@ Player::Player(Grid &m_Grid) :
 	if (!m_texture.loadFromFile("./resources/Player.png")) {
 		//do something
 	}
-
+	m_font.loadFromFile("./resources/OCRAEXT.TTF");
+	
+	playerText.setFont(m_font);
+	playerText.setCharacterSize(58);
+	playerText.setFillColor(sf::Color::Green);
+	enemyText.setFont(m_font);
+	playerText.setString("Score: " + std::to_string(score) + " /200");
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 	m_sprite.setScale(0.1, 0.1);
@@ -102,69 +108,69 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 
 
-	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
-	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
-	collision(m_powerUps, dt);
-	cumulativeTime += dt / 1000;
-	shieldcrc.setPosition(m_sprite.getPosition().x - m_grid->m_tileSize / 2, m_sprite.getPosition().y - m_grid->m_tileSize / 2);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		increaseRotation();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		decreaseRotation();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		speedUp();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		speedDown();
-	}
-	
-	for (int i = 0; i < m_powerUps.size(); i++)
-	{
-		if (m_powerUps[i]->getState() == GOTTAGOFAST && m_powerUps[i]->collected)
+		pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
+		pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
+		collision(m_powerUps, dt);
+		cumulativeTime += dt / 1000;
+		shieldcrc.setPosition(m_sprite.getPosition().x - m_grid->m_tileSize / 2, m_sprite.getPosition().y - m_grid->m_tileSize / 2);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			if (cumulativeTime <= 10)
-			{
-				m_maxSpeed = 70.0;
-			}
-			else if (cumulativeTime >= 10 && m_speed >= m_maxSpeed)
-			{
-				m_maxSpeed = 50.0;
-				speedDown();
-			}
+			increaseRotation();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			decreaseRotation();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			speedUp();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			speedDown();
 		}
 
-		if (m_powerUps[i]->getState() == REPLENISH && m_powerUps[i]->collected)
+		for (int i = 0; i < m_powerUps.size(); i++)
 		{
-			m_healthSystem->m_healthValue = 6;
-		}
-
-		if (m_powerUps[i]->getState() == MORESHOTS && m_powerUps[i]->collected)
-		{
-			if (cumulativeTime <= 15)
+			if (m_powerUps[i]->getState() == GOTTAGOFAST && m_powerUps[i]->collected)
 			{
-				firepower = true;
+				if (cumulativeTime <= 10)
+				{
+					m_maxSpeed = 70.0;
+				}
+				else if (cumulativeTime >= 10 && m_speed >= m_maxSpeed)
+				{
+					m_maxSpeed = 50.0;
+					speedDown();
+				}
 			}
-			else
-				firepower = false;
-		}
 
-		if (m_powerUps[i]->getState() == NODAMAGE && m_powerUps[i]->collected)
-		{
-			if (cumulativeTime <= 15)
+			if (m_powerUps[i]->getState() == REPLENISH && m_powerUps[i]->collected)
 			{
-				shield = true;
+				m_healthSystem->m_healthValue = 6;
 			}
-			else
-				shield = false;
+
+			if (m_powerUps[i]->getState() == MORESHOTS && m_powerUps[i]->collected)
+			{
+				if (cumulativeTime <= 15)
+				{
+					firepower = true;
+				}
+				else
+					firepower = false;
+			}
+
+			if (m_powerUps[i]->getState() == NODAMAGE && m_powerUps[i]->collected)
+			{
+				if (cumulativeTime <= 15)
+				{
+					shield = true;
+				}
+				else
+					shield = false;
+			}
+
 		}
-		
-	}
 
 
 		m_heading.x = cos(m_rotation * (3.14 / 180));
@@ -175,7 +181,6 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x * (dt / 100), m_sprite.getPosition().y + m_velocity.y * (dt / 100));
 		m_sprite.setRotation(m_rotation);
 
-		respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
 		if (bulletindex <= 2)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false)
@@ -200,37 +205,25 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		}
 
 
-	
 
+		m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+		m_healthSystem->update();
+		playerText.setPosition(m_sprite.getPosition().x - 300, m_sprite.getPosition().y - 470);
+		playerText.setString("Score: " + std::to_string(score) + " /200");
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == false && fired == true)
 		{
 			fired = false;
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == false && fired == true)
+			{
+				fired = false;
+			}
 		}
-	}
 
-	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
-	m_healthSystem->update();
-	
-}
+		m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
+		m_healthSystem->update();
 
-void Player::respawn(float x, float y)
-{
-	if (y >= 1000 + 100)
-	{
-		//m_sprite.setPosition(m_sprite.getPosition().x, -200);
-	}
-
-	else if (y < -200)
-	{
-		//m_sprite.setPosition(m_sprite.getPosition().x,1100);
-	}
-	else if (x < -200)
-	{
-		//m_sprite.setPosition(2100, m_sprite.getPosition().y);
-	}
-	else if (x >= 2100)
-	{
-		//m_sprite.setPosition(200, m_sprite.getPosition().y);
 	}
 }
 
@@ -315,12 +308,13 @@ void Player::respawn(float x, float y)
 
 void Player::render(sf::RenderWindow &window)
 {
+	window.draw(m_sprite);
+	window.draw(playerText);
 
 	if (m_healthSystem->m_healthValue > 0)
 	{
 		window.draw(m_sprite);
 	}
-	
 	if (shield)
 	{
 		window.draw(shieldcrc);
