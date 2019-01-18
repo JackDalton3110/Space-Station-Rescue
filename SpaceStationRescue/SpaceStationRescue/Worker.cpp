@@ -1,13 +1,14 @@
 #include "Worker.h"
 
-Worker::Worker():
+Worker::Worker(Grid &m_grid):
 	velocity(0,0),
 	maxSpeed(3.0f),
 	maxRotation(360),
 	rotation(90),
+	m_Grid(&m_grid),
 	alive(true)
 {
-	m_Grid = new Grid();
+	//m_Grid = new Grid();
 	spawnWorkers();
 
 	if (!workerTxt.loadFromFile("./resources/worker.png"))
@@ -37,6 +38,7 @@ void Worker::collision(Player &m_player)
 	{
 		velocity.y *= -1;
 		m_position.y += 5;
+
 	}
 	if (m_Grid->m_tileGrid[pGridX][pGridY + 1]->getCurrentState() == OBSTACLE)
 	{

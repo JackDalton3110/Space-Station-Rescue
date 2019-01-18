@@ -4,14 +4,14 @@
 #include <math.h>
 #include "Grid.h"
 #include "HealthSystem.h"
-#include "Bullet.h"
-#include "Powerups.h"
+#include "Player.h"
+#include "Nests.h"
 
-class Player
+class Predator
 {
 public:
-	Player(Grid &m_Grid);
-	~Player();
+	Predator(float x, float y, Grid &m_Grid);
+	~Predator();
 
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
@@ -19,22 +19,22 @@ public:
 	void speedDown();
 	void increaseRotation();
 	void decreaseRotation();
-	void respawn(float x, float y);
-	void update(double dt, std::vector<Powerups*>&m_powerUps);
+	void shoot();
+	void respawn(std::vector<Nests*> &nests);
+	void update(Player &m_player, std::vector<Nests*> &nests, double dt);
 	void render(sf::RenderWindow &window);
-	void collision(std::vector<Powerups*>&m_powerUps, double dt);
+	void collision();
+	void collisionPlayer(Player & m_player);
+	void respawn();
 
 	float getRotation();
 
-	bool firepower, shield = false;
-	int bulletindex = 0;
-	bool fired=false;
-	HealthSystem *m_healthSystem;
-	std::vector<Bullet *> m_bullet;
-	int pGridX;
-	int pGridY;
 
-	int score;
+	int bulletindex = 0;
+	bool fired = false;
+	HealthSystem *m_healthSystem;
+	Bullet* m_bullet;
+	int spawnSpot;
 
 private:
 	sf::CircleShape shape;
@@ -43,19 +43,20 @@ private:
 	sf::Texture m_texture;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_position;
+	sf::Vector2f m_headingBullet;
 	float m_orientation;
+	float dist, dx, dy;
 
 	float  DEG_TO_RAD;
 	float m_maxSpeed;
 	float m_rotation;
 	sf::Vector2f m_heading;
 	float m_speed;
-	double cumulativeTime;
-	sf::CircleShape shieldcrc;
 	Grid *m_grid;
-
-	sf::Text playerText, enemyText;
-	sf::Font m_font;
+	int pGridX;
+	int pGridY;
+	float m_shootDist;
+	int bulletDelay;
 
 
 };

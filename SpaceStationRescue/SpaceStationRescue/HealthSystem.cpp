@@ -99,11 +99,13 @@ void HealthSystem::update()
 		case 1:
 			healthSprite.setTexture(health0_5Txt);
 			break;
-		case 0:
-			healthSprite.setTexture(health0_0Txt);
-			break;
 		default:
 			break;
+		}
+
+		if (m_healthValue <= 0)
+		{
+			healthSprite.setTexture(health0_0Txt);
 		}
 	}
 	else

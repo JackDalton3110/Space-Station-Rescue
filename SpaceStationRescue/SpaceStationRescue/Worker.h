@@ -10,7 +10,7 @@
 class Worker
 {
 public:
-	Worker();
+	Worker(Grid &m_grid);
 	~Worker();
 
 	void update(Player &m_player);
