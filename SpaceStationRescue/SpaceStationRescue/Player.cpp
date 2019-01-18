@@ -14,7 +14,13 @@ Player::Player() :
 	if (!m_texture.loadFromFile("./resources/Player.png")) {
 		//do something
 	}
-
+	m_font.loadFromFile("./resources/OCRAEXT.TTF");
+	
+	playerText.setFont(m_font);
+	playerText.setCharacterSize(58);
+	playerText.setFillColor(sf::Color::Green);
+	enemyText.setFont(m_font);
+	playerText.setString("Score: " + std::to_string(score) + " /200");
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 	m_sprite.setScale(0.1, 0.1);
@@ -94,7 +100,7 @@ void Player::decreaseRotation()
 
 void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 {
-
+	playerText.setString(std::to_string(score));
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 	collision(m_powerUps, dt);
@@ -194,7 +200,8 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 
 	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
 	m_healthSystem->update();
-
+	playerText.setPosition(m_sprite.getPosition().x -300 , m_sprite.getPosition().y - 470);
+	playerText.setString("Score: " + std::to_string(score) + " /200");
 	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Space)==false && fired == true)
 	{
 		fired = false;
@@ -305,6 +312,7 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
+	window.draw(playerText);
 	if (shield)
 	{
 		window.draw(shieldcrc);

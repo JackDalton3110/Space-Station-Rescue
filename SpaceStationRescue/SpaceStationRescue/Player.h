@@ -51,7 +51,8 @@ private:
 	double cumulativeTime;
 	sf::CircleShape shieldcrc;
 	Grid *m_grid;
-
+	sf::Text playerText, enemyText;
+	sf::Font m_font;
 	int pGridX;
 	int pGridY;
 

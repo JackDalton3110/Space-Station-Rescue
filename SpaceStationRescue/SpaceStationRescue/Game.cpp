@@ -42,28 +42,6 @@ Game::Game() :
 	
 	
 	m_player = new Player();
-	//m_worker = new Worker();
-
-	/*Enemy* m_pursue = new Pursue(*this);
-	Enemy* m_arriveFast = new Arrive(60.0f, 100.0f, 100.0f);
-	Enemy* m_arriveSlow = new Arrive(150.0f, 1720.0f, 1000.0f);
-	Enemy* m_seek = new Seek();
-	Enemy* m_wander = new Wander();*/
-
-	//Factory* factory = new EnemyFactory;
-
-	/*enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());
-	enemies.push_back(factory->CreateEnemy());*/
-
-	//enemies.push_back(m_pursue);
-	//enemies.push_back(m_arriveFast);
-	//enemies.push_back(m_arriveSlow);
-	//enemies.push_back(m_seek);
-	////enemies.push_back(m_flee);
-	//enemies.push_back(m_wander);
 	miniMapView.setViewport(sf::FloatRect(0.64f, 0.02f, 0.3f, 0.3f));
 	miniMapView.setSize(3750, 3750);
 	miniMapView.setCenter(1875, 1875);
@@ -164,7 +142,6 @@ void Game::processGameEvents(sf::Event& event)
 
 				m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->setCurrentState(START);
 
-				//getPath(m_tilePosX, m_tilePosY);
 				m_leftPress = true;
 			}
 
@@ -240,7 +217,7 @@ void Game::update(double dt)
 	
 	for (int i = 0; i < workers.size(); i++)
 	{
-		workers[i]->update();
+		workers[i]->update(*m_player);
 	}
 	for (int i = 0; i < nests.size(); i++)
 	{
@@ -255,20 +232,6 @@ void Game::update(double dt)
 	{
 		m_powerups[i]->update();
 	}
-	//m_worker->update();
-
-	//m_Grid->update(gameView);
-
-	/*for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->update(m_player->getPosition(), m_player->getVelocity());
-		enemies[i]->collisionAvoidance(enemies);
-	}*/
-	//m_enemy->update(m_player->getPosition());
-	//m_enemySeek->update(m_player->getPosition());
-
-	//	m_enemyFlee->update(m_player->getPosition());
-	//m_enemyPursue->update(m_player->getPosition(), m_player->getVelocity());
 
 }
 
@@ -310,29 +273,10 @@ void Game::render()
 		m_Grid->m_spawnPoints[i]->render(m_window);
 	}
 
-	//for (int i = 0; i < m_Grid->m_nestPoints.size(); i++) {
-	//	m_Grid->m_nestPoints[i]->render(m_window);
-	//}
-
 	for (int i = 0; i < nests.size(); i++)
 	{
 		nests[i]->render(m_window);
 	}
 	m_window.draw(m_playerMM);
-	//for (int i = 0; i < workers.size(); i++)
-	//{
-		//workers[i]->render(m_window);
-	//}
-	/*m_worker->render(m_window);*/
-	//m_player->render(m_window);
-
-	/*for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}*/
-	//	m_enemyPursue->render(m_window);
-	//m_enemy->render(m_window);
-	//m_enemySeek->render(m_window);
-	//m_enemyFlee->render(m_window);
 	m_window.display();
 }
