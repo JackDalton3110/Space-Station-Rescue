@@ -6,6 +6,7 @@ Player::Player() :
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(50.0),
+	shieldcrc(60),
 	m_speed(0),
 	m_heading(0,0)
 
@@ -20,9 +21,10 @@ Player::Player() :
 	m_sprite.setRotation(90);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
-
 	m_grid = new Grid();
-
+	shieldcrc.setFillColor(sf::Color(0, 0, 100, 60));
+	shieldcrc.setPosition(m_sprite.getPosition().x-m_grid->m_tileSize/2, m_sprite.getPosition().y-m_grid->m_tileSize/2);
+	shieldcrc.setOrigin(30, 30);
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 
@@ -90,14 +92,14 @@ void Player::decreaseRotation()
 	
 }
 
-void Player::update(double dt)
+void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 {
 
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
-
-	collision();
-
+	collision(m_powerUps, dt);
+	cumulativeTime += dt / 1000;
+	shieldcrc.setPosition(m_sprite.getPosition().x - m_grid->m_tileSize / 2, m_sprite.getPosition().y - m_grid->m_tileSize / 2);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		increaseRotation();
@@ -115,6 +117,47 @@ void Player::update(double dt)
 		speedDown();
 	}
 	
+	for (int i = 0; i < m_powerUps.size(); i++)
+	{
+		if (m_powerUps[i]->getState() == GOTTAGOFAST && m_powerUps[i]->collected)
+		{
+			if (cumulativeTime <= 10)
+			{
+				m_maxSpeed = 70.0;
+			}
+			else if (cumulativeTime >= 10 && m_speed >= m_maxSpeed)
+			{
+				m_maxSpeed = 50.0;
+				speedDown();
+			}
+		}
+
+		if (m_powerUps[i]->getState() == REPLENISH && m_powerUps[i]->collected)
+		{
+			m_healthSystem->m_healthValue = 6;
+		}
+
+		if (m_powerUps[i]->getState() == MORESHOTS && m_powerUps[i]->collected)
+		{
+			if (cumulativeTime <= 15)
+			{
+				firepower = true;
+			}
+			else
+				firepower = false;
+		}
+
+		if (m_powerUps[i]->getState() == NODAMAGE && m_powerUps[i]->collected)
+		{
+			if (cumulativeTime <= 15)
+			{
+				shield = true;
+			}
+			else
+				shield = false;
+		}
+		
+	}
 
 	m_heading.x = cos(m_rotation * (3.14 / 180));
 	m_heading.y = sin(m_rotation * (3.14 / 180));
@@ -181,7 +224,7 @@ void Player::respawn(float x, float y)
 	}
 }
 
- void Player::collision()
+ void Player::collision(std::vector<Powerups*>&m_powerUps, double dt)
 {
 
 	if (m_grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
@@ -227,6 +270,34 @@ void Player::respawn(float x, float y)
 
 	  }
 
+	  for (int i = 0; i < m_powerUps.size(); i++)
+	  {
+		  if (pGridX == m_powerUps[i]->pGridX  &&
+			  pGridY == m_powerUps[i]->pGridY)
+		  {
+			  if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == MORESHOTS)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+				  
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == GOTTAGOFAST)
+			  {
+				  m_powerUps[i]->collected = true;
+				  cumulativeTime = 0;
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == REPLENISH)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+			  }
+			  else if (!m_powerUps[i]->collected && m_powerUps[i]->getState() == NODAMAGE)
+			  {
+				  cumulativeTime = 0;
+				  m_powerUps[i]->collected = true;
+			  }
+		  }
+	  }
 
 }
 
@@ -234,7 +305,10 @@ void Player::respawn(float x, float y)
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
-
+	if (shield)
+	{
+		window.draw(shieldcrc);
+	}
 	m_healthSystem->render(window);
 
 	for (int i = 0; i < m_bullet.size(); i++)

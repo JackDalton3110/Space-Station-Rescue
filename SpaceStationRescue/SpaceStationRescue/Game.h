@@ -42,7 +42,7 @@ protected:
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
 	std::vector<Sweeper*> m_sweeper;
-	Powerups* m_powerups;
+	std::vector<Powerups*> m_powerups;
 	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
@@ -75,6 +75,7 @@ protected:
 	sf::Texture m_MMT;
 
 	std::vector<int> usedSpawns;
+	std::vector<int> usedTypes;
 
 	int spawnSpot;
 

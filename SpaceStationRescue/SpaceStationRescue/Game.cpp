@@ -26,8 +26,21 @@ Game::Game() :
 			usedSpawns.push_back(spawnSpot);
 			m_sweeper.push_back(new Sweeper(workers));
 	}
+	for (int i = 0; i < 4; i++)
+	{
+		int PowerupType = rand() % 4;
+
+
+		while ((std::find(usedTypes.begin(), usedTypes.end(), PowerupType) != usedTypes.end()))
+		{
+			PowerupType = rand() % 4;
+		}
+		m_powerups.push_back(new Powerups(PowerupType));
+
+		usedTypes.push_back(PowerupType);
+	}
 	
-	m_powerups = new Powerups(2, workers[1]->getPosition());
+	
 	m_player = new Player();
 	//m_worker = new Worker();
 
@@ -222,9 +235,9 @@ void Game::update(double dt)
 {
 	m_playerMM.setPosition(m_player->getPosition());
 	m_playerMM.setRotation(m_player->getRotation());
-	m_player->update(dt);
+	m_player->update(dt, m_powerups);
 	gameView.setCenter(m_player->getPosition());
-	m_powerups->update();
+	
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->update();
@@ -232,10 +245,15 @@ void Game::update(double dt)
 	for (int i = 0; i < nests.size(); i++)
 	{
 		nests[i]->update(*m_player, dt);
+		
 	}
 	for (int i = 0; i < m_sweeper.size(); i++)
 	{
 		m_sweeper[i]->update(m_player->getPosition(), dt, *m_player);
+	}
+	for (int i = 0; i < m_powerups.size(); i++)
+	{
+		m_powerups[i]->update();
 	}
 	//m_worker->update();
 
@@ -264,21 +282,26 @@ void Game::render()
 	m_window.clear(sf::Color(45, 45, 45));
 	m_window.setView(gameView);
 	m_Grid->render(m_window, gameView, false);
-	m_powerups->render(m_window);
-	for (int i = 0; i < nests.size(); i++)
+	int i;
+	for (i = 0; i < nests.size(); i++)
 	{
 		nests[i]->render(m_window);
+
 	}
 	m_player->render(m_window);
-	for (int i = 0; i < workers.size(); i++)
+	for (i = 0; i < workers.size(); i++)
 	{
 		
 		workers[i]->render(m_window);
 	}
 
-	for (int i = 0; i < m_sweeper.size(); i++)
+	for (i = 0; i < m_sweeper.size(); i++)
 	{
 		m_sweeper[i]->render(m_window);
+	}
+	for (i = 0; i < m_powerups.size(); i++)
+	{
+		m_powerups[i]->render(m_window);
 	}
 	m_window.setView(miniMapView);
 

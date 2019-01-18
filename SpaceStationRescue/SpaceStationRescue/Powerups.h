@@ -15,16 +15,18 @@ enum Powerup {
 class Powerups
 {
 public:
-	Powerups(int state, sf::Vector2f pos);
+	Powerups(int state);
 	~Powerups();
 	void update();
 	void render(sf::RenderWindow &window);
 	sf::Vector2f getPosition();
 	Powerup getState();
 	void setState(int S);
-
+	int pGridX;
+	int pGridY;
 	bool collected;
-	Powerup currentPowerup;
+	bool shrink = false;
+	Powerup currentPowerup = MORESHOTS;
 private:
 	void setImage(Powerup S);
 	
@@ -33,9 +35,11 @@ private:
 	float maxRotation;
 	float m_scale;
 	sf::Texture PowerupTxt;
+	sf::Texture PowerupTxt2;
+	sf::Texture PowerupTxt3;
+	sf::Texture PowerupTxt4;
 	sf::Sprite PowerupSprite;
 	sf::RectangleShape p_shape;
 	Grid *m_Grid;
-	int pGridX;
-	int pGridY;
+	
 };

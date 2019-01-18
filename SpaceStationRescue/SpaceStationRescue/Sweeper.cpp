@@ -2,7 +2,7 @@
 
 Sweeper::Sweeper(std::vector<Worker*> &m_worker):
 	m_velocity(0,0),
-	maxSpeed(3.0f),
+	maxSpeed(4.0f),
 	maxRotation(360),
 	rotation(0),
 	speed(2.0f),
