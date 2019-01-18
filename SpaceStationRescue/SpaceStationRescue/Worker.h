@@ -4,6 +4,7 @@
 #include "Grid.h"
 #include <SFML\Config.hpp>
 #include <string>
+#include "Player.h"
 
 
 class Worker
@@ -12,11 +13,11 @@ public:
 	Worker(Grid &m_grid);
 	~Worker();
 
-	void update();
+	void update(Player &m_player);
 	void render(sf::RenderWindow &window);
 	float getRandom(int x, int y);
 	sf::Vector2f getPosition();
-	void collision();
+	void collision(Player &m_player);
 
 	int count = 0;
 	int spawn =0;

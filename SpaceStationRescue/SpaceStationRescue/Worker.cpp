@@ -32,7 +32,7 @@ Worker::~Worker()
 
 }
 
-void Worker::collision()
+void Worker::collision(Player &m_player)
 {
 	if (m_Grid->m_tileGrid[pGridX][pGridY - 1]->getCurrentState() == OBSTACLE)
 	{
@@ -56,6 +56,19 @@ void Worker::collision()
 		m_position.x += 5;
 	}
 
+	
+		if (workerSprite.getPosition().x - m_Grid->m_tileSize / 2 < m_player.getPosition().x + m_Grid->m_tileSize / 2 &&
+			workerSprite.getPosition().x + m_Grid->m_tileSize / 2 > m_player.getPosition().x - m_Grid->m_tileSize / 2 &&
+			workerSprite.getPosition().y - m_Grid->m_tileSize / 2 < m_player.getPosition().y + m_Grid->m_tileSize / 2 &&
+			workerSprite.getPosition().y + m_Grid->m_tileSize / 2 > m_player.getPosition().y - m_Grid->m_tileSize / 2)
+		{
+			if (alive)
+			{
+				alive = false;
+				m_player.score += 10;
+			}
+		}
+
 }
 
 sf::Vector2f Worker::getPosition()
@@ -63,13 +76,13 @@ sf::Vector2f Worker::getPosition()
 	return workerSprite.getPosition();
 }
 
-void Worker::update()
+void Worker::update(Player &m_player)
 {
 	if (alive)
 	{
 		pGridX = floor(workerSprite.getPosition().x / m_Grid->m_tileSize);
 		pGridY = floor(workerSprite.getPosition().y / m_Grid->m_tileSize);
-		collision();
+		collision(m_player);
 		m_position.x += velocity.x * 30 / 100;
 		m_position.y += velocity.y * 30 / 100;
 		workerSprite.setPosition(m_position.x, m_position.y);

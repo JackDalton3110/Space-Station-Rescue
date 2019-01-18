@@ -44,9 +44,9 @@ Game::Game() :
 	}
 	
 	
+
 	m_player = new Player(*m_Grid);
 	
-
 	miniMapView.setViewport(sf::FloatRect(0.64f, 0.02f, 0.3f, 0.3f));
 	miniMapView.setSize(3750, 3750);
 	miniMapView.setCenter(1875, 1875);
@@ -182,7 +182,6 @@ void Game::processGameEvents(sf::Event& event)
 
 				m_Grid->m_tileGrid[m_tilePosX][m_tilePosY]->setCurrentState(START);
 
-				//getPath(m_tilePosX, m_tilePosY);
 				m_leftPress = true;
 			}
 
@@ -253,8 +252,14 @@ void Game::update(double dt)
 {
 
 	m_player->update(dt, m_powerups);
+	gameView.setCenter(m_player->getPosition());
+	
+	for (int i = 0; i < workers.size(); i++)
+	{
+		workers[i]->update(*m_player);
+	}
 
-	if (m_player->m_healthSystem->m_healthValue > 0)
+	if (m_player->m_healthSystem->m_healthValue > 0 || !m_player->score==200)
 	{
 		m_playerMM.setPosition(m_player->getPosition());
 		m_playerMM.setRotation(m_player->getRotation());
@@ -279,10 +284,7 @@ void Game::update(double dt)
 		m_predatorMM3.setRotation(predators[2]->getRotation());
 		
 		gameView.setCenter(m_player->getPosition());
-		for (int i = 0; i < workers.size(); i++)
-		{
-			workers[i]->update();
-		}
+		
 		for (int i = 0; i < nests.size(); i++)
 		{
 			nests[i]->update(*m_player, dt);
@@ -299,7 +301,6 @@ void Game::update(double dt)
 		}
 
 	}
-	
 	
 }
 
@@ -338,7 +339,22 @@ void Game::render()
 		m_text.setPosition(m_player->getPosition().x - 400, m_player->getPosition().y - 100);
 		m_window.draw(m_text);
 	}
-
+	if (m_player->score == 200)
+	{
+		m_window.draw(m_gameOverBG);
+		m_text.setFont(m_font);
+		m_text2.setFont(m_font);
+		m_text.setString("ALL WORKERS ARE SAFE");
+		m_text2.setString("YOU WIN!");
+		m_text2.setCharacterSize(100);
+		m_text.setCharacterSize(100);
+		m_text.setFillColor(sf::Color::Green);
+		m_text2.setFillColor(sf::Color::Green);
+		m_text.setPosition(m_player->getPosition().x - 600, m_player->getPosition().y - 100);
+		m_text2.setPosition(m_player->getPosition().x - 200, m_player->getPosition().y);
+		m_window.draw(m_text);
+		m_window.draw(m_text2);
+	}
 
 	for (i = 0; i < m_sweeper.size(); i++)
 	{
@@ -355,10 +371,6 @@ void Game::render()
 	for (int i = 0; i < m_Grid->m_spawnPoints.size(); i++) {
 		m_Grid->m_spawnPoints[i]->render(m_window);
 	}
-
-	//for (int i = 0; i < m_Grid->m_nestPoints.size(); i++) {
-	//	m_Grid->m_nestPoints[i]->render(m_window);
-	//}
 
 	for (int i = 0; i < nests.size(); i++)
 	{
@@ -382,26 +394,11 @@ void Game::render()
 		m_window.draw(m_predatorMM3);
 	}
 	
-	if (m_player->m_healthSystem->m_healthValue <= 0)
+	if (m_player->m_healthSystem->m_healthValue <= 0 || m_player->score==200)
 	{
 		m_window.draw(m_gameOverBG);
 	
 	}
-
-	//for (int i = 0; i < workers.size(); i++)
-	//{
-		//workers[i]->render(m_window);
-	//}
-	/*m_worker->render(m_window);*/
-	//m_player->render(m_window);
-
-	/*for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}*/
-	//	m_enemyPursue->render(m_window);
-	//m_enemy->render(m_window);
-	//m_enemySeek->render(m_window);
-	//m_enemyFlee->render(m_window);
+	
 	m_window.display();
 }
