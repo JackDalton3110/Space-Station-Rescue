@@ -1,12 +1,13 @@
 #include "Nests.h"
 #include <cstdlib>
 
-Nests::Nests(int m_spawnSpot):
+Nests::Nests(int m_spawnSpot, Grid &m_grid):
 	defendRad(400),
-	spawnSpot(m_spawnSpot)
+	spawnSpot(m_spawnSpot),
+	m_Grid(&m_grid)
 {
-	m_Grid = new Grid();
-	m_bullet = new Bullet();
+	
+	m_bullet = new Bullet(*m_Grid);
 	
 	defendRad.setFillColor(sf::Color(0,100,0,70));
 	spawnNests();
@@ -77,6 +78,7 @@ void Nests::update(Player &m_player, double dt)
 		cumulativeTime += dt/1000;
 	}
 
+
 	if (cumulativeTime >= 5)
 	{
 		m_bullet->nestShot = false;
@@ -119,21 +121,6 @@ void Nests::collision(Player & m_player)
 		}
 	}
 
-	/*for (int i = 0; i < nests.size(); i++) {
-
-		if (getPosition().x - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().x + m_grid->m_tileSize / 2 &&
-			getPosition().x + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().x - m_grid->m_tileSize / 2 &&
-			getPosition().y - m_grid->m_tileSize / 2 < nests[i].m_bullet->getPosition().y + m_grid->m_tileSize / 2 &&
-			getPosition().y + m_grid->m_tileSize / 2 > nests[i].m_bullet->getPosition().y - m_grid->m_tileSize / 2) {
-			if (nests[i].m_bullet->nestShot == true)
-			{
-				m_healthSystem->m_healthValue--;
-
-				nests[i].m_bullet->nestShot = false;
-			}
-
-		}
-	}*/
 
 	if (m_bullet->getPosition().x - m_Grid->m_tileSize / 2 < m_player.getPosition().x + m_Grid->m_tileSize / 2 &&
 		m_bullet->getPosition().x + m_Grid->m_tileSize / 2 > m_player.getPosition().x - m_Grid->m_tileSize / 2 &&
@@ -150,6 +137,11 @@ void Nests::collision(Player & m_player)
 			m_bullet->nestShot = false;
 		}
 	}
+}
+
+sf::Vector2f Nests::getPosition()
+{
+	return defendRad.getPosition();
 }
 
 void Nests::render(sf::RenderWindow &m_window)

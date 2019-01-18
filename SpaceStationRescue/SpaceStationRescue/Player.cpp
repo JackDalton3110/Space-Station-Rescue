@@ -1,14 +1,15 @@
 #include "Player.h"
 #include <iostream>
-Player::Player() :
-	m_position(3000, 3000),
+Player::Player(Grid &m_Grid) :
+	m_position(2000, 2000),
 	m_velocity(0,0),
 	shape(100.0),
 	m_rotation(0),
-	m_maxSpeed(50.0),
+	m_maxSpeed(40.0),
 	shieldcrc(60),
 	m_speed(0),
-	m_heading(0,0)
+	m_heading(0,0),
+	m_grid(&m_Grid)
 
 {
 	if (!m_texture.loadFromFile("./resources/Player.png")) {
@@ -21,10 +22,11 @@ Player::Player() :
 	m_sprite.setRotation(90);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
-	m_grid = new Grid();
+
 	shieldcrc.setFillColor(sf::Color(0, 0, 100, 60));
 	shieldcrc.setPosition(m_sprite.getPosition().x-m_grid->m_tileSize/2, m_sprite.getPosition().y-m_grid->m_tileSize/2);
 	shieldcrc.setOrigin(30, 30);
+
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY= m_position.y / m_grid->m_tileSize;
 
@@ -34,7 +36,7 @@ Player::Player() :
 
 	for (int i = 0; i < 3; i++)
 	{
-		m_bullet.push_back(new Bullet());
+		m_bullet.push_back(new Bullet(*m_grid));
 	}
 	
 
@@ -94,6 +96,11 @@ void Player::decreaseRotation()
 
 void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 {
+	if (m_healthSystem->m_healthValue > 0)
+	{
+		pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
+		pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
+
 
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
@@ -159,48 +166,51 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		
 	}
 
-	m_heading.x = cos(m_rotation * (3.14 / 180));
-	m_heading.y = sin(m_rotation * (3.14 / 180));
 
-	m_velocity = m_heading * m_speed;
-	
-	m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x * (dt / 100), m_sprite.getPosition().y + m_velocity.y * (dt / 100));
-	m_sprite.setRotation(m_rotation);
+		m_heading.x = cos(m_rotation * (3.14 / 180));
+		m_heading.y = sin(m_rotation * (3.14 / 180));
 
-	respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
-	if (bulletindex <= 2)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false )
+		m_velocity = m_heading * m_speed;
+
+		m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x * (dt / 100), m_sprite.getPosition().y + m_velocity.y * (dt / 100));
+		m_sprite.setRotation(m_rotation);
+
+		respawn(m_sprite.getPosition().x, m_sprite.getPosition().y);
+		if (bulletindex <= 2)
 		{
-			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_bullet[bulletindex]->getState() == false && fired == false)
+			{
 				m_bullet[bulletindex]->shoot(m_heading, m_sprite.getPosition(), m_rotation);
 				bulletindex++;
 				fired = true;
+
+			}
 		}
-	}
-	else
-		bulletindex = 0;
+		else
+			bulletindex = 0;
+
+
+		for (int i = 0; i < m_bullet.size(); i++)
+		{
+			if (m_bullet[i]->getState() == true) {
+
+				m_bullet[i]->update(dt);
+
+			}
+		}
+
+
 	
 
-	for (int i = 0; i < m_bullet.size(); i++)
-	{
-		if (m_bullet[i]->getState() == true){
-
-			m_bullet[i]->update(dt);
-			
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == false && fired == true)
+		{
+			fired = false;
 		}
 	}
-
 
 	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
 	m_healthSystem->update();
-
-	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Space)==false && fired == true)
-	{
-		fired = false;
-	}
-
-
+	
 }
 
 void Player::respawn(float x, float y)
@@ -299,16 +309,23 @@ void Player::respawn(float x, float y)
 		  }
 	  }
 
+
 }
 
 
 void Player::render(sf::RenderWindow &window)
 {
-	window.draw(m_sprite);
+
+	if (m_healthSystem->m_healthValue > 0)
+	{
+		window.draw(m_sprite);
+	}
+	
 	if (shield)
 	{
 		window.draw(shieldcrc);
 	}
+
 	m_healthSystem->render(window);
 
 	for (int i = 0; i < m_bullet.size(); i++)

@@ -18,6 +18,7 @@
 //#include "Seek.h"
 //#include "Wander.h"
 #include "Grid.h"
+#include "Predator.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -41,9 +42,15 @@ protected:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Nests*> nests;
+
+	std::vector<Predator*> predators;
+	std::vector<sf::Sprite> predSprite;
+	Predator* m_predator;
+
+ 	sf::Vector2i m_mousePos;
+
 	std::vector<Sweeper*> m_sweeper;
 	std::vector<Powerups*> m_powerups;
-	sf::Vector2i m_mousePos;
 
 	Tile * m_startTile;
 	Tile * m_goalTile;
@@ -71,6 +78,15 @@ protected:
 	sf::Sprite m_playerMM;
 	sf::Texture m_playerMMT;
 
+	sf::Sprite m_predatorMM;
+	sf::Texture m_predatorMMT;
+
+	sf::Sprite m_predatorMM2;
+	sf::Texture m_predatorMMT2;
+
+	sf::Sprite m_predatorMM3;
+	sf::Texture m_predatorMMT3;
+
 	sf::Sprite m_MM;
 	sf::Texture m_MMT;
 
@@ -79,6 +95,13 @@ protected:
 
 	int spawnSpot;
 
+	int previousX;
+	int previousY;
+
+	sf::RectangleShape m_gameOverBG;
+
+	sf::Font m_font;
+	sf::Text m_text;
 
 };
 #endif // !GAME

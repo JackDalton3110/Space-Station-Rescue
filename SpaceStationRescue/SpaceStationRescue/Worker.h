@@ -9,7 +9,7 @@
 class Worker
 {
 public:
-	Worker();
+	Worker(Grid &m_grid);
 	~Worker();
 
 	void update();

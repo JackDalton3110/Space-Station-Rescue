@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nests.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Predator.cpp" />
     <ClCompile Include="Powerups.cpp" />
     <ClCompile Include="Sweeper.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -166,11 +167,13 @@
     <ClInclude Include="Nests.h" />
     <ClInclude Include="HealthSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Predator.h" />
     <ClInclude Include="Sweeper.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Worker.h" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="resources\Adventure.otf" />
     <Font Include="resources\OCRAEXT.TTF" />
   </ItemGroup>
   <ItemGroup>

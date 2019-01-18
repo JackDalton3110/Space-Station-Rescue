@@ -15,23 +15,26 @@
 class Nests
 {
 public:
-	Nests(int m_spawnSpot);
+	Nests(int m_spawnSpot, Grid &m_grid);
 	~Nests();
 
 	void update(Player & m_player, double dt);
 	void render(sf::RenderWindow &m_window);
 	void collision(Player & m_player);
 	void spawnNests();
+	sf::Vector2f getPosition();
 	int spawnSpot;
+
 	sf::Vertex line[2];
 	//State m_currentState = PLAYER;
 	HealthSystem *m_healthSystem;
 	int m_gridX;
 	int m_gridY;
 	Bullet *m_bullet;
+	sf::Vector2f m_position;
 
 private:
-	sf::Vector2f m_position;
+	
 	std::vector<int> usedSpawns;
 	sf::CircleShape defendRad;
 	bool shot,attack,time;

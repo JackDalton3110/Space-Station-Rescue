@@ -33,6 +33,8 @@ public:
 	void mouseDetection(sf::Vector2i mousePos, int val);
 	void setRotation(float rot);
 	void setCost(int cost);
+	void setVelocity(int x, int y);
+	sf::Vector2f getVelocity();
 	void setPrevious(int x, int y);
 	int getCost();
 
@@ -71,6 +73,8 @@ public:
 	sf::RectangleShape vector;
 
 	std::pair < int, int> m_previous;
+
+	sf::Vector2f m_velocity;
 
 private:
 

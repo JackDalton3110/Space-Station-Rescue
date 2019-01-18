@@ -19,6 +19,7 @@ public:
 
 	void processGameEvents(sf::Event& event);
 	void initGrid(int posX, int posY);
+	void updateCost(int posX, int posY, int radius);
 	static const int m_gridSize = 55;
 	static const int m_tileSize = 68.2;
 	Tile *m_tileGrid[m_gridSize][m_gridSize];
@@ -29,7 +30,7 @@ public:
 	std::ofstream myMap;
 
 private:
-	
+
 	void processEvents();
 	void reset();
 	void getPath(Tile m_startTile);
@@ -48,6 +49,7 @@ protected:
 
 	Tile * m_startTile;
 	Tile * m_goalTile;
+
 	sf::Font m_font;
 
 	bool m_leftPress = false;

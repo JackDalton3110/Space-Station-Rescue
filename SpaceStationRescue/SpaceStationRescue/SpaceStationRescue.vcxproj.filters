@@ -28,6 +28,7 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Predator.cpp">
     <ClCompile Include="Sweeper.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -60,6 +61,7 @@
     <ClInclude Include="Worker.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Predator.h">
     <ClInclude Include="Sweeper.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -106,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\OCRAEXT.TTF">
+      <Filter>Resources</Filter>
+    </Font>
+    <Font Include="resources\Adventure.otf">
       <Filter>Resources</Filter>
     </Font>
   </ItemGroup>

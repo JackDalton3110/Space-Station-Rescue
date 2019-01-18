@@ -1,13 +1,14 @@
 #include "Bullet.h"
 #include <iostream>
-Bullet::Bullet() :
+Bullet::Bullet(Grid &m_Grid) :
 	m_position(900, 500),
 	m_velocity(0, 0),
 	shape(100.0),
 	m_rotation(0),
 	m_maxSpeed(20.0),
 	m_speed(100),
-	m_heading(0, 0)
+	m_heading(0, 0),
+	m_grid(&m_Grid)
 
 {
 	if (!m_texture.loadFromFile("./resources/bullet.png")) {
@@ -20,7 +21,6 @@ Bullet::Bullet() :
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
 
-	m_grid = new Grid();
 
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY = m_position.y / m_grid->m_tileSize;
@@ -46,7 +46,14 @@ void Bullet::shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rota
 {
 	if (active == false)
 	{
-		m_velocity = m_heading * m_speed;
+		/*if (m_heading.x >= 0 && m_heading.y >= 0)
+		{*/
+			m_velocity = m_heading * m_speed;
+	/*	}
+		else {
+			m_velocity = m_heading * -m_speed;
+		}*/
+		
 
 		m_sprite.setPosition(m_position);
 		m_sprite.setRotation(m_rotation);
