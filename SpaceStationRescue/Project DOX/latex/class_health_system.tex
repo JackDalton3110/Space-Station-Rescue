@@ -1,0 +1,151 @@
+\hypertarget{class_health_system}{}\section{Health\+System Class Reference}
+\label{class_health_system}\index{HealthSystem@{HealthSystem}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_health_system_abbcc6e0dd6abe767873ee03bc0cdb656}\label{class_health_system_abbcc6e0dd6abe767873ee03bc0cdb656}} 
+{\bfseries Health\+System} (float width, float height)
+\item 
+void \mbox{\hyperlink{class_health_system_a9378f97771d046d67c794c3ec08f3d9e}{update}} ()
+\begin{DoxyCompactList}\small\item\em If the healthsystem state is set to player, the hearts png is chnaged depending on the helthvalue If the healthsystem state is set to enemy, the percentage that the health bar is filled is changed depending on the health value \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_system_ae0ef2aa8b9b040f3b973a3f220b5b19e}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders and sets the position of the hearts if state is player renders and sets the position of the healthbar if state is enemy \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_system_ad07dc3ea58beaead2f660a8f11dc5997}{set\+Position}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Method that sets the position of the health bar / hearts \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_system_a01566694009124a5994accfa1cecb687}{set\+State}} (hs\+State state)
+\begin{DoxyCompactList}\small\item\em Sets the state of the healthsystem \end{DoxyCompactList}\item 
+hs\+State \mbox{\hyperlink{class_health_system_ab64ef1ddec39477ac49dcf6390294201}{get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Returns the state of the health system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_health_system_a3aee22fae436dc4966caf0726dcbe9bb}\label{class_health_system_a3aee22fae436dc4966caf0726dcbe9bb}} 
+bool {\bfseries dead} = false
+\item 
+\mbox{\Hypertarget{class_health_system_a79423a4c710bc6bec6876e673d780fc5}\label{class_health_system_a79423a4c710bc6bec6876e673d780fc5}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_health_system_af5efc6a207dcc25be3c1d89cdbee4d5f}\label{class_health_system_af5efc6a207dcc25be3c1d89cdbee4d5f}} 
+int {\bfseries m\+\_\+health\+Value}
+\item 
+\mbox{\Hypertarget{class_health_system_a3c401e0104c299b34ccf198b1045ffa7}\label{class_health_system_a3c401e0104c299b34ccf198b1045ffa7}} 
+sf\+::\+Sprite {\bfseries health\+Sprite}
+\item 
+\mbox{\Hypertarget{class_health_system_a56f0a0b1991da5b5c3a4cfd90f1fdf2f}\label{class_health_system_a56f0a0b1991da5b5c3a4cfd90f1fdf2f}} 
+hs\+State {\bfseries m\+\_\+current\+State} = P\+L\+A\+Y\+ER
+\item 
+\mbox{\Hypertarget{class_health_system_a199a775106497e622f97b5e0e6bb1034}\label{class_health_system_a199a775106497e622f97b5e0e6bb1034}} 
+float {\bfseries m\+\_\+hb\+Width}
+\item 
+\mbox{\Hypertarget{class_health_system_a8fd8c5d1b85b0abab2b3c18d9dbc0520}\label{class_health_system_a8fd8c5d1b85b0abab2b3c18d9dbc0520}} 
+float {\bfseries m\+\_\+hb\+Height}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_health_system_a3ab0f2f933ddf8574d0814ac7d4c73fc}\label{class_health_system_a3ab0f2f933ddf8574d0814ac7d4c73fc}} 
+sf\+::\+Texture {\bfseries health3\+\_\+0\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_ac003fc2293955dc5b2e27f0b6af93352}\label{class_health_system_ac003fc2293955dc5b2e27f0b6af93352}} 
+sf\+::\+Texture {\bfseries health2\+\_\+5\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_aa7bf621c91b4117cb051356fef728d40}\label{class_health_system_aa7bf621c91b4117cb051356fef728d40}} 
+sf\+::\+Texture {\bfseries health2\+\_\+0\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_acd0781be4853a6fd3d8973e0b7f70c72}\label{class_health_system_acd0781be4853a6fd3d8973e0b7f70c72}} 
+sf\+::\+Texture {\bfseries health1\+\_\+5\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_ae0839577024e6766584dd4ceb9b9f483}\label{class_health_system_ae0839577024e6766584dd4ceb9b9f483}} 
+sf\+::\+Texture {\bfseries health1\+\_\+0\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_a2771af7716d563ad5b9faa79f15fcb66}\label{class_health_system_a2771af7716d563ad5b9faa79f15fcb66}} 
+sf\+::\+Texture {\bfseries health0\+\_\+5\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_a44205bf34f766aa6dcd6b04f684bd2b5}\label{class_health_system_a44205bf34f766aa6dcd6b04f684bd2b5}} 
+sf\+::\+Texture {\bfseries health0\+\_\+0\+Txt}
+\item 
+\mbox{\Hypertarget{class_health_system_a769daa2b7d445bb5a00bc6ede3db44b4}\label{class_health_system_a769daa2b7d445bb5a00bc6ede3db44b4}} 
+sf\+::\+Rectangle\+Shape {\bfseries outer\+Rect}
+\item 
+\mbox{\Hypertarget{class_health_system_acaa0c164ecfa5ca2bb2b58858f98be35}\label{class_health_system_acaa0c164ecfa5ca2bb2b58858f98be35}} 
+sf\+::\+Rectangle\+Shape {\bfseries inner\+Rect}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_health_system_ab64ef1ddec39477ac49dcf6390294201}\label{class_health_system_ab64ef1ddec39477ac49dcf6390294201}} 
+\index{HealthSystem@{HealthSystem}!getState@{getState}}
+\index{getState@{getState}!HealthSystem@{HealthSystem}}
+\subsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily hs\+State Health\+System\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the state of the health system 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_health_system_ae0ef2aa8b9b040f3b973a3f220b5b19e}\label{class_health_system_ae0ef2aa8b9b040f3b973a3f220b5b19e}} 
+\index{HealthSystem@{HealthSystem}!render@{render}}
+\index{render@{render}!HealthSystem@{HealthSystem}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Health\+System\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Renders and sets the position of the hearts if state is player renders and sets the position of the healthbar if state is enemy 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_health_system_ad07dc3ea58beaead2f660a8f11dc5997}\label{class_health_system_ad07dc3ea58beaead2f660a8f11dc5997}} 
+\index{HealthSystem@{HealthSystem}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!HealthSystem@{HealthSystem}}
+\subsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Health\+System\+::set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+Method that sets the position of the health bar / hearts 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_health_system_a01566694009124a5994accfa1cecb687}\label{class_health_system_a01566694009124a5994accfa1cecb687}} 
+\index{HealthSystem@{HealthSystem}!setState@{setState}}
+\index{setState@{setState}!HealthSystem@{HealthSystem}}
+\subsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Health\+System\+::set\+State (\begin{DoxyParamCaption}\item[{hs\+State}]{state }\end{DoxyParamCaption})}
+
+
+
+Sets the state of the healthsystem 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_health_system_a9378f97771d046d67c794c3ec08f3d9e}\label{class_health_system_a9378f97771d046d67c794c3ec08f3d9e}} 
+\index{HealthSystem@{HealthSystem}!update@{update}}
+\index{update@{update}!HealthSystem@{HealthSystem}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Health\+System\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+If the healthsystem state is set to player, the hearts png is chnaged depending on the helthvalue If the healthsystem state is set to enemy, the percentage that the health bar is filled is changed depending on the health value 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Health\+System.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Health\+System.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,211 @@
+\hypertarget{class_nests}{}\section{Nests Class Reference}
+\label{class_nests}\index{Nests@{Nests}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_nests_ae9e040d5e6f53f7390fa25a909db6cf4}{Nests}} (int m\+\_\+spawn\+Spot, \mbox{\hyperlink{class_grid}{Grid}} \&m\+\_\+grid)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_nests}{Nests}} contructor method Passes in which nest spot will be active Passes in the grid after it is created \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nests_a90eb0853ddad202743d19375b9d8d76b}{update}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player, double dt)
+\begin{DoxyCompactList}\small\item\em Updates the nest values while the game is still active and the nest is alive \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nests_afc6913bd1628de06319db793053adb79}{render}} (sf\+::\+Render\+Window \&m\+\_\+window)
+\begin{DoxyCompactList}\small\item\em Renders the nest, radius, Line of sight to the player and its bullet \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nests_a524f84ef21f6cf7943f2a82eecc1d18e}{collision}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Checks for collision between the nests bullet and the player If the nests bullet collides with the player the players health is decremented Checks for collsision between the players bullet and the nest If the player\textquotesingle{}s bullet hits the nest the nests\textquotesingle{} health is decremented \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_nests_a2d63aa3b2e3a72954f995485b173e5f1}{spawn\+Nests}} ()
+\begin{DoxyCompactList}\small\item\em Sets a radius around active \mbox{\hyperlink{class_nests}{Nests}} Gives the \mbox{\hyperlink{class_nests}{Nests}} a health system to track how much health they have Assigns bullet to fire seeking bullet from this position \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_nests_a3869bcee468b9ecfdb4200fcb6857c5d}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Returns the position of the nest \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_nests_a0c635928bdc0f7ef0374fe78e34843ae}\label{class_nests_a0c635928bdc0f7ef0374fe78e34843ae}} 
+int {\bfseries spawn\+Spot}
+\item 
+\mbox{\Hypertarget{class_nests_a38ea59b54dd213b300f2b3da3b0e79ce}\label{class_nests_a38ea59b54dd213b300f2b3da3b0e79ce}} 
+sf\+::\+Vertex {\bfseries line} \mbox{[}2\mbox{]}
+\item 
+\mbox{\Hypertarget{class_nests_a9dbedd161d8ee39de58a662110635661}\label{class_nests_a9dbedd161d8ee39de58a662110635661}} 
+\mbox{\hyperlink{class_health_system}{Health\+System}} $\ast$ {\bfseries m\+\_\+health\+System}
+\item 
+\mbox{\Hypertarget{class_nests_a3aadebbd4c949b83557e020b9f608f5e}\label{class_nests_a3aadebbd4c949b83557e020b9f608f5e}} 
+int {\bfseries m\+\_\+gridX}
+\item 
+\mbox{\Hypertarget{class_nests_ad9528611a051cd31d323ebd6fc4908f9}\label{class_nests_ad9528611a051cd31d323ebd6fc4908f9}} 
+int {\bfseries m\+\_\+gridY}
+\item 
+\mbox{\Hypertarget{class_nests_aff13627e988c12e514fa45c2c9517a94}\label{class_nests_aff13627e988c12e514fa45c2c9517a94}} 
+\mbox{\hyperlink{class_bullet}{Bullet}} $\ast$ {\bfseries m\+\_\+bullet}
+\item 
+\mbox{\Hypertarget{class_nests_af75b4a367391b43c4748745ce85195a3}\label{class_nests_af75b4a367391b43c4748745ce85195a3}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_nests_a0c7331f3aad39acda6c56b93a9e2acdf}\label{class_nests_a0c7331f3aad39acda6c56b93a9e2acdf}} 
+bool {\bfseries in\+View} (sf\+::\+Vector2f position)
+\item 
+void \mbox{\hyperlink{class_nests_a288c3f8242ce492434df30d8204c10ca}{Attack}} (sf\+::\+Vector2f pos)
+\begin{DoxyCompactList}\small\item\em Attacks the player once they entered the radius of the nest Fires one bullet at a time \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_nests_a79af2d2666f61120964f8617d69923af}\label{class_nests_a79af2d2666f61120964f8617d69923af}} 
+std\+::vector$<$ int $>$ {\bfseries used\+Spawns}
+\item 
+\mbox{\Hypertarget{class_nests_a815d61cb73c4c8b5e6d81659910bca5c}\label{class_nests_a815d61cb73c4c8b5e6d81659910bca5c}} 
+sf\+::\+Circle\+Shape {\bfseries defend\+Rad}
+\item 
+\mbox{\Hypertarget{class_nests_a968b732d1583c20b595bda0441c1a5b8}\label{class_nests_a968b732d1583c20b595bda0441c1a5b8}} 
+bool {\bfseries shot}
+\item 
+\mbox{\Hypertarget{class_nests_a53331ada104f0fdefd4983e44b2eeefd}\label{class_nests_a53331ada104f0fdefd4983e44b2eeefd}} 
+bool {\bfseries attack}
+\item 
+\mbox{\Hypertarget{class_nests_a6b29f7ac60a1f8be8dbe3e2c058c9bbd}\label{class_nests_a6b29f7ac60a1f8be8dbe3e2c058c9bbd}} 
+bool {\bfseries time}
+\item 
+\mbox{\Hypertarget{class_nests_a49ec5c5da63d642bae141d1353037cc9}\label{class_nests_a49ec5c5da63d642bae141d1353037cc9}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+\+Grid}
+\item 
+\mbox{\Hypertarget{class_nests_a5fe276e5cc0d5642238e0f8b57f36946}\label{class_nests_a5fe276e5cc0d5642238e0f8b57f36946}} 
+float {\bfseries dist}
+\item 
+\mbox{\Hypertarget{class_nests_a56281e38587115e46391dd3824fbd84d}\label{class_nests_a56281e38587115e46391dd3824fbd84d}} 
+float {\bfseries dx}
+\item 
+\mbox{\Hypertarget{class_nests_aa7d2eff8eff0e13035ac4de61d0edb33}\label{class_nests_aa7d2eff8eff0e13035ac4de61d0edb33}} 
+float {\bfseries dy}
+\item 
+\mbox{\Hypertarget{class_nests_a4ecdd359f6038aa0765c1666ea54887b}\label{class_nests_a4ecdd359f6038aa0765c1666ea54887b}} 
+sf\+::\+Clock {\bfseries bullet\+Time}
+\item 
+\mbox{\Hypertarget{class_nests_ad5c6a0818985e0bb33254fe88e6705f0}\label{class_nests_ad5c6a0818985e0bb33254fe88e6705f0}} 
+double {\bfseries cumulative\+Time}
+\item 
+\mbox{\Hypertarget{class_nests_a78f5940ae696fbba93aeedfd29b11a65}\label{class_nests_a78f5940ae696fbba93aeedfd29b11a65}} 
+float {\bfseries t2} = 0.\+0f
+\item 
+\mbox{\Hypertarget{class_nests_a75147ac5c7c2ad03180c17ecce4b3e42}\label{class_nests_a75147ac5c7c2ad03180c17ecce4b3e42}} 
+sf\+::\+Time {\bfseries delta\+Time} = sf\+::seconds(5)
+\item 
+\mbox{\Hypertarget{class_nests_a0abac4455774d103708df5811b3c9008}\label{class_nests_a0abac4455774d103708df5811b3c9008}} 
+int {\bfseries count} = 0
+\item 
+\mbox{\Hypertarget{class_nests_a11e3e93b955cad6817f3857f24996b40}\label{class_nests_a11e3e93b955cad6817f3857f24996b40}} 
+int {\bfseries seconds} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_nests_ae9e040d5e6f53f7390fa25a909db6cf4}\label{class_nests_ae9e040d5e6f53f7390fa25a909db6cf4}} 
+\index{Nests@{Nests}!Nests@{Nests}}
+\index{Nests@{Nests}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{Nests()}{Nests()}}
+{\footnotesize\ttfamily Nests\+::\+Nests (\begin{DoxyParamCaption}\item[{int}]{m\+\_\+spawn\+Spot,  }\item[{\mbox{\hyperlink{class_grid}{Grid}} \&}]{m\+\_\+grid }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_nests}{Nests}} contructor method Passes in which nest spot will be active Passes in the grid after it is created 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+spawn\+Spot} & \\
+\hline
+{\em m\+\_\+grid} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_nests_a288c3f8242ce492434df30d8204c10ca}\label{class_nests_a288c3f8242ce492434df30d8204c10ca}} 
+\index{Nests@{Nests}!Attack@{Attack}}
+\index{Attack@{Attack}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily void Nests\+::\+Attack (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Attacks the player once they entered the radius of the nest Fires one bullet at a time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_nests_a524f84ef21f6cf7943f2a82eecc1d18e}\label{class_nests_a524f84ef21f6cf7943f2a82eecc1d18e}} 
+\index{Nests@{Nests}!collision@{collision}}
+\index{collision@{collision}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily void Nests\+::collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Checks for collision between the nests bullet and the player If the nests bullet collides with the player the players health is decremented Checks for collsision between the players bullet and the nest If the player\textquotesingle{}s bullet hits the nest the nests\textquotesingle{} health is decremented 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_nests_a3869bcee468b9ecfdb4200fcb6857c5d}\label{class_nests_a3869bcee468b9ecfdb4200fcb6857c5d}} 
+\index{Nests@{Nests}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Nests\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the position of the nest 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_nests_afc6913bd1628de06319db793053adb79}\label{class_nests_afc6913bd1628de06319db793053adb79}} 
+\index{Nests@{Nests}!render@{render}}
+\index{render@{render}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Nests\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{m\+\_\+window }\end{DoxyParamCaption})}
+
+
+
+Renders the nest, radius, Line of sight to the player and its bullet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_nests_a2d63aa3b2e3a72954f995485b173e5f1}\label{class_nests_a2d63aa3b2e3a72954f995485b173e5f1}} 
+\index{Nests@{Nests}!spawnNests@{spawnNests}}
+\index{spawnNests@{spawnNests}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{spawnNests()}{spawnNests()}}
+{\footnotesize\ttfamily void Nests\+::spawn\+Nests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets a radius around active \mbox{\hyperlink{class_nests}{Nests}} Gives the \mbox{\hyperlink{class_nests}{Nests}} a health system to track how much health they have Assigns bullet to fire seeking bullet from this position 
+
+\mbox{\Hypertarget{class_nests_a90eb0853ddad202743d19375b9d8d76b}\label{class_nests_a90eb0853ddad202743d19375b9d8d76b}} 
+\index{Nests@{Nests}!update@{update}}
+\index{update@{update}!Nests@{Nests}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Nests\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Updates the nest values while the game is still active and the nest is alive 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+{\em dt} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Nests.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Nests.\+cpp\end{DoxyCompactItemize}

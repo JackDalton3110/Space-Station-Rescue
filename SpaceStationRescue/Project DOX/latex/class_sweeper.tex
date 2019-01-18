@@ -1,0 +1,300 @@
+\hypertarget{class_sweeper}{}\section{Sweeper Class Reference}
+\label{class_sweeper}\index{Sweeper@{Sweeper}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sweeper_a6c4ed469055d3da0b584bdbe32e4292a}{Sweeper}} (std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ \&m\+\_\+worker)
+\begin{DoxyCompactList}\small\item\em Constructor method; sets position, image, rotation and scale of \mbox{\hyperlink{class_sweeper}{Sweeper}} Creates radius surrounding Sweepers \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sweeper_a635c38dff02c5dcc73248b3359fdaee3}{kinematic\+Seek}} (sf\+::\+Vector2f worker\+Pos)
+\begin{DoxyCompactList}\small\item\em Method used to seek out targets. Is only active within the F\+I\+ND state Sweepers seek out workers by using the Workers\+Pos variable which is passed in. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sweeper_a8bf97c85c79f5e2fef3c9822eb304596}{get\+New\+Orientation}} (float current\+Orientation, float velocity)
+\begin{DoxyCompactList}\small\item\em Returns new orientation for Sweepers if the Sweepers Velocity is more than 0 Orientation is later used in Seek method \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sweeper_ae240040aec3dd3f3c0082e5c614fab6d}{kinematic\+Flee}} (sf\+::\+Vector2f player\+Pos)
+\begin{DoxyCompactList}\small\item\em Makes the sweeper flee from the player if the player is within a certain distance \mbox{\hyperlink{class_sweeper}{Sweeper}} prioritises fleeing the player over seeking workers. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sweeper_a8e6da37b5524e7abeacba40af61694c4}\label{class_sweeper_a8e6da37b5524e7abeacba40af61694c4}} 
+void {\bfseries cone\+Vision} (std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ workers)
+\item 
+void \mbox{\hyperlink{class_sweeper_a393a95f7cc21803e0cd542392b201b42}{update}} (sf\+::\+Vector2f pos, double dt, \mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Updates the Sweepers position, rotation, collision, and wandering behaviour \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sweeper_a8308b5cec3c19e0292947081100d777b}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders \mbox{\hyperlink{class_sweeper}{Sweeper}} while it is still alive. \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_sweeper_a9fecea4436904ee3357a0b763f2c6c76}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Returns Sweepers position \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sweeper_a798701d04c6defb37e778da27a32054d}{collision}} (\mbox{\hyperlink{class_player}{Player}} \&m\+\_\+player)
+\begin{DoxyCompactList}\small\item\em Collision checking for Sweepers. Checks for Collision between Sweepers and Walls Checks if Sweepers have collected Workers. If so it increments the Sweepers\textquotesingle{} score and removes worker. Checks if Sweepers have been shot and Destroyed by the player \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sweeper_a557be93dd6ee042a2b7323350c244ae4}{set\+Behave\+State}} (sf\+::\+Vector2f pos, behave\+State S)
+\begin{DoxyCompactList}\small\item\em Sets the Sweepers behaviour state Default state is W\+A\+N\+D\+ER If the player is near the \mbox{\hyperlink{class_sweeper}{Sweeper}} will F\+L\+EE If workers are near and the player is not the \mbox{\hyperlink{class_sweeper}{Sweeper}} will seek out workers within the F\+I\+ND state. \end{DoxyCompactList}\item 
+behave\+State \mbox{\hyperlink{class_sweeper_a97c66e303a24b8c864ef74a39337f853}{get\+Current\+State}} ()
+\begin{DoxyCompactList}\small\item\em returns the Sweepers current behave State. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sweeper_a6a5e75e9c3524ee3eb34c707bc6095e4}\label{class_sweeper_a6a5e75e9c3524ee3eb34c707bc6095e4}} 
+behave\+State {\bfseries current\+State} = W\+A\+N\+D\+ER
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_sweeper_af1af1e14967e47526c530963b93fcea9}{rotate\+Sweeper}} (sf\+::\+Vector2f vel, float rot)
+\begin{DoxyCompactList}\small\item\em Rotates sweepers based on the Sweepers velocity so that it faces the correct direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sweeper_a28db02a361ea0fd9a00952e3c5d72c23}\label{class_sweeper_a28db02a361ea0fd9a00952e3c5d72c23}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_sweeper_a57a76323f7d34dbd9bd20630c25fee36}\label{class_sweeper_a57a76323f7d34dbd9bd20630c25fee36}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_sweeper_a5cd64b3ea68fcda46c7e8bae348ce93a}\label{class_sweeper_a5cd64b3ea68fcda46c7e8bae348ce93a}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+heading}
+\item 
+\mbox{\Hypertarget{class_sweeper_a9c89ad620707534674cbecd17ef720ed}\label{class_sweeper_a9c89ad620707534674cbecd17ef720ed}} 
+float {\bfseries max\+Speed}
+\item 
+\mbox{\Hypertarget{class_sweeper_ae366514f9ec0f6b33dfe0aeca9a8bf0d}\label{class_sweeper_ae366514f9ec0f6b33dfe0aeca9a8bf0d}} 
+float {\bfseries rotation}
+\item 
+\mbox{\Hypertarget{class_sweeper_aec765160d1029ec44a5a3fc6bbbd34ed}\label{class_sweeper_aec765160d1029ec44a5a3fc6bbbd34ed}} 
+float {\bfseries max\+Rotation}
+\item 
+\mbox{\Hypertarget{class_sweeper_a1a6460039d22ba86df17403963b0ef7b}\label{class_sweeper_a1a6460039d22ba86df17403963b0ef7b}} 
+float {\bfseries speed}
+\item 
+\mbox{\Hypertarget{class_sweeper_a9104d34c8e4c80abd8c4eeb4ee39d9a7}\label{class_sweeper_a9104d34c8e4c80abd8c4eeb4ee39d9a7}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_sweeper_a5b2dbb9337c53409cac4443e01c6e398}\label{class_sweeper_a5b2dbb9337c53409cac4443e01c6e398}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_sweeper_ac644bdfe46852496c55e7ff8234708d5}\label{class_sweeper_ac644bdfe46852496c55e7ff8234708d5}} 
+float {\bfseries dist}
+\item 
+\mbox{\Hypertarget{class_sweeper_ac20fccf1b6429c60cf718b821c0d74ce}\label{class_sweeper_ac20fccf1b6429c60cf718b821c0d74ce}} 
+float {\bfseries dx}
+\item 
+\mbox{\Hypertarget{class_sweeper_a6edfbda94749969a94fe90e398b0a576}\label{class_sweeper_a6edfbda94749969a94fe90e398b0a576}} 
+float {\bfseries dy}
+\item 
+\mbox{\Hypertarget{class_sweeper_a6694fb8d6805fc4047daa30fed18134c}\label{class_sweeper_a6694fb8d6805fc4047daa30fed18134c}} 
+int {\bfseries score\+Count}
+\item 
+\mbox{\Hypertarget{class_sweeper_a97334ecbd8da6b2657ff4b4243abef5b}\label{class_sweeper_a97334ecbd8da6b2657ff4b4243abef5b}} 
+double {\bfseries cumulative\+Time}
+\item 
+\mbox{\Hypertarget{class_sweeper_a4d7698326d4308e6467290e706bac026}\label{class_sweeper_a4d7698326d4308e6467290e706bac026}} 
+sf\+::\+Texture {\bfseries sweeper\+Txt}
+\item 
+\mbox{\Hypertarget{class_sweeper_a1bbe960cea73933f579b8d8d80c43b59}\label{class_sweeper_a1bbe960cea73933f579b8d8d80c43b59}} 
+sf\+::\+Sprite {\bfseries sweeper\+Sprite}
+\item 
+\mbox{\Hypertarget{class_sweeper_ac29ff5f130f3628c3dc8a6b1f08f7304}\label{class_sweeper_ac29ff5f130f3628c3dc8a6b1f08f7304}} 
+sf\+::\+Circle\+Shape {\bfseries radius}
+\item 
+\mbox{\Hypertarget{class_sweeper_add5430965fbeeed394b95023050cec72}\label{class_sweeper_add5430965fbeeed394b95023050cec72}} 
+std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ {\bfseries workers}
+\item 
+\mbox{\Hypertarget{class_sweeper_a8d00136cb889ffb5e74c713f17d4270a}\label{class_sweeper_a8d00136cb889ffb5e74c713f17d4270a}} 
+\mbox{\hyperlink{class_health_system}{Health\+System}} $\ast$ {\bfseries m\+\_\+health\+System}
+\item 
+\mbox{\Hypertarget{class_sweeper_aa1aa2f58ac7d159f57e3cc2255cb896f}\label{class_sweeper_aa1aa2f58ac7d159f57e3cc2255cb896f}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+\+Grid}
+\item 
+\mbox{\Hypertarget{class_sweeper_a3907da71f596fd6def71c69710db4a4a}\label{class_sweeper_a3907da71f596fd6def71c69710db4a4a}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_sweeper_ab514a255f1e417c8fe0ca2d2919db97c}\label{class_sweeper_ab514a255f1e417c8fe0ca2d2919db97c}} 
+int {\bfseries p\+GridY}
+\item 
+\mbox{\Hypertarget{class_sweeper_a7fcb20248b5697445b1101f99df6b27d}\label{class_sweeper_a7fcb20248b5697445b1101f99df6b27d}} 
+bool {\bfseries alive}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sweeper_a6c4ed469055d3da0b584bdbe32e4292a}\label{class_sweeper_a6c4ed469055d3da0b584bdbe32e4292a}} 
+\index{Sweeper@{Sweeper}!Sweeper@{Sweeper}}
+\index{Sweeper@{Sweeper}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{Sweeper()}{Sweeper()}}
+{\footnotesize\ttfamily Sweeper\+::\+Sweeper (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ \&}]{m\+\_\+worker }\end{DoxyParamCaption})}
+
+
+
+Constructor method; sets position, image, rotation and scale of \mbox{\hyperlink{class_sweeper}{Sweeper}} Creates radius surrounding Sweepers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+worker} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sweeper_a798701d04c6defb37e778da27a32054d}\label{class_sweeper_a798701d04c6defb37e778da27a32054d}} 
+\index{Sweeper@{Sweeper}!collision@{collision}}
+\index{collision@{collision}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily void Sweeper\+::collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Collision checking for Sweepers. Checks for Collision between Sweepers and Walls Checks if Sweepers have collected Workers. If so it increments the Sweepers\textquotesingle{} score and removes worker. Checks if Sweepers have been shot and Destroyed by the player 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sweeper_a97c66e303a24b8c864ef74a39337f853}\label{class_sweeper_a97c66e303a24b8c864ef74a39337f853}} 
+\index{Sweeper@{Sweeper}!getCurrentState@{getCurrentState}}
+\index{getCurrentState@{getCurrentState}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{getCurrentState()}{getCurrentState()}}
+{\footnotesize\ttfamily behave\+State Sweeper\+::get\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns the Sweepers current behave State. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sweeper_a8bf97c85c79f5e2fef3c9822eb304596}\label{class_sweeper_a8bf97c85c79f5e2fef3c9822eb304596}} 
+\index{Sweeper@{Sweeper}!getNewOrientation@{getNewOrientation}}
+\index{getNewOrientation@{getNewOrientation}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{getNewOrientation()}{getNewOrientation()}}
+{\footnotesize\ttfamily float Sweeper\+::get\+New\+Orientation (\begin{DoxyParamCaption}\item[{float}]{current\+Orientation,  }\item[{float}]{vel }\end{DoxyParamCaption})}
+
+
+
+Returns new orientation for Sweepers if the Sweepers Velocity is more than 0 Orientation is later used in Seek method 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Orientation} & \\
+\hline
+{\em vel} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sweeper_a9fecea4436904ee3357a0b763f2c6c76}\label{class_sweeper_a9fecea4436904ee3357a0b763f2c6c76}} 
+\index{Sweeper@{Sweeper}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Sweeper\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns Sweepers position 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sweeper_ae240040aec3dd3f3c0082e5c614fab6d}\label{class_sweeper_ae240040aec3dd3f3c0082e5c614fab6d}} 
+\index{Sweeper@{Sweeper}!kinematicFlee@{kinematicFlee}}
+\index{kinematicFlee@{kinematicFlee}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{kinematicFlee()}{kinematicFlee()}}
+{\footnotesize\ttfamily void Sweeper\+::kinematic\+Flee (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{pos }\end{DoxyParamCaption})}
+
+
+
+Makes the sweeper flee from the player if the player is within a certain distance \mbox{\hyperlink{class_sweeper}{Sweeper}} prioritises fleeing the player over seeking workers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sweeper_a635c38dff02c5dcc73248b3359fdaee3}\label{class_sweeper_a635c38dff02c5dcc73248b3359fdaee3}} 
+\index{Sweeper@{Sweeper}!kinematicSeek@{kinematicSeek}}
+\index{kinematicSeek@{kinematicSeek}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{kinematicSeek()}{kinematicSeek()}}
+{\footnotesize\ttfamily void Sweeper\+::kinematic\+Seek (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{worker\+Pos }\end{DoxyParamCaption})}
+
+
+
+Method used to seek out targets. Is only active within the F\+I\+ND state Sweepers seek out workers by using the Workers\+Pos variable which is passed in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em worker\+Pos} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sweeper_a8308b5cec3c19e0292947081100d777b}\label{class_sweeper_a8308b5cec3c19e0292947081100d777b}} 
+\index{Sweeper@{Sweeper}!render@{render}}
+\index{render@{render}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Sweeper\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Renders \mbox{\hyperlink{class_sweeper}{Sweeper}} while it is still alive. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sweeper_af1af1e14967e47526c530963b93fcea9}\label{class_sweeper_af1af1e14967e47526c530963b93fcea9}} 
+\index{Sweeper@{Sweeper}!rotateSweeper@{rotateSweeper}}
+\index{rotateSweeper@{rotateSweeper}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{rotateSweeper()}{rotateSweeper()}}
+{\footnotesize\ttfamily float Sweeper\+::rotate\+Sweeper (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{vel,  }\item[{float}]{rot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rotates sweepers based on the Sweepers velocity so that it faces the correct direction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vel} & \\
+\hline
+{\em rot} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sweeper_a557be93dd6ee042a2b7323350c244ae4}\label{class_sweeper_a557be93dd6ee042a2b7323350c244ae4}} 
+\index{Sweeper@{Sweeper}!setBehaveState@{setBehaveState}}
+\index{setBehaveState@{setBehaveState}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{setBehaveState()}{setBehaveState()}}
+{\footnotesize\ttfamily void Sweeper\+::set\+Behave\+State (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{pos,  }\item[{behave\+State}]{S }\end{DoxyParamCaption})}
+
+
+
+Sets the Sweepers behaviour state Default state is W\+A\+N\+D\+ER If the player is near the \mbox{\hyperlink{class_sweeper}{Sweeper}} will F\+L\+EE If workers are near and the player is not the \mbox{\hyperlink{class_sweeper}{Sweeper}} will seek out workers within the F\+I\+ND state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+{\em S} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sweeper_a393a95f7cc21803e0cd542392b201b42}\label{class_sweeper_a393a95f7cc21803e0cd542392b201b42}} 
+\index{Sweeper@{Sweeper}!update@{update}}
+\index{update@{update}!Sweeper@{Sweeper}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Sweeper\+::update (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{pos,  }\item[{double}]{dt,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{m\+\_\+player }\end{DoxyParamCaption})}
+
+
+
+Updates the Sweepers position, rotation, collision, and wandering behaviour 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+{\em dt} & \\
+\hline
+{\em m\+\_\+player} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Sweeper.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Sweeper.\+cpp\end{DoxyCompactItemize}

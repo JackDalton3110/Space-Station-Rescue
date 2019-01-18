@@ -1,0 +1,240 @@
+\hypertarget{class_bullet}{}\section{Bullet Class Reference}
+\label{class_bullet}\index{Bullet@{Bullet}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bullet_a4e8c9e9ad30a2b883dfa7db4d6d9b529}\label{class_bullet_a4e8c9e9ad30a2b883dfa7db4d6d9b529}} 
+{\bfseries Bullet} (\mbox{\hyperlink{class_grid}{Grid}} \&m\+\_\+\+Grid)
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_bullet_a64e4ce634f62ab31d338bd142c1987c9}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Returns the bullets position \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_bullet_a212f3fa752a1cff3b10312795c78705d}{get\+Velocity}} ()
+\begin{DoxyCompactList}\small\item\em Returns the bullet velocity \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bullet_a1bd1e35612988f63316c8f95ac35112b}\label{class_bullet_a1bd1e35612988f63316c8f95ac35112b}} 
+void {\bfseries respawn} (float x, float y)
+\item 
+void \mbox{\hyperlink{class_bullet_a854416dc6aa91ff20858a11d0333b8cc}{update}} (double dt)
+\begin{DoxyCompactList}\small\item\em Updates the position of both heatseeking and normal bullets when their bools are true \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_acea71a980a81ac7da86099d2aa9d433c}{render}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders the bullet sprite to the screen \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_ae321c1bab25a1a9d2d9fedbdafbed2bc}{shoot}} (sf\+::\+Vector2f m\+\_\+heading, sf\+::\+Vector2f m\+\_\+position, float m\+\_\+rotation)
+\begin{DoxyCompactList}\small\item\em Function that controlls the shooting of the normal non heat seaking bullet The ships heading, position and rotation is passed in Position sets where the bullet is being fired from The heading is used to calculate the velocity of the bullet Rotation passed in is set to the rotation of the bullet sprite \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_a4315a4cef5fc227efbd64a099ac748fb}{collision\+Wall}} ()
+\begin{DoxyCompactList}\small\item\em Handles gullet collision with the world walls in 4 directions When the bullet hits a wall the active bools are set to false Mening the bullet is no longer updated or drawn \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bullet_a90ac3ad6ec7b69d9026e545f315a244f}\label{class_bullet_a90ac3ad6ec7b69d9026e545f315a244f}} 
+void {\bfseries collision\+Nest} (int x\+Pos, int y\+Pos)
+\item 
+bool \mbox{\hyperlink{class_bullet_a50c5b3bb7dfaad883ba11e06cf7ec1d1}{get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Returns the active bool for normal bullet type \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_a7a61dfd6c3d2a192a1a2b1da7c808f71}{seek\+Shoot}} (sf\+::\+Vector2f player\+Position)
+\begin{DoxyCompactList}\small\item\em Controls the shooting of the heat seeking bullet the vector passed in is where the bullet will try to go towards the bullet adjusts its heading and velocity to get to this point resulting in a seeking bullet \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bullet_ad813e052994dc9e8a7d2de8b60d01e29}\label{class_bullet_ad813e052994dc9e8a7d2de8b60d01e29}} 
+Bullet\+Type {\bfseries bullet\+State} = S\+T\+A\+N\+D\+A\+RD
+\item 
+\mbox{\Hypertarget{class_bullet_a4d75dff91affd24dbff56416a535d0eb}\label{class_bullet_a4d75dff91affd24dbff56416a535d0eb}} 
+bool {\bfseries nest\+Shot} = false
+\item 
+\mbox{\Hypertarget{class_bullet_a68d311a87ea5a50966fbfa6ace4cbb21}\label{class_bullet_a68d311a87ea5a50966fbfa6ace4cbb21}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_bullet_a9d63ff903e36d4ad9b5500c540024c36}\label{class_bullet_a9d63ff903e36d4ad9b5500c540024c36}} 
+int {\bfseries p\+GridX}
+\item 
+\mbox{\Hypertarget{class_bullet_ab8ef313cda95604f6c1de8ecf0ddc3de}\label{class_bullet_ab8ef313cda95604f6c1de8ecf0ddc3de}} 
+int {\bfseries p\+GridY}
+\item 
+\mbox{\Hypertarget{class_bullet_af049bb84d3cafeb49adbcc65939e111f}\label{class_bullet_af049bb84d3cafeb49adbcc65939e111f}} 
+bool {\bfseries active} = false
+\item 
+\mbox{\Hypertarget{class_bullet_ad596674fc2b3b7fb355a4ad2ca289a8b}\label{class_bullet_ad596674fc2b3b7fb355a4ad2ca289a8b}} 
+float {\bfseries m\+\_\+speed}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_bullet_a60bd50aace6a584421fe9012ff45aa4e}{get\+New\+Orientation}} (float current\+Orientation, float velocity)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bullet_a0066dac0e185e22972e90659efd1cffd}\label{class_bullet_a0066dac0e185e22972e90659efd1cffd}} 
+sf\+::\+Circle\+Shape {\bfseries shape}
+\item 
+\mbox{\Hypertarget{class_bullet_a86315eecca9912a6288b059bd5448287}\label{class_bullet_a86315eecca9912a6288b059bd5448287}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+rect}
+\item 
+\mbox{\Hypertarget{class_bullet_a9518e851ff433a413b281f4192893ec9}\label{class_bullet_a9518e851ff433a413b281f4192893ec9}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_bullet_a18bf31cf70e58e09e200b2e8c289d6d4}\label{class_bullet_a18bf31cf70e58e09e200b2e8c289d6d4}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_bullet_a5ff781b721a87eba76e76f51c808a405}\label{class_bullet_a5ff781b721a87eba76e76f51c808a405}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_bullet_a5adcabcb90bf792eef52718e48146387}\label{class_bullet_a5adcabcb90bf792eef52718e48146387}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_bullet_a8bc9b803eb1c50bcc2b54906323b0e29}\label{class_bullet_a8bc9b803eb1c50bcc2b54906323b0e29}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_bullet_ac73e4e6e046a1243de79282ff8cb5ae5}\label{class_bullet_ac73e4e6e046a1243de79282ff8cb5ae5}} 
+float {\bfseries D\+E\+G\+\_\+\+T\+O\+\_\+\+R\+AD}
+\item 
+\mbox{\Hypertarget{class_bullet_aae9bd6d957c5ec5f0082e93a34fc78c2}\label{class_bullet_aae9bd6d957c5ec5f0082e93a34fc78c2}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_bullet_a7e46cbed270297314307517422c873b1}\label{class_bullet_a7e46cbed270297314307517422c873b1}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_bullet_a176effb507fb7428be4ff9bb35d8cbdd}\label{class_bullet_a176effb507fb7428be4ff9bb35d8cbdd}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+heading}
+\item 
+\mbox{\Hypertarget{class_bullet_a7851af77fd661c4382ef399eb8ebc53c}\label{class_bullet_a7851af77fd661c4382ef399eb8ebc53c}} 
+\mbox{\hyperlink{class_grid}{Grid}} $\ast$ {\bfseries m\+\_\+grid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bullet_a4315a4cef5fc227efbd64a099ac748fb}\label{class_bullet_a4315a4cef5fc227efbd64a099ac748fb}} 
+\index{Bullet@{Bullet}!collisionWall@{collisionWall}}
+\index{collisionWall@{collisionWall}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{collisionWall()}{collisionWall()}}
+{\footnotesize\ttfamily void Bullet\+::collision\+Wall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Handles gullet collision with the world walls in 4 directions When the bullet hits a wall the active bools are set to false Mening the bullet is no longer updated or drawn 
+
+\mbox{\Hypertarget{class_bullet_a60bd50aace6a584421fe9012ff45aa4e}\label{class_bullet_a60bd50aace6a584421fe9012ff45aa4e}} 
+\index{Bullet@{Bullet}!getNewOrientation@{getNewOrientation}}
+\index{getNewOrientation@{getNewOrientation}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{getNewOrientation()}{getNewOrientation()}}
+{\footnotesize\ttfamily float Bullet\+::get\+New\+Orientation (\begin{DoxyParamCaption}\item[{float}]{current\+Orientation,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Orientation} & \\
+\hline
+{\em velocity} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bullet_a64e4ce634f62ab31d338bd142c1987c9}\label{class_bullet_a64e4ce634f62ab31d338bd142c1987c9}} 
+\index{Bullet@{Bullet}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Bullet\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the bullets position 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bullet_a50c5b3bb7dfaad883ba11e06cf7ec1d1}\label{class_bullet_a50c5b3bb7dfaad883ba11e06cf7ec1d1}} 
+\index{Bullet@{Bullet}!getState@{getState}}
+\index{getState@{getState}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily bool Bullet\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the active bool for normal bullet type 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bullet_a212f3fa752a1cff3b10312795c78705d}\label{class_bullet_a212f3fa752a1cff3b10312795c78705d}} 
+\index{Bullet@{Bullet}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Bullet\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the bullet velocity 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bullet_acea71a980a81ac7da86099d2aa9d433c}\label{class_bullet_acea71a980a81ac7da86099d2aa9d433c}} 
+\index{Bullet@{Bullet}!render@{render}}
+\index{render@{render}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Bullet\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption})}
+
+
+
+Renders the bullet sprite to the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bullet_a7a61dfd6c3d2a192a1a2b1da7c808f71}\label{class_bullet_a7a61dfd6c3d2a192a1a2b1da7c808f71}} 
+\index{Bullet@{Bullet}!seekShoot@{seekShoot}}
+\index{seekShoot@{seekShoot}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{seekShoot()}{seekShoot()}}
+{\footnotesize\ttfamily void Bullet\+::seek\+Shoot (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{player\+Position }\end{DoxyParamCaption})}
+
+
+
+Controls the shooting of the heat seeking bullet the vector passed in is where the bullet will try to go towards the bullet adjusts its heading and velocity to get to this point resulting in a seeking bullet 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Position} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bullet_ae321c1bab25a1a9d2d9fedbdafbed2bc}\label{class_bullet_ae321c1bab25a1a9d2d9fedbdafbed2bc}} 
+\index{Bullet@{Bullet}!shoot@{shoot}}
+\index{shoot@{shoot}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily void Bullet\+::shoot (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{m\+\_\+heading,  }\item[{sf\+::\+Vector2f}]{m\+\_\+position,  }\item[{float}]{m\+\_\+rotation }\end{DoxyParamCaption})}
+
+
+
+Function that controlls the shooting of the normal non heat seaking bullet The ships heading, position and rotation is passed in Position sets where the bullet is being fired from The heading is used to calculate the velocity of the bullet Rotation passed in is set to the rotation of the bullet sprite 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+heading} & \\
+\hline
+{\em m\+\_\+position} & \\
+\hline
+{\em m\+\_\+rotation} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bullet_a854416dc6aa91ff20858a11d0333b8cc}\label{class_bullet_a854416dc6aa91ff20858a11d0333b8cc}} 
+\index{Bullet@{Bullet}!update@{update}}
+\index{update@{update}!Bullet@{Bullet}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Bullet\+::update (\begin{DoxyParamCaption}\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Updates the position of both heatseeking and normal bullets when their bools are true 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Bullet.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+C\+A1-\/\+A\+I-\//\+Space\+Station\+Rescue/\+Space\+Station\+Rescue/Bullet.\+cpp\end{DoxyCompactItemize}
