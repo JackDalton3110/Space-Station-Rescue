@@ -19,7 +19,6 @@ public:
 	void speedDown();
 	void increaseRotation();
 	void decreaseRotation();
-	void respawn(float x, float y);
 	void update(double dt, std::vector<Powerups*>&m_powerUps);
 	void render(sf::RenderWindow &window);
 	void collision(std::vector<Powerups*>&m_powerUps, double dt);

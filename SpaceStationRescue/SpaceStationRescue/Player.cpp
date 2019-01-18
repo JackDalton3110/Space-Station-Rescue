@@ -51,21 +51,37 @@ Player::~Player()
 {
 
 }
-
+/// <summary>
+/// Returns the position of the player sprite
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Player::getPosition()
 {
 	return m_sprite.getPosition();
 }
+
+/// <summary>
+/// Returns the velocity of the player sprite
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Player::getVelocity()
 {
 	return m_velocity;
 }
 
+
+/// <summary>
+/// Returns the sprite rotation
+/// </summary>
+/// <returns></returns>
 float Player::getRotation()
 {
 	return m_sprite.getRotation();
 }
 
+/// <summary>
+/// Increases the player speed
+/// </summary>
 void Player::speedUp()
 {
 	if (m_speed < m_maxSpeed)
@@ -73,6 +89,10 @@ void Player::speedUp()
 		m_speed += 2;
 	}
 }
+
+/// <summary>
+/// Decreases the playe speed
+/// </summary>
 void Player::speedDown()
 {
 	if (m_speed > 0)
@@ -80,11 +100,19 @@ void Player::speedDown()
 		m_speed -= 2;
 	}
 }
+
+/// <summary>
+/// Increases the player rotation
+/// </summary>
 void Player::increaseRotation()
 {
 
 	m_rotation += 4.0f;
 }
+
+/// <summary>
+/// Decreases the player rotation
+/// </summary>
 void Player::decreaseRotation()
 {
 	
@@ -99,7 +127,17 @@ void Player::decreaseRotation()
 	
 	
 }
-
+/// <summary>
+/// only updates the player if the player is alive
+/// calculates the players grid position
+/// handles all keyboard input for the player
+/// updates powerups
+/// fires bullet when spacebar is clicked, allowing for 3 bullets to be fired at a time
+/// updates healthsystem position and values
+/// updates player sprite position
+/// </summary>
+/// <param name="dt"></param>
+/// <param name="m_powerUps"></param>
 void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 {
 	if (m_healthSystem->m_healthValue > 0)
@@ -210,10 +248,6 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		m_healthSystem->update();
 		playerText.setPosition(m_sprite.getPosition().x - 300, m_sprite.getPosition().y - 470);
 		playerText.setString("Score: " + std::to_string(score) + " /200");
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == false && fired == true)
-		{
-			fired = false;
-
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == false && fired == true)
 			{
@@ -222,10 +256,18 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 		}
 
 		m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
-		m_healthSystem->update();
-
-	}
+	  m_healthSystem->update();
+	
 }
+/// <summary>
+/// Handles collision with world walls in all directions 
+/// Checks the adjacent walls if they are of type obstacle and performs rectangle collision at these points 
+/// 
+/// Also checks collision with powerups, checking if its in the same grid position as the player,
+/// Checks the typr of powerup and sets timer to 0 and picked up to false
+/// </summary>
+/// <param name="m_powerUps"></param>
+/// <param name="dt"></param>
 
  void Player::collision(std::vector<Powerups*>&m_powerUps, double dt)
 {
@@ -305,7 +347,13 @@ void Player::update(double dt, std::vector<Powerups *>&m_powerUps)
 
 }
 
-
+ /// <summary>
+ /// Only draws player sprite if player is alive
+ /// only draws the player shield if shield is active
+ /// Renders healthsystem hearts to the screen as a HUD
+ /// loops through the bullet vector and renders 
+ /// </summary>
+ /// <param name="window"></param>
 void Player::render(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);

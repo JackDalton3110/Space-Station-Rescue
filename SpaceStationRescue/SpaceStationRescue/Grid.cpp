@@ -186,7 +186,22 @@ void Grid::reset()
 }
 
 
-
+/// <summary>
+/// Updates the flowfield thats used for the predator pathfinding
+/// Pos x and Pos Y is the players grid position, the player is acting as the goal to the preadtors
+/// radius is how many loops the updates cost loop does, the higher the ny,be the more of the map is updates
+/// initially the entire maps costs are updated but as the game runs more than half of the map is updated as the player moves for efficiency 
+/// 
+/// when called all the tiles that arent obstacles are set to unchecked
+/// 
+/// the tiles are then checked around the player going further away, updating the tiles costs (how far away they are from the player
+/// As it does this the rotation for the tile vector is set to point at the previous tile
+/// 
+/// These checks are done in 8 directions
+/// </summary>
+/// <param name="posX"></param>
+/// <param name="posY"></param>
+/// <param name="radius"></param>
 void Grid::updateCost(int posX, int posY, int radius)
 {
 
@@ -215,10 +230,9 @@ void Grid::updateCost(int posX, int posY, int radius)
 
 	auto iter = tileQueue.begin();
 
-	//for (; iter != endIter; iter++) {
 	while (tileQueue.size() !=0 && i < radius ) {
 		i++;
-	//	std::cout << i << std::endl;
+
 
 		if (iter->m_xPos != 0 && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->getCurrentState() != OBSTACLE && m_tileGrid[iter->m_xPos - 1][iter->m_yPos]->checked == false)
 		{
@@ -360,17 +374,19 @@ void Grid::updateCost(int posX, int posY, int radius)
 		}
 		
 
-		//tileQueue.remove(*iter);
 		iter++;
-		//m_tileGrid[iter->m_xPos][iter->m_yPos]->checked = false;
 		tileQueue.pop_front();
 	}
 
 
-	//getPath(*m_startTile);
 
 
 }
+
+/// <summary>
+/// Calculates the optimal path through the flowfield
+/// </summary>
+/// <param name="m_startTile"></param>
 void Grid::getPath(Tile m_startTile)
 {
 
@@ -391,6 +407,15 @@ void Grid::getPath(Tile m_startTile)
 
 
 }
+
+/// <summary>
+/// Checks if a position that is passed in, is wihin the gameview
+/// If it is true is returned 
+/// If not false is returned 
+/// </summary>
+/// <param name="position"></param>
+/// <param name="m_gameView"></param>
+/// <returns></returns>
 bool Grid::inView(sf::Vector2f position, sf::View &m_gameView)
 {
 	sf::Vector2f center = m_gameView.getCenter();
@@ -409,8 +434,10 @@ bool Grid::inView(sf::Vector2f position, sf::View &m_gameView)
 		return false;
 	}
 }
+
 /// <summary>
-/// 
+/// Renders all the tiles in the map only if they are in the game view
+/// This will improve performance
 /// </summary>
 void Grid::render(sf::RenderWindow &window, sf::View &m_gameView, bool draw)
 {

@@ -30,30 +30,42 @@ Bullet::~Bullet()
 {
 
 }
-
+/// <summary>
+/// Returns the bullets position
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Bullet::getPosition()
 {
 	return m_sprite.getPosition();
 }
+/// <summary>
+/// Returns the bullet velocity
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Bullet::getVelocity()
 {
 	return m_velocity;
 }
 
 
-
+/// <summary>
+/// Function that controlls the shooting of the normal non heat seaking bullet
+/// The ships heading, position and rotation is passed in
+/// Position sets where the bullet is being fired from
+/// The heading is used to calculate the velocity of the bullet
+/// Rotation passed in is set to the rotation of the bullet sprite
+/// </summary>
+/// <param name="m_heading"></param>
+/// <param name="m_position"></param>
+/// <param name="m_rotation"></param>
 void Bullet::shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rotation)
 {
 	if (active == false)
 	{
-		/*if (m_heading.x >= 0 && m_heading.y >= 0)
-		{*/
-			m_velocity = m_heading * m_speed;
-	/*	}
-		else {
-			m_velocity = m_heading * -m_speed;
-		}*/
 		
+	
+		m_velocity = m_heading * m_speed;
+	
 
 		m_sprite.setPosition(m_position);
 		m_sprite.setRotation(m_rotation);
@@ -62,6 +74,12 @@ void Bullet::shoot(sf::Vector2f m_heading, sf::Vector2f m_position, float m_rota
 	}
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="currentOrientation"></param>
+/// <param name="velocity"></param>
+/// <returns></returns>
 float Bullet::getNewOrientation(float currentOrientation, float velocity)
 {
 	if (velocity >0)
@@ -74,13 +92,19 @@ float Bullet::getNewOrientation(float currentOrientation, float velocity)
 
 }
 
+/// <summary>
+/// Controls the shooting of the heat seeking bullet
+/// the vector passed in is where the bullet will try to go towards
+/// the bullet adjusts its heading and velocity to get to this point
+/// resulting in a seeking bullet
+/// </summary>
+/// <param name="playerPosition"></param>
 void Bullet::seekShoot(sf::Vector2f playerPosition)
 {
 	
 		m_velocity = playerPosition - m_position;
 		//Get magnitude of vector
 		m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y* m_velocity.y);
-		//m_velocityF = m_velocityF * m_maxSpeed;
 		//Normalize vector
 		m_velocity.x = m_velocity.x / m_velocityF;
 		m_velocity.y = m_velocity.y / m_velocityF;
@@ -90,14 +114,13 @@ void Bullet::seekShoot(sf::Vector2f playerPosition)
 
 		m_rotation = getNewOrientation(m_rotation, m_velocityF) + 90;
 
-		//pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
-		//pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
-
-
-		//collision();
 	
 }
-
+/// <summary>
+/// Updates the position of both heatseeking and normal bullets 
+/// when their bools are true
+/// </summary>
+/// <param name="dt"></param>
 void Bullet::update(double dt)
 {
 	if (active == true) {
@@ -114,42 +137,30 @@ void Bullet::update(double dt)
 		m_position = m_position + m_velocity;
 
 	}
+
+	//Calculates the bullet postiion within the grid
 	pGridX = floor(m_sprite.getPosition().x / m_grid->m_tileSize);
 	pGridY = floor(m_sprite.getPosition().y / m_grid->m_tileSize);
 	
 
-	//std::cout << pGrid.x << std::endl;
-	//std::cout << pGrid.y << std::endl;
+	
 
 	collisionWall();
 }
-
+/// <summary>
+/// Returns the active bool for normal bullet type
+/// </summary>
+/// <returns></returns>
 bool Bullet::getState() {
 
 	return active;
 }
 
-void Bullet::respawn(float x, float y)
-{
-	if (y >= 1000 + 100)
-	{
-		//m_sprite.setPosition(m_sprite.getPosition().x, -200);
-	}
-
-	else if (y < -200)
-	{
-		//m_sprite.setPosition(m_sprite.getPosition().x,1100);
-	}
-	else if (x < -200)
-	{
-		//m_sprite.setPosition(2100, m_sprite.getPosition().y);
-	}
-	else if (x >= 2100)
-	{
-		//m_sprite.setPosition(200, m_sprite.getPosition().y);
-	}
-}
-
+/// <summary>
+/// Handles gullet collision with the world walls in 4 directions
+/// When the bullet hits a wall the active bools are set to false
+/// Mening the bullet is no longer updated or drawn
+/// </summary>
 void Bullet::collisionWall()
 {
 
@@ -192,14 +203,10 @@ void Bullet::collisionWall()
 	}
 
 }
-
-void Bullet::collisionNest(int xPos, int yPos)
-{
-	
-
-	
-}
-
+/// <summary>
+/// Renders the bullet sprite to the screen
+/// </summary>
+/// <param name="window"></param>
 void Bullet::render(sf::RenderWindow &window)
 {
 

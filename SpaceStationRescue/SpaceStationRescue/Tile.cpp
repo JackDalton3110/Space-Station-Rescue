@@ -34,7 +34,11 @@ Tile::~Tile()
 {
 
 }
-
+/// <summary>
+/// handles rotation of teh flow field vectors
+/// Also sets the velocity of this tile depending on the rotation
+/// </summary>
+/// <param name="rot"></param>
 void Tile::setRotation(float rot)
 {
 	m_rotation = rot;
@@ -74,20 +78,35 @@ void Tile::setRotation(float rot)
 	}
 	
 }
+
+/// <summary>
+/// Sets the velocity of the tile
+/// </summary>
+/// <param name="x"></param>
+/// <param name="y"></param>
 void Tile::setVelocity(int x, int y)
 {
 	m_velocity.x = x;
 	m_velocity.y = y;
 
 }
+
+/// <summary>
+/// Returns the velocity of the player
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Tile::getVelocity()
 {
 	return m_velocity;
 
 }
 
-
-
+/// <summary>
+/// Sets the current state of the tile
+/// depending on the tile type the tile is coloured differently 
+/// 
+/// </summary>
+/// <param name="s"></param>
 void Tile::setCurrentState(State s)
 {
 	m_currentState = s;
@@ -132,67 +151,66 @@ void Tile::setCurrentState(State s)
 	}
 }
 
-
+/// <summary>
+/// Get current state of the tile
+/// </summary>
+/// <returns></returns>
 State Tile::getCurrentState()
 {
 	return m_currentState;
 }
 
+/// <summary>
+/// Sets the draw state of the tyle
+/// </summary>
+/// <param name="ds"></param>
 void Tile::setDrawState(Draw ds) {
 
 	m_drawState = ds;
 }
+
+/// <summary>
+/// Returns the drawstate of the tile
+/// </summary>
+/// <returns></returns>
 Draw Tile::getDrawState() {
 	return m_drawState;
 }
 
-//void Tile::setCurrentDrawState(DrawState s)
-//{
-//	m_currentDrawState = s;
-//}
-//
-//
-//DrawState Tile::getCurrentDrawState()
-//{
-//	return m_currentDrawState;
-//}
-//
-
-void Tile::mouseDetection(sf::Vector2i mousePos, int val)
-{
-
-	if ((m_position.x < mousePos.x) &&
-		(m_position.x + (m_tileSize * m_tileScale) > mousePos.x) &&
-		(m_position.y + (m_tileSize * m_tileScale) > mousePos.y) &&
-		(m_position.y < mousePos.y))
-	{
-		if (val == 1) {
-			setCurrentState(START);
-		}
-		else if (val == 2)
-		{
-			setCurrentState(GOAL);
-		}
-	}
-
-}
-
+/// <summary>
+/// Sets the cost of teh tile
+/// </summary>
+/// <param name="cost"></param>
 void Tile::setCost(int cost)
 {
 	m_cost = cost;
 	m_costText.setString(std::to_string(m_cost));
 
 }
+/// <summary>
+/// returns the cost of the tile
+/// </summary>
+/// <returns></returns>
 int Tile::getCost()
 {
 	return m_cost;
 }
 
+/// <summary>
+/// Sets the previous tile that was visited
+/// </summary>
+/// <param name="x"></param>
+/// <param name="y"></param>
 void Tile::setPrevious(int x, int y) {
 
 	m_previous = std::make_pair(x, y);
 }
 
+/// <summary>
+/// Draws the vectors of the flowfield on the tile
+/// If commented outthe red vectors will disappear 
+/// </summary>
+/// <param name="window"></param>
 void Tile::render(sf::RenderWindow &window)
 {
 	if (m_cost == 0) {
@@ -204,23 +222,10 @@ void Tile::render(sf::RenderWindow &window)
 
 	window.draw(rectangle);
 
-	//switch (m_drawState)
-	//{
-	//case FLOW:
 	if (m_currentState == NONE || m_currentState == PATH)
 	{
 		window.draw(vector);
 	}
-	/*case COST:
-	if (m_currentState == NONE || m_currentState == PATH)
-	{
-		window.draw(m_costText);
-	}
-			*/
-
-		//break;
-	//default:
-		//break;
-	//}
+	
 
 }

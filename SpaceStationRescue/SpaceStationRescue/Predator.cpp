@@ -23,19 +23,13 @@ Predator::Predator(float x, float y, Grid &m_Grid) :
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	DEG_TO_RAD = 3.14 / 180;
 
-	//m_position.x = m_grid->m_tileGrid[45][45]->m_position.x + m_grid->m_tileSize;
-	//m_position.y = m_grid->m_tileGrid[45][45]->m_position.y + m_grid->m_tileSize;
-	
-
 	m_healthSystem = new HealthSystem(0, 0);
 	m_healthSystem->setState(ENEMY);
 	m_healthSystem->m_healthValue = 6;
 
 	m_bullet = new Bullet(*m_grid);
 	m_bullet->m_speed = 30;
-	//m_grid->updateCost(pGridX, pGridY);
-
-
+	
 	pGridX = m_position.x / m_grid->m_tileSize;
 	pGridY = m_position.y / m_grid->m_tileSize;
 
@@ -44,56 +38,41 @@ Predator::~Predator()
 {
 
 }
-
+/// <summary>
+/// Returns the predator position
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Predator::getPosition()
 {
 	return m_sprite.getPosition();
 }
+
+/// <summary>
+/// Returns the predators velocity
+/// </summary>
+/// <returns></returns>
 sf::Vector2f Predator::getVelocity()
 {
 	return m_velocity;
 }
 
+/// <summary>
+/// Returns the predators rotation
+/// </summary>
+/// <returns></returns>
 float Predator::getRotation()
 {
 	return m_sprite.getRotation();
 }
 
-void Predator::speedUp()
-{
-	if (m_speed < m_maxSpeed)
-	{
-		m_speed += 2;
-	}
-}
-void Predator::speedDown()
-{
-	if (m_speed > 0)
-	{
-		m_speed -= 2;
-	}
-}
-void Predator::increaseRotation()
-{
-
-	m_rotation += 4.0f;
-}
-void Predator::decreaseRotation()
-{
-
-	if (m_rotation != 0.00f)
-	{
-		m_rotation -= 4.0f;
-	}
-	else
-	{
-		m_rotation = 359.0f;
-	}
-
-
-}
-
-
+/// <summary>
+/// Handles predator respawning when they die
+/// Randomly picks one of the 3 nests to spawn at
+/// If it picks a nest that is dead a random number is generated again 
+/// If this nest is alive the predator will spawn here
+/// If all 3 nests are dead the predator will not respawn
+/// </summary>
+/// <param name="nests"></param>
 void Predator::respawn(std::vector<Nests*> &nests)
 {
 
@@ -116,7 +95,20 @@ void Predator::respawn(std::vector<Nests*> &nests)
 
 
 }
-
+/// <summary>
+/// Predator only updates when they are alive
+/// calculates the distance from the predator to the player
+/// calculates the predators grid position
+/// respawns when health is 0
+/// updates health system
+/// 
+/// Retrieves the vector from teh current tile the predator is on, within the flowfield
+/// This vector is then multiplied by a speed allowing the predator to move along the flowfield to reach the player
+/// The tile rotation is also set to the predator sprite making it face in the correct direction
+/// </summary>
+/// <param name="m_player"></param>
+/// <param name="nests"></param>
+/// <param name="dt"></param>
 void Predator::update(Player &m_player, std::vector<Nests*> &nests, double dt)
 {
 	if (m_healthSystem->m_healthValue > 0 )
@@ -144,52 +136,46 @@ void Predator::update(Player &m_player, std::vector<Nests*> &nests, double dt)
 			respawn(nests);
 		}
 
-	
-
-
 
 		m_bullet->update(dt);
 
-
-
-		
-		
-			m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x,
-				m_sprite.getPosition().y + m_velocity.y);
-			m_sprite.setRotation(m_rotation);
-		
-		
-
-
+		m_sprite.setPosition(m_sprite.getPosition().x + m_velocity.x,
+		m_sprite.getPosition().y + m_velocity.y);
+		m_sprite.setRotation(m_rotation);
+	
+	
 	}
 	
 	m_healthSystem->setPosition(m_sprite.getPosition().x - 600, m_sprite.getPosition().y - 450);
 	m_healthSystem->update();
 
 
-
 }
 
-
+/// <summary>
+/// IS called when the player is within the predators radius
+/// Calculates the bullets heading and calls the shoot method for the normal bullet
+/// </summary>
 void Predator::shoot()
 {
 	if (dist<m_shootDist + m_grid->m_tileSize / 2)
 	{
 
 
-			m_headingBullet.x = cos(m_rotation * (3.14 / 180));
-			m_headingBullet.y = sin(m_rotation * (3.14 / 180));
+		m_headingBullet.x = cos(m_rotation * (3.14 / 180));
+		m_headingBullet.y = sin(m_rotation * (3.14 / 180));
 
-			m_bullet->shoot(m_headingBullet, m_sprite.getPosition(), m_rotation);
+		m_bullet->shoot(m_headingBullet, m_sprite.getPosition(), m_rotation);
 			
-		
-		
-		//m_bullet->shoot(test, m_Grid->m_nestPoints[spawnSpot]->m_position, 0);
 	}
 
 }
 
-
+/// <summary>
+/// Checks collision with the world walls
+/// Checks the ssquares that are nieghbouring the predator in the grid
+/// If an obstacle is detected the predator will be bumped back from the wall
+/// </summary>
 void Predator::collision()
 {
 
@@ -197,7 +183,6 @@ void Predator::collision()
 	{
 		if (m_sprite.getPosition().y - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX][pGridY - 1]->m_position.y + m_grid->m_tileSize))
 		{
-			//m_velocity.y *= -1;
 			m_position.y += 5;
 		}
 
@@ -206,7 +191,6 @@ void Predator::collision()
 	{
 		if (m_sprite.getPosition().y + (m_grid->m_tileSize / 2) >= (m_grid->m_tileGrid[pGridX][pGridY + 1]->m_position.y))
 		{
-			//m_velocity.y *= -1;
 			m_position.y -= 5;
 		}
 
@@ -215,7 +199,6 @@ void Predator::collision()
 	{
 		if (m_sprite.getPosition().x + (m_grid->m_tileSize / 2) >= (m_grid->m_tileGrid[pGridX + 1][pGridY]->m_position.x))
 		{
-			//m_velocity.x *= -1;
 			m_position.x -= 5;
 		}
 
@@ -225,7 +208,6 @@ void Predator::collision()
 	{
 		if (m_sprite.getPosition().x - (m_grid->m_tileSize / 2) <= (m_grid->m_tileGrid[pGridX - 1][pGridY]->m_position.x + m_grid->m_tileSize))
 		{
-			//m_velocity.x *= -1;
 			m_position.x += 5;
 		}
 
@@ -234,7 +216,13 @@ void Predator::collision()
 
 }
 
-
+/// <summary>
+/// Hnadles bullet collision related to the predator
+/// Detects collision with the predator bullet and the player, minus the player health if hit
+/// Checks if the predator is being hit by the predator bullet, if so the predators health gets deducted 
+/// Bullets are destroyed when collision is detected 
+/// </summary>
+/// <param name="m_player"></param>
 void Predator::collisionPlayer(Player & m_player)
 {
 	if (m_bullet->getPosition().x - m_grid->m_tileSize / 2 < m_player.getPosition().x + m_grid->m_tileSize / 2 &&
@@ -274,7 +262,10 @@ void Predator::collisionPlayer(Player & m_player)
 	}
 	
 }
-
+/// <summary>
+/// Renders the predator and bullet when the predator is alive
+/// </summary>
+/// <param name="window"></param>
 void Predator::render(sf::RenderWindow &window)
 {
 	if (m_healthSystem->m_healthValue > 0) {
