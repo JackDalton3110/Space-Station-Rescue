@@ -29,14 +29,5 @@ Right Arrow: Rotate right
 Left Arrow: Rotate left
 Space: Player shoots bullet ahead of them.(limited to 3 bullets at a time).
 
-# Extras
-Map Culling: Only renders tiles that are in the gameview
-HUD: Displays game info to the player
-Win / Lose state: Player wins when all workers are saved, lose when you run out of life
-HealthSystem: Healthbars displayed under nests and player hearts in the HUD
-Workers and predators randomly spawn from spwanpoints on the map 
-
-Split: Aaron 50%, Jack 50%
-
 # Doxygen 
 Doxygen files are located in project DOX folder
